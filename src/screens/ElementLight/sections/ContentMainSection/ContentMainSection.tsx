@@ -447,40 +447,40 @@ export const ContentMainSection = ({
         </CardContent>
       </Card>
 
-      <Card className="w-full bg-white rounded-[32px] border-0">
-        <CardContent className="flex flex-col gap-4 p-4">
-          <div className="flex flex-col lg:flex-row gap-5">
-            <div className="flex-1 flex items-center pt-10 px-10">
-              <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-2xl md:text-[37.2px] tracking-[-1.60px] leading-10">
+      <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
+        <CardContent className="flex flex-col gap-4 p-3 md:p-4">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
+            <div className="flex-1 flex items-center pt-6 md:pt-10 px-5 md:px-10">
+              <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.2px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10">
                 Высокие оценки и рейтинг АГАМИ -<br />
                 показатель нашей работы
               </h2>
             </div>
-            <Card className="flex-1 bg-[#336699] rounded-[28px] border-0">
-              <CardContent className="p-10">
-                <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-2xl md:text-[29.9px] leading-8 mb-12">
+            <Card className="flex-1 bg-[#336699] rounded-2xl md:rounded-[28px] border-0">
+              <CardContent className="p-6 md:p-10">
+                <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-xl md:text-2xl lg:text-[29.9px] leading-7 md:leading-8 mb-8 md:mb-12">
                   Независимые рейтинги
                 </h3>
                 <div className="grid grid-cols-2 gap-2">
                   {ratingPlatforms.map((platform, index) => (
                     <Card
                       key={index}
-                      className="bg-[#ffffff1f] rounded-[32px] border-0"
+                      className="bg-[#ffffff1f] rounded-2xl md:rounded-[32px] border-0"
                     >
-                      <CardContent className="flex flex-col justify-between p-6 min-h-[134px]">
+                      <CardContent className="flex flex-col justify-between p-4 md:p-6 min-h-[110px] md:min-h-[134px]">
                         <div
-                          className="h-[22px] bg-cover bg-center"
+                          className="h-[18px] md:h-[22px] bg-contain bg-no-repeat bg-center"
                           style={{ backgroundImage: `url(${platform.logo})` }}
                         />
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <div className="w-6 h-6" />
-                            <span className="[font-family:'Manrope',Helvetica] font-normal text-white text-xl">
+                            <div className="w-5 h-5 md:w-6 md:h-6" />
+                            <span className="[font-family:'Manrope',Helvetica] font-normal text-white text-lg md:text-xl">
                               {platform.rating}
                             </span>
                           </div>
-                          <div className="flex w-10 h-10 items-center justify-center bg-[#ffffff29] rounded-xl">
-                            <div className="w-8 h-8" />
+                          <div className="flex w-8 h-8 md:w-10 md:h-10 items-center justify-center bg-[#ffffff29] rounded-lg md:rounded-xl">
+                            <div className="w-6 h-6 md:w-8 md:h-8" />
                           </div>
                         </div>
                       </CardContent>
@@ -491,25 +491,25 @@ export const ContentMainSection = ({
             </Card>
           </div>
 
-          <Card className="bg-[#0035690a] rounded-[28px] border-0">
-            <CardContent className="flex flex-col gap-12 p-10">
+          <Card className="bg-[#0035690a] rounded-2xl md:rounded-[28px] border-0">
+            <CardContent className="flex flex-col gap-8 md:gap-12 p-6 md:p-10">
               <div className="flex items-center justify-between">
-                <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-2xl md:text-[30.4px] leading-8">
+                <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[30.4px] leading-7 md:leading-8">
                   Награды и сертификаты
                 </h3>
-                <div className="flex items-center gap-3">
+                <div className="hidden md:flex items-center gap-3">
                   <Button
                     variant="secondary"
                     size="icon"
-                    className="w-14 h-14 bg-[#1d252d1f] hover:bg-[#1d252d1f]/80 rounded-2xl"
+                    className="w-12 h-12 md:w-14 md:h-14 bg-[#1d252d1f] hover:bg-[#1d252d1f]/80 rounded-xl md:rounded-2xl"
                   >
-                    <div className="w-8 h-8 rotate-180" />
+                    <div className="w-6 h-6 md:w-8 md:h-8 rotate-180" />
                   </Button>
                   <Button
                     size="icon"
-                    className="w-14 h-14 bg-[#336699] hover:bg-[#336699]/90 rounded-2xl"
+                    className="w-12 h-12 md:w-14 md:h-14 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl"
                   >
-                    <div className="w-8 h-8" />
+                    <div className="w-6 h-6 md:w-8 md:h-8" />
                   </Button>
                 </div>
               </div>
@@ -539,15 +539,15 @@ export const ContentMainSection = ({
                   </span>
                 </Button>
               </div>
-              <Card className="flex-1 bg-[#0035690a] rounded-[28px] overflow-hidden border-0 relative min-h-80">
-                <CardContent className="p-10 flex flex-col justify-between h-full">
-                  <p className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d99] text-lg">
+              <Card className="flex-1 bg-[#0035690a] rounded-2xl md:rounded-[28px] overflow-hidden border-0 relative min-h-64 md:min-h-80">
+                <CardContent className="p-6 md:p-10 flex flex-col justify-between h-full">
+                  <p className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d99] text-base md:text-lg">
                     {services[0].category}
                   </p>
-                  <h4 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-xl md:text-[22.3px] leading-7">
+                  <h4 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7">
                     {services[0].title}
                   </h4>
-                  <div className="absolute top-[calc(50%-105px)] right-0 w-[210px] h-[210px] bg-white rounded-[32px] overflow-hidden">
+                  <div className="absolute top-[calc(50%-80px)] md:top-[calc(50%-105px)] right-0 w-[160px] h-[160px] md:w-[210px] md:h-[210px] bg-white rounded-2xl md:rounded-[32px] overflow-hidden">
                     <div
                       className="w-full h-full bg-cover bg-center"
                       style={{ backgroundImage: `url(${services[0].image})` }}
@@ -581,50 +581,50 @@ export const ContentMainSection = ({
               ))}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-              <Card className="bg-[#ae955f1f] rounded-[28px] border-0">
-                <CardContent className="p-10 flex gap-5 min-h-[344px]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-5">
+              <Card className="bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
+                <CardContent className="p-6 md:p-10 flex gap-5 min-h-[280px] md:min-h-[344px]">
                   <div className="flex-1 flex flex-col justify-between">
-                    <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-2xl md:text-[30.1px] leading-8 mb-6">
+                    <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-xl md:text-2xl lg:text-[30.1px] leading-7 md:leading-8 mb-4 md:mb-6">
                       Прозрачное
                       <br />
                       ценообразование
                     </h3>
-                    <p className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d99] text-sm leading-5 mb-12">
+                    <p className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d99] text-xs md:text-sm leading-4 md:leading-5 mb-8 md:mb-12">
                       Наш подход к лечению пациента - формирование комплексного
                       плана при первом посещении клиники. Такой план лечения
                       включает все необходимые услуги, этапы и общую сумму. Мы
                       гарантируем, что стоимость останется итоговой. Никаких
                       скрытых расходов — только честное ценообразование.
                     </p>
-                    <Button className="h-12 gap-3 px-5 bg-[#ae955f2e] hover:bg-[#ae955f2e]/80 rounded-2xl w-fit">
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-base">
+                    <Button className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ae955f2e] hover:bg-[#ae955f2e]/80 rounded-xl md:rounded-2xl w-fit">
+                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-sm md:text-base">
                         Цены
                       </span>
                     </Button>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-[#336699] rounded-[40px] border-0 relative overflow-hidden">
-                <CardContent className="p-10 flex gap-5 min-h-[344px]">
+              <Card className="bg-[#336699] rounded-2xl md:rounded-[40px] border-0 relative overflow-hidden">
+                <CardContent className="p-6 md:p-10 flex gap-5 min-h-[280px] md:min-h-[344px]">
                   <div className="flex-1 flex flex-col justify-between z-10">
-                    <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-2xl md:text-[29.9px] leading-8 mb-6">
+                    <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-xl md:text-2xl lg:text-[29.9px] leading-7 md:leading-8 mb-4 md:mb-6">
                       Лечим зубы
                       <br />
                       во сне под седацией
                     </h3>
-                    <p className="[font-family:'Manrope',Helvetica] font-normal text-[#ffffffcc] text-sm leading-5 mb-12">
+                    <p className="[font-family:'Manrope',Helvetica] font-normal text-[#ffffffcc] text-xs md:text-sm leading-4 md:leading-5 mb-8 md:mb-12">
                       Комфортное лечение зубов без страха, стресса и неприятных
                       воспоминаний под полным контролем врача-анестезиолога
                     </p>
-                    <Button className="h-12 gap-3 px-5 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl w-fit">
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base">
+                    <Button className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-xl md:rounded-2xl w-fit">
+                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
                         Подробнее
                       </span>
                     </Button>
                   </div>
                   <div
-                    className="absolute -top-8 right-2 w-[calc(50%+24px)] h-[calc(100%+64px)] rounded-[32px] bg-cover bg-center"
+                    className="hidden md:block absolute -top-8 right-2 w-[calc(50%+24px)] h-[calc(100%+64px)] rounded-[32px] bg-cover bg-center"
                     style={{
                       backgroundImage:
                         "url(/------------br---------------------.png)",
@@ -676,24 +676,24 @@ export const ContentMainSection = ({
             Где мы находимся?
           </h2>
 
-          <div className="flex flex-col lg:flex-row gap-5 w-full">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-5 w-full">
             <div className="flex-1">
-              <div className="relative h-[554px] rounded-[28px] overflow-hidden">
+              <div className="relative h-[300px] md:h-[400px] lg:h-[554px] rounded-2xl md:rounded-[28px] overflow-hidden">
                 <div className="w-full h-full relative">
                   <div className="absolute top-0 left-0 w-px h-px flex bg-white bg-blend-saturation">
                     <div className="-mt-32 w-[1020px] h-[810px] -ml-32 bg-[url(/image.png)] bg-cover bg-center" />
                   </div>
                   <img
-                    className="absolute top-[197px] left-[347px] w-[70px] h-20"
+                    className="hidden md:block absolute top-[197px] left-[347px] w-[70px] h-20"
                     alt="Image"
                     src="/image-1.svg"
                   />
                   <img
-                    className="absolute top-[108px] left-2.5 w-7 h-[206px]"
+                    className="hidden md:block absolute top-[108px] left-2.5 w-7 h-[206px]"
                     alt="Container"
                     src="/container-4.svg"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 flex flex-col items-start pl-[423.55px] pr-[3px]">
+                  <div className="hidden md:flex absolute bottom-0 left-0 right-0 flex-col items-start pl-[423.55px] pr-[3px]">
                     <div className="flex items-center gap-2 pb-2 px-2">
                       <div className="flex items-start h-6 bg-white rounded-[3px] overflow-hidden shadow-[0px_2px_5px_-3px_#00000026,0px_1px_2px_1px_#00000026]">
                         <img
@@ -743,39 +743,39 @@ export const ContentMainSection = ({
               </div>
             </div>
 
-            <Card className="flex-1 bg-[#3366990a] rounded-[28px] border-0">
-              <CardContent className="p-4 flex flex-col gap-5 h-full">
-                <Card className="bg-[#336699] rounded-3xl border-0">
-                  <CardContent className="flex flex-col gap-12 p-10">
-                    <div className="flex flex-col md:flex-row gap-5">
+            <Card className="flex-1 bg-[#3366990a] rounded-2xl md:rounded-[28px] border-0">
+              <CardContent className="p-3 md:p-4 flex flex-col gap-4 md:gap-5 h-full">
+                <Card className="bg-[#336699] rounded-2xl md:rounded-3xl border-0">
+                  <CardContent className="flex flex-col gap-8 md:gap-12 p-6 md:p-10">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-5">
                       <div className="flex-1 flex items-center gap-3">
-                        <div className="w-8 h-8" />
-                        <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm">
+                        <div className="w-6 h-6 md:w-8 md:h-8" />
+                        <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-xs md:text-sm">
                           г. Москва, ул. Советской Армии, 17/52
                         </span>
                       </div>
                       <div className="flex-1 flex items-center gap-3">
-                        <div className="w-8 h-8" />
-                        <div className="flex flex-col gap-2">
-                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm">
+                        <div className="w-6 h-6 md:w-8 md:h-8" />
+                        <div className="flex flex-col gap-1.5 md:gap-2">
+                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-xs md:text-sm">
                             м. Марьина Роща
                           </span>
-                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm">
+                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-xs md:text-sm">
                             5 минут пешком (400 метров)
                           </span>
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-col md:flex-row gap-5">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-5">
                       <div className="flex-1">
-                        <p className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm leading-5">
+                        <p className="[font-family:'Manrope',Helvetica] font-extralight text-white text-xs md:text-sm leading-4 md:leading-5">
                           Находимся с торца жилого дома со стороны Лазаревского
                           переулка.
                         </p>
                       </div>
                       <div className="flex-1">
-                        <Button className="h-12 gap-3 px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-2xl">
-                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base">
+                        <Button className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl">
+                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
                             Контакты
                           </span>
                         </Button>
@@ -783,7 +783,7 @@ export const ContentMainSection = ({
                     </div>
                   </CardContent>
                 </Card>
-                <div className="flex-1 rounded-3xl bg-[url(/img-3.png)] bg-cover bg-center" />
+                <div className="flex-1 rounded-2xl md:rounded-3xl bg-[url(/img-3.png)] bg-cover bg-center min-h-[150px]" />
               </CardContent>
             </Card>
           </div>
