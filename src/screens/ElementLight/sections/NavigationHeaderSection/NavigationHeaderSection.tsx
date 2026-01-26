@@ -1,5 +1,6 @@
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, Menu, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import {
   NavigationMenu,
@@ -20,6 +21,7 @@ export const NavigationHeaderSection = ({
 }: NavigationHeaderSectionProps): JSX.Element => {
   const { language } = useLanguage();
   const t = useTranslations(language);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
     { label: t.header.services, hasDropdown: false, link: "#" },
@@ -68,6 +70,16 @@ export const NavigationHeaderSection = ({
           </NavigationMenu>
 
           <div className="flex items-center gap-1 md:gap-2">
+            <button
+              className="lg:hidden text-white p-2 hover:opacity-80 transition-opacity"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
             <a
               href="tel:+74950856646"
               className="hidden md:block pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap hover:opacity-80 transition-opacity"
@@ -89,6 +101,45 @@ export const NavigationHeaderSection = ({
           </div>
         </div>
       </nav>
+
+      {isMobileMenuOpen && (
+        <div className="lg:hidden w-full bg-white rounded-2xl shadow-lg mt-2 p-4 animate-in slide-in-from-top-5">
+          <nav className="flex flex-col gap-3">
+            {navigationItems.map((item, index) => (
+              <div key={index}>
+                {item.link.startsWith("/") ? (
+                  <Link
+                    to={item.link}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-3 px-4 rounded-lg hover:bg-[#f5f7fa] transition-colors"
+                  >
+                    <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#336699] text-base">
+                      {item.label}
+                    </span>
+                  </Link>
+                ) : (
+                  <a
+                    href={item.link}
+                    className="block py-3 px-4 rounded-lg hover:bg-[#f5f7fa] transition-colors"
+                  >
+                    <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#336699] text-base">
+                      {item.label}
+                    </span>
+                  </a>
+                )}
+              </div>
+            ))}
+            <a
+              href="tel:+74950856646"
+              className="block py-3 px-4 rounded-lg hover:bg-[#f5f7fa] transition-colors md:hidden"
+            >
+              <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#336699] text-base">
+                {t.header.phone}
+              </span>
+            </a>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
