@@ -21,12 +21,11 @@ export const NavigationHeaderSection = ({
   const t = useTranslations(language);
 
   const navigationItems = [
-    { label: t.header.services, hasDropdown: true },
-    { label: t.header.aboutClinic, hasDropdown: false },
+    { label: t.header.services, hasDropdown: false },
     { label: t.header.team, hasDropdown: false },
-    { label: t.header.sleepTreatment, hasDropdown: false },
-    { label: t.header.forPatients, hasDropdown: true },
     { label: t.header.prices, hasDropdown: false },
+    { label: t.header.blog, hasDropdown: false },
+    { label: t.header.aboutClinic, hasDropdown: false },
     { label: t.header.contacts, hasDropdown: false },
   ];
   return (
@@ -52,20 +51,13 @@ export const NavigationHeaderSection = ({
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex items-center gap-2 px-[30px]">
-            <span className="text-white text-sm leading-3 whitespace-nowrap [font-family:'Manrope',Helvetica] font-extralight tracking-[0]">
-              {t.header.address}
-            </span>
-            <div className="w-px h-6 bg-white opacity-40" />
-            <span className="text-white text-sm leading-3 whitespace-nowrap [font-family:'Manrope',Helvetica] font-extralight tracking-[0]">
-              {t.header.metro}
-            </span>
-          </div>
-
           <div className="flex items-center gap-2">
-            <span className="pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap">
+            <a
+              href="tel:+74950856646"
+              className="pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap hover:opacity-80 transition-opacity"
+            >
               {t.header.phone}
-            </span>
+            </a>
             <img
               className="flex-shrink-0"
               alt="List margin"

@@ -1,8 +1,10 @@
+import { useState, useRef } from "react";
 import { Avatar, AvatarImage } from "../../../../components/ui/avatar";
 import { Badge } from "../../../../components/ui/badge";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { ScrollArea, ScrollBar } from "../../../../components/ui/scroll-area";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const teamMembers = [
   {
@@ -51,7 +53,7 @@ const trustReasons = [
     title:
       "Опыт команды + Технологии = Высококачественные стоматологические услуги",
     badge: "Гарантии качества",
-    bgColor: "bg-[#003569]",
+    bgColor: "bg-[#336699]",
     textColor: "text-white",
   },
   {
@@ -126,6 +128,35 @@ interface ContentMainSectionProps {
 export const ContentMainSection = ({
   onOpenModal,
 }: ContentMainSectionProps): JSX.Element => {
+  const trustScrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const scrollTrust = (direction: "left" | "right") => {
+    if (trustScrollRef.current) {
+      const scrollAmount = 400;
+      const newScrollLeft =
+        trustScrollRef.current.scrollLeft +
+        (direction === "right" ? scrollAmount : -scrollAmount);
+
+      trustScrollRef.current.scrollTo({
+        left: newScrollLeft,
+        behavior: "smooth",
+      });
+
+      setTimeout(() => {
+        if (trustScrollRef.current) {
+          setCanScrollLeft(trustScrollRef.current.scrollLeft > 0);
+          setCanScrollRight(
+            trustScrollRef.current.scrollLeft <
+              trustScrollRef.current.scrollWidth -
+                trustScrollRef.current.clientWidth
+          );
+        }
+      }, 300);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full items-start gap-5 px-4 md:px-8 lg:px-[170px] py-0 relative">
       <Card className="w-full bg-white rounded-[32px] overflow-hidden border-0">
@@ -350,27 +381,49 @@ export const ContentMainSection = ({
 
       <Card className="w-full bg-white rounded-[32px] border-0">
         <CardContent className="p-4">
-          <div className="pt-10 pb-6 px-10">
+          <div className="pt-10 pb-6 px-10 flex items-center justify-between">
             <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-4xl md:text-[74.7px] tracking-[-3.20px] leading-[64px]">
               Почему нам доверяют?
             </h2>
+            <div className="flex items-center gap-3">
+              <Button
+                variant="secondary"
+                size="icon"
+                onClick={() => scrollTrust("left")}
+                disabled={!canScrollLeft}
+                className="w-14 h-14 bg-[#1d252d1f] hover:bg-[#1d252d1f]/80 rounded-2xl disabled:opacity-30"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </Button>
+              <Button
+                size="icon"
+                onClick={() => scrollTrust("right")}
+                disabled={!canScrollRight}
+                className="w-14 h-14 bg-[#336699] hover:bg-[#336699]/90 rounded-2xl disabled:opacity-30"
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </Button>
+            </div>
           </div>
-          <div className="w-full">
-            <ScrollArea className="w-full">
-              <div className="flex gap-5 pl-4 md:pl-14 pr-4 pb-10">
+          <div className="w-full relative">
+            <div
+              ref={trustScrollRef}
+              className="flex gap-5 pl-4 md:pl-14 pr-4 pb-10 overflow-x-auto scrollbar-hide"
+              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            >
                 {trustReasons.map((reason, index) => (
                   <Card
                     key={index}
-                    className={`min-w-[372px] ${reason.bgColor} rounded-[28px] overflow-hidden border-0`}
+                    className={`min-w-[320px] max-w-[320px] ${reason.bgColor} rounded-[28px] overflow-hidden border-0 flex-shrink-0`}
                   >
-                    <CardContent className="p-1 flex flex-col relative min-h-[400px]">
+                    <CardContent className="p-1 flex flex-col relative min-h-[320px]">
                       {reason.image && (
                         <div
-                          className="relative h-[212px] rounded-[20px] overflow-hidden z-[1]"
+                          className="relative h-[150px] rounded-[20px] overflow-hidden z-[1] bg-cover bg-center"
                           style={{ backgroundImage: `url(${reason.image})` }}
                         >
                           <Badge
-                            className="absolute top-4 left-4 h-8 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm"
+                            className="absolute top-3 left-3 h-7 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-xs"
                             style={{
                               color:
                                 reason.textColor === "text-white"
@@ -384,23 +437,23 @@ export const ContentMainSection = ({
                       )}
                       {!reason.image && (
                         <div className="relative h-px z-[1]">
-                          <Badge className="absolute top-4 left-4 h-8 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm text-[#336699]">
+                          <Badge className="absolute top-3 left-3 h-7 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-xs text-[#336699]">
                             {reason.badge}
                           </Badge>
                         </div>
                       )}
                       <div
-                        className={`flex-1 flex flex-col ${reason.hasOverlay ? "justify-end pt-[243px]" : "justify-start pt-6"} pb-4 px-4 md:px-6 z-0`}
+                        className={`flex-1 flex flex-col ${reason.hasOverlay ? "justify-end pt-[180px]" : "justify-start pt-4"} pb-3 px-4 z-0`}
                       >
                         {reason.hasOverlay ? (
-                          <div className="p-4 backdrop-blur-[27px] bg-[#ffffffcc] rounded-[28px]">
+                          <div className="p-3 backdrop-blur-[27px] bg-[#ffffffcc] rounded-[20px]">
                             <h3
-                              className={`[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-xl md:text-[26.1px] tracking-[-0.50px] leading-8 mb-4`}
+                              className={`[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-base tracking-[-0.50px] leading-6 mb-2`}
                             >
                               {reason.title}
                             </h3>
                             {reason.description && (
-                              <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-sm leading-5">
+                              <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-xs leading-4">
                                 {reason.description}
                               </p>
                             )}
@@ -408,13 +461,13 @@ export const ContentMainSection = ({
                         ) : (
                           <>
                             <h3
-                              className={`[font-family:'Inter',Helvetica] font-normal ${reason.textColor || "text-[#ae955f]"} text-xl md:text-[22.3px] tracking-[-0.50px] leading-7 mb-4`}
+                              className={`[font-family:'Inter',Helvetica] font-normal ${reason.textColor || "text-[#ae955f]"} text-base tracking-[-0.50px] leading-6 mb-2`}
                             >
                               {reason.title}
                             </h3>
                             {reason.description && (
                               <p
-                                className={`[font-family:'Manrope',Helvetica] font-extralight ${reason.textColor === "text-white" ? "text-white" : "text-[#1d252d]"} text-sm leading-5`}
+                                className={`[font-family:'Manrope',Helvetica] font-extralight ${reason.textColor === "text-white" ? "text-white" : "text-[#1d252d]"} text-xs leading-4`}
                               >
                                 {reason.description}
                               </p>
@@ -431,10 +484,7 @@ export const ContentMainSection = ({
                     </CardContent>
                   </Card>
                 ))}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-            <img className="w-full" alt="Container" src="/container-2.svg" />
+            </div>
           </div>
         </CardContent>
       </Card>
