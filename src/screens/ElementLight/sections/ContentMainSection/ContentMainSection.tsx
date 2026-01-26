@@ -333,25 +333,7 @@ export const ContentMainSection = ({
             </Card>
           </div>
 
-          <div className="flex flex-col items-end gap-8 pl-0 md:pl-10">
-            <div className="flex flex-wrap gap-2 w-full">
-              {specialtyFilters.map((filter, index) => (
-                <Badge
-                  key={index}
-                  variant={filter.active ? "default" : "secondary"}
-                  className={`min-h-10 px-4 py-3 rounded-2xl ${
-                    filter.active
-                      ? "bg-[#336699] hover:bg-[#336699]/90 text-white"
-                      : "bg-[#3366990a] hover:bg-[#3366990a]/80 text-[#33669999]"
-                  } [font-family:'Manrope',Helvetica] font-extralight text-base`}
-                >
-                  {filter.label}
-                </Badge>
-              ))}
-            </div>
-
-            
-          </div>
+          
         </CardContent>
       </Card>
 
