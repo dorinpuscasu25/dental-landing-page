@@ -119,23 +119,32 @@ const services = [
 
 const avatarImages = ["/i.png", "/i-1.png", "/i-2.png", "/i-3.png", "/i-4.png"];
 
-export const ContentMainSection = (): JSX.Element => {
+interface ContentMainSectionProps {
+  onOpenModal: () => void;
+}
+
+export const ContentMainSection = ({
+  onOpenModal,
+}: ContentMainSectionProps): JSX.Element => {
   return (
     <div className="flex flex-col w-full items-start gap-5 px-4 md:px-8 lg:px-[170px] py-0 relative">
       <Card className="w-full bg-white rounded-[32px] overflow-hidden border-0">
         <CardContent className="flex items-start justify-center pl-4 pr-4 md:pr-[200px] lg:pr-[800px] pt-[402.75px] pb-4 relative p-0">
           <div className="absolute w-full h-full top-0 left-0" />
           <div className="gap-6 p-10 flex-1 backdrop-blur-[10px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(10px)_brightness(100%)] flex flex-col items-start relative bg-[#ffffffcc] rounded-[28px]">
-            <h1 className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-3xl md:text-[45.2px] tracking-[-1.92px] leading-[48px]">
+            <h1 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-3xl md:text-[45.2px] tracking-[-1.92px] leading-[48px]">
               Стоматология АГАМИ
             </h1>
-            <p className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-xl md:text-3xl tracking-[-0.50px] leading-8">
+            <p className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-xl md:text-3xl tracking-[-0.50px] leading-8">
               Серьёзная клиника для серьёзного
               <br />
               лечения.
             </p>
             <div className="pt-10">
-              <Button className="h-12 gap-3 px-5 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl">
+              <Button
+                onClick={onOpenModal}
+                className="h-12 gap-3 px-5 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl"
+              >
                 <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base">
                   Записаться
                 </span>
@@ -150,7 +159,7 @@ export const ContentMainSection = (): JSX.Element => {
           <div className="flex flex-col gap-5">
             <div className="flex flex-col lg:flex-row min-h-52 gap-5">
               <div className="flex-1 flex items-center pt-10 px-10">
-                <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-4xl md:text-[74.8px] tracking-[-3.20px] leading-[64px]">
+                <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-4xl md:text-[74.8px] tracking-[-3.20px] leading-[64px]">
                   О клинике
                 </h2>
               </div>
@@ -205,9 +214,9 @@ export const ContentMainSection = (): JSX.Element => {
                     </p>
                     <Button
                       variant="secondary"
-                      className="h-10 px-4 bg-[#00356914] hover:bg-[#00356914]/80 rounded-2xl w-fit"
+                      className="h-10 px-4 bg-[#33669914] hover:bg-[#33669914]/80 rounded-2xl w-fit"
                     >
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#003569] text-base">
+                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#336699] text-base">
                         О клинике
                       </span>
                     </Button>
@@ -225,11 +234,11 @@ export const ContentMainSection = (): JSX.Element => {
         <CardContent className="flex flex-col gap-24 p-4">
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="flex-1 flex items-center pt-10 px-10">
-              <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-4xl md:text-[76.1px] tracking-[-3.20px] leading-[64px]">
+              <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-4xl md:text-[76.1px] tracking-[-3.20px] leading-[64px]">
                 Наша команда
               </h2>
             </div>
-            <Card className="flex-1 bg-[#003569] rounded-[28px] border-0">
+            <Card className="flex-1 bg-[#336699] rounded-[28px] border-0">
               <CardContent className="p-10">
                 <div className="flex flex-col md:flex-row gap-5">
                   <div className="flex-1">
@@ -242,13 +251,13 @@ export const ContentMainSection = (): JSX.Element => {
                       {avatarImages.map((img, index) => (
                         <Avatar
                           key={index}
-                          className="w-[50px] h-[50px] -ml-2.5 first:ml-0 border-2 border-[#003569]"
+                          className="w-[50px] h-[50px] -ml-2.5 first:ml-0 border-2 border-[#336699]"
                         >
                           <AvatarImage src={img} className="object-cover" />
                         </Avatar>
                       ))}
-                      <div className="flex w-[50px] h-[50px] -ml-2.5 items-center justify-center bg-white rounded-full border-2 border-[#003569]">
-                        <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#003569] text-sm">
+                      <div className="flex w-[50px] h-[50px] -ml-2.5 items-center justify-center bg-white rounded-full border-2 border-[#336699]">
+                        <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#336699] text-sm">
                           22 +
                         </span>
                       </div>
@@ -279,8 +288,8 @@ export const ContentMainSection = (): JSX.Element => {
                   variant={filter.active ? "default" : "secondary"}
                   className={`min-h-10 px-4 py-3 rounded-2xl ${
                     filter.active
-                      ? "bg-[#003f80] hover:bg-[#003f80]/90 text-white"
-                      : "bg-[#0035690a] hover:bg-[#0035690a]/80 text-[#00356999]"
+                      ? "bg-[#336699] hover:bg-[#336699]/90 text-white"
+                      : "bg-[#3366990a] hover:bg-[#3366990a]/80 text-[#33669999]"
                   } [font-family:'Manrope',Helvetica] font-extralight text-base`}
                 >
                   {filter.label}
@@ -318,7 +327,10 @@ export const ContentMainSection = (): JSX.Element => {
                           <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#ffffffcc] text-base mb-4">
                             {member.role}
                           </p>
-                          <Button className="w-full h-12 px-4 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl">
+                          <Button
+                            onClick={onOpenModal}
+                            className="w-full h-12 px-4 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl"
+                          >
                             <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base">
                               Записаться
                             </span>
@@ -336,14 +348,14 @@ export const ContentMainSection = (): JSX.Element => {
         </CardContent>
       </Card>
 
-      <Card className="w-full bg-white rounded-[32px] border-0 relative min-h-[724px]">
-        <CardContent className="p-0">
-          <div className="absolute top-14 left-4 md:left-14">
-            <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-4xl md:text-[74.7px] tracking-[-3.20px] leading-[64px]">
+      <Card className="w-full bg-white rounded-[32px] border-0">
+        <CardContent className="p-4">
+          <div className="pt-10 pb-6 px-10">
+            <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-4xl md:text-[74.7px] tracking-[-3.20px] leading-[64px]">
               Почему нам доверяют?
             </h2>
           </div>
-          <div className="absolute top-[216px] left-0 right-0">
+          <div className="w-full">
             <ScrollArea className="w-full">
               <div className="flex gap-5 pl-4 md:pl-14 pr-4 pb-10">
                 {trustReasons.map((reason, index) => (
@@ -362,7 +374,7 @@ export const ContentMainSection = (): JSX.Element => {
                             style={{
                               color:
                                 reason.textColor === "text-white"
-                                  ? "#003569"
+                                  ? "#336699"
                                   : "#ae955f",
                             }}
                           >
@@ -372,7 +384,7 @@ export const ContentMainSection = (): JSX.Element => {
                       )}
                       {!reason.image && (
                         <div className="relative h-px z-[1]">
-                          <Badge className="absolute top-4 left-4 h-8 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm text-[#003569]">
+                          <Badge className="absolute top-4 left-4 h-8 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm text-[#336699]">
                             {reason.badge}
                           </Badge>
                         </div>
@@ -436,7 +448,7 @@ export const ContentMainSection = (): JSX.Element => {
                 показатель нашей работы
               </h2>
             </div>
-            <Card className="flex-1 bg-[#003569] rounded-[28px] border-0">
+            <Card className="flex-1 bg-[#336699] rounded-[28px] border-0">
               <CardContent className="p-10">
                 <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-2xl md:text-[29.9px] leading-8 mb-12">
                   Независимые рейтинги
@@ -487,7 +499,7 @@ export const ContentMainSection = (): JSX.Element => {
                   </Button>
                   <Button
                     size="icon"
-                    className="w-14 h-14 bg-[#003569] hover:bg-[#003569]/90 rounded-2xl"
+                    className="w-14 h-14 bg-[#336699] hover:bg-[#336699]/90 rounded-2xl"
                   >
                     <div className="w-8 h-8" />
                   </Button>
@@ -501,7 +513,7 @@ export const ContentMainSection = (): JSX.Element => {
 
       <Card className="w-full bg-white rounded-[32px] border-0">
         <CardContent className="flex flex-col items-center gap-12 pt-14 pb-4 px-4">
-          <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-4xl md:text-[74.7px] tracking-[-3.20px] leading-[64px] w-full max-w-[1468px]">
+          <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-4xl md:text-[74.7px] tracking-[-3.20px] leading-[64px] w-full max-w-[1468px]">
             Какое лечение проводим?
           </h2>
 
@@ -513,7 +525,7 @@ export const ContentMainSection = (): JSX.Element => {
                   <br />
                   зубов в одной клинике
                 </h3>
-                <Button className="h-12 gap-3 px-5 bg-[#003569] hover:bg-[#003569]/90 rounded-2xl w-fit">
+                <Button className="h-12 gap-3 px-5 bg-[#336699] hover:bg-[#336699]/90 rounded-2xl w-fit">
                   <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base">
                     Все услуги
                   </span>
@@ -585,7 +597,7 @@ export const ContentMainSection = (): JSX.Element => {
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-[#003569] rounded-[40px] border-0 relative overflow-hidden">
+              <Card className="bg-[#336699] rounded-[40px] border-0 relative overflow-hidden">
                 <CardContent className="p-10 flex gap-5 min-h-[344px]">
                   <div className="flex-1 flex flex-col justify-between z-10">
                     <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-2xl md:text-[29.9px] leading-8 mb-6">
@@ -652,7 +664,7 @@ export const ContentMainSection = (): JSX.Element => {
 
       <Card className="w-full bg-white rounded-[32px] border-0">
         <CardContent className="flex flex-col items-center gap-[77px] pt-14 pb-4 px-4">
-          <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#003569] text-4xl md:text-[75px] tracking-[-3.20px] leading-[64px] w-full max-w-[1468px]">
+          <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-4xl md:text-[75px] tracking-[-3.20px] leading-[64px] w-full max-w-[1468px]">
             Где мы находимся?
           </h2>
 
@@ -723,9 +735,9 @@ export const ContentMainSection = (): JSX.Element => {
               </div>
             </div>
 
-            <Card className="flex-1 bg-[#0035690a] rounded-[28px] border-0">
+            <Card className="flex-1 bg-[#3366990a] rounded-[28px] border-0">
               <CardContent className="p-4 flex flex-col gap-5 h-full">
-                <Card className="bg-[#003569] rounded-3xl border-0">
+                <Card className="bg-[#336699] rounded-3xl border-0">
                   <CardContent className="flex flex-col gap-12 p-10">
                     <div className="flex flex-col md:flex-row gap-5">
                       <div className="flex-1 flex items-center gap-3">

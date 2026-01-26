@@ -14,9 +14,15 @@ const patientsLinks = [
 
 const messagingButtons = [{ label: "В Telegram" }, { label: "В WhatsApp" }];
 
-export const AppWrapperSection = (): JSX.Element => {
+interface AppWrapperSectionProps {
+  onOpenModal: () => void;
+}
+
+export const AppWrapperSection = ({
+  onOpenModal,
+}: AppWrapperSectionProps): JSX.Element => {
   return (
-    <footer className="flex flex-col w-full items-start p-14 relative bg-[#003569] rounded-[32px]">
+    <footer className="flex flex-col w-full items-start p-14 relative bg-[#336699] rounded-[32px]">
       <div className="flex items-start justify-center gap-5 pt-0 pb-[60px] px-0 relative self-stretch w-full flex-[0_0_auto]">
         <img
           className="relative flex-1 self-stretch grow"
@@ -136,7 +142,10 @@ export const AppWrapperSection = (): JSX.Element => {
             </div>
           </div>
 
-          <Button className="h-12 px-5 py-0 bg-[#ae955f] hover:bg-[#9a8354] rounded-2xl">
+          <Button
+            onClick={onOpenModal}
+            className="h-12 px-5 py-0 bg-[#ae955f] hover:bg-[#9a8354] rounded-2xl"
+          >
             <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base text-center tracking-[0] leading-4 whitespace-nowrap">
               Записаться на прием
             </span>

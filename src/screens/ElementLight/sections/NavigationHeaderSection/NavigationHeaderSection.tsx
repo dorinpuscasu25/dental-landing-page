@@ -6,21 +6,32 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "../../../../components/ui/navigation-menu";
+import { LanguageSwitcher } from "../../../../components/LanguageSwitcher";
+import { useLanguage } from "../../../../contexts/LanguageContext";
+import { useTranslations } from "../../../../translations";
 
-const navigationItems = [
-  { label: "Услуги", hasDropdown: true },
-  { label: "О клинике", hasDropdown: false },
-  { label: "Команда", hasDropdown: false },
-  { label: "Лечение во сне", hasDropdown: false },
-  { label: "Пациентам", hasDropdown: true },
-  { label: "Цены", hasDropdown: false },
-  { label: "Контакты", hasDropdown: false },
-];
+interface NavigationHeaderSectionProps {
+  onOpenModal: () => void;
+}
 
-export const NavigationHeaderSection = (): JSX.Element => {
+export const NavigationHeaderSection = ({
+  onOpenModal,
+}: NavigationHeaderSectionProps): JSX.Element => {
+  const { language } = useLanguage();
+  const t = useTranslations(language);
+
+  const navigationItems = [
+    { label: t.header.services, hasDropdown: true },
+    { label: t.header.aboutClinic, hasDropdown: false },
+    { label: t.header.team, hasDropdown: false },
+    { label: t.header.sleepTreatment, hasDropdown: false },
+    { label: t.header.forPatients, hasDropdown: true },
+    { label: t.header.prices, hasDropdown: false },
+    { label: t.header.contacts, hasDropdown: false },
+  ];
   return (
     <header className="flex flex-col w-full items-start px-40 py-2.5 relative bg-transparent">
-      <nav className="flex items-center justify-between px-6 py-5 relative self-stretch w-full bg-[#003569] rounded-3xl shadow-[0px_6px_24px_#0000000d]">
+      <nav className="flex items-center justify-between px-6 py-5 relative self-stretch w-full bg-[#336699] rounded-3xl shadow-[0px_6px_24px_#0000000d]">
         <img className="relative flex-shrink-0" alt="Link" src="/link.svg" />
 
         <div className="flex items-center justify-between relative flex-1 ml-6">
@@ -43,25 +54,29 @@ export const NavigationHeaderSection = (): JSX.Element => {
 
           <div className="flex items-center gap-2 px-[30px]">
             <span className="text-white text-sm leading-3 whitespace-nowrap [font-family:'Manrope',Helvetica] font-extralight tracking-[0]">
-              Москва,ул. Советской Армии, 17/52
+              {t.header.address}
             </span>
             <div className="w-px h-6 bg-white opacity-40" />
             <span className="text-white text-sm leading-3 whitespace-nowrap [font-family:'Manrope',Helvetica] font-extralight tracking-[0]">
-              м. Марьина Роща
+              {t.header.metro}
             </span>
           </div>
 
-          <div className="flex items-center gap-0">
+          <div className="flex items-center gap-2">
             <span className="pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap">
-              8 (495) 085-66-46
+              {t.header.phone}
             </span>
             <img
               className="flex-shrink-0"
               alt="List margin"
               src="/list-margin.svg"
             />
-            <Button className="h-10 px-4 bg-[#ae955f] hover:bg-[#9d8454] text-white rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-base leading-4">
-              Записаться
+            <LanguageSwitcher />
+            <Button
+              onClick={onOpenModal}
+              className="h-10 px-4 bg-[#ae955f] hover:bg-[#9d8454] text-white rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-base leading-4"
+            >
+              {t.header.bookAppointment}
             </Button>
           </div>
         </div>
