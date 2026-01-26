@@ -1,4 +1,5 @@
 import { ChevronDownIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Button } from "../../../../components/ui/button";
 import {
   NavigationMenu,
@@ -21,31 +22,46 @@ export const NavigationHeaderSection = ({
   const t = useTranslations(language);
 
   const navigationItems = [
-    { label: t.header.services, hasDropdown: false },
-    { label: t.header.team, hasDropdown: false },
-    { label: t.header.prices, hasDropdown: false },
-    { label: t.header.blog, hasDropdown: false },
-    { label: t.header.aboutClinic, hasDropdown: false },
-    { label: t.header.contacts, hasDropdown: false },
+    { label: t.header.services, hasDropdown: false, link: "#" },
+    { label: t.header.team, hasDropdown: false, link: "#" },
+    { label: t.header.prices, hasDropdown: false, link: "/prices" },
+    { label: t.header.blog, hasDropdown: false, link: "#" },
+    { label: t.header.aboutClinic, hasDropdown: false, link: "#" },
+    { label: t.header.contacts, hasDropdown: false, link: "#" },
   ];
   return (
     <header className="flex flex-col w-full items-start px-40 py-2.5 relative bg-transparent">
       <nav className="flex items-center justify-between px-6 py-5 relative self-stretch w-full bg-[#336699] rounded-3xl shadow-[0px_6px_24px_#0000000d]">
-        <img className="relative flex-shrink-0" alt="Link" src="/link.svg" />
+        <Link to="/">
+          <img className="relative flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity" alt="Link" src="/link.svg" />
+        </Link>
 
         <div className="flex items-center justify-between relative flex-1 ml-6">
           <NavigationMenu className="flex-1">
             <NavigationMenuList className="flex items-center gap-0">
               {navigationItems.map((item, index) => (
                 <NavigationMenuItem key={index}>
-                  <NavigationMenuLink className="inline-flex items-center gap-1 px-2 py-2 cursor-pointer hover:opacity-80 transition-opacity">
-                    <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap">
-                      {item.label}
-                    </span>
-                    {item.hasDropdown && (
-                      <ChevronDownIcon className="w-4 h-4 text-white" />
-                    )}
-                  </NavigationMenuLink>
+                  {item.link.startsWith("/") ? (
+                    <Link to={item.link}>
+                      <NavigationMenuLink className="inline-flex items-center gap-1 px-2 py-2 cursor-pointer hover:opacity-80 transition-opacity">
+                        <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap">
+                          {item.label}
+                        </span>
+                        {item.hasDropdown && (
+                          <ChevronDownIcon className="w-4 h-4 text-white" />
+                        )}
+                      </NavigationMenuLink>
+                    </Link>
+                  ) : (
+                    <NavigationMenuLink className="inline-flex items-center gap-1 px-2 py-2 cursor-pointer hover:opacity-80 transition-opacity">
+                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap">
+                        {item.label}
+                      </span>
+                      {item.hasDropdown && (
+                        <ChevronDownIcon className="w-4 h-4 text-white" />
+                      )}
+                    </NavigationMenuLink>
+                  )}
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
