@@ -72,6 +72,28 @@ const trustReasons = [
     bgColor: "bg-[#ae955f1f]",
     hasOverlay: true,
   },
+  {
+    title: "Собственная лаборатория",
+    description:
+      "Полный цикл изготовления протезов под контролем наших специалистов",
+    badge: "Качество",
+    bgColor: "bg-[#ae955f1f]",
+  },
+  {
+    title: "Гарантия на все работы",
+    description:
+      "Предоставляем официальную гарантию на все виды стоматологических услуг",
+    badge: "Надежность",
+    bgColor: "bg-[#336699]",
+    textColor: "text-white",
+  },
+  {
+    title: "Современное оборудование",
+    description:
+      "Используем новейшие технологии для точной диагностики и лечения",
+    badge: "Инновации",
+    bgColor: "bg-[#ae955f1f]",
+  },
 ];
 
 const ratingPlatforms = [
@@ -414,16 +436,16 @@ export const ContentMainSection = ({
                 {trustReasons.map((reason, index) => (
                   <Card
                     key={index}
-                    className={`min-w-[320px] max-w-[320px] ${reason.bgColor} rounded-[28px] overflow-hidden border-0 flex-shrink-0`}
+                    className={`min-w-[300px] max-w-[300px] ${reason.bgColor} rounded-[24px] overflow-hidden border-0 flex-shrink-0`}
                   >
-                    <CardContent className="p-1 flex flex-col relative min-h-[320px]">
+                    <CardContent className="p-1 flex flex-col relative min-h-[260px]">
                       {reason.image && (
                         <div
-                          className="relative h-[150px] rounded-[20px] overflow-hidden z-[1] bg-cover bg-center"
+                          className="relative h-[120px] rounded-[20px] overflow-hidden z-[1] bg-cover bg-center"
                           style={{ backgroundImage: `url(${reason.image})` }}
                         >
                           <Badge
-                            className="absolute top-3 left-3 h-7 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-xs"
+                            className="absolute top-2 left-2 h-6 px-2 bg-white hover:bg-white/90 rounded-xl [font-family:'Manrope',Helvetica] font-extralight text-xs"
                             style={{
                               color:
                                 reason.textColor === "text-white"
@@ -437,13 +459,13 @@ export const ContentMainSection = ({
                       )}
                       {!reason.image && (
                         <div className="relative h-px z-[1]">
-                          <Badge className="absolute top-3 left-3 h-7 px-2.5 bg-white hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-xs text-[#336699]">
+                          <Badge className="absolute top-2 left-2 h-6 px-2 bg-white hover:bg-white/90 rounded-xl [font-family:'Manrope',Helvetica] font-extralight text-xs text-[#336699]">
                             {reason.badge}
                           </Badge>
                         </div>
                       )}
                       <div
-                        className={`flex-1 flex flex-col ${reason.hasOverlay ? "justify-end pt-[180px]" : "justify-start pt-4"} pb-3 px-4 z-0`}
+                        className={`flex-1 flex flex-col ${reason.hasOverlay ? "justify-end pt-[140px]" : "justify-start pt-3"} pb-3 px-3 z-0`}
                       >
                         {reason.hasOverlay ? (
                           <div className="p-3 backdrop-blur-[27px] bg-[#ffffffcc] rounded-[20px]">
