@@ -30,14 +30,14 @@ export const NavigationHeaderSection = ({
     { label: t.header.contacts, hasDropdown: false, link: "#" },
   ];
   return (
-    <header className="flex flex-col w-full items-start px-40 py-2.5 relative bg-transparent">
-      <nav className="flex items-center justify-between px-6 py-5 relative self-stretch w-full bg-[#336699] rounded-3xl shadow-[0px_6px_24px_#0000000d]">
+    <header className="flex flex-col w-full items-start px-4 md:px-8 lg:px-40 py-2.5 relative bg-transparent">
+      <nav className="flex items-center justify-between px-3 md:px-6 py-4 md:py-5 relative self-stretch w-full bg-[#336699] rounded-2xl md:rounded-3xl shadow-[0px_6px_24px_#0000000d]">
         <Link to="/">
-          <img className="relative flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity" alt="Link" src="/link.svg" />
+          <img className="relative flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity w-20 md:w-auto" alt="Link" src="/link.svg" />
         </Link>
 
-        <div className="flex items-center justify-between relative flex-1 ml-6">
-          <NavigationMenu className="flex-1">
+        <div className="flex items-center justify-between relative flex-1 ml-3 md:ml-6">
+          <NavigationMenu className="flex-1 hidden lg:block">
             <NavigationMenuList className="flex items-center gap-0">
               {navigationItems.map((item, index) => (
                 <NavigationMenuItem key={index}>
@@ -67,22 +67,22 @@ export const NavigationHeaderSection = ({
             </NavigationMenuList>
           </NavigationMenu>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 md:gap-2">
             <a
               href="tel:+74950856646"
-              className="pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap hover:opacity-80 transition-opacity"
+              className="hidden md:block pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap hover:opacity-80 transition-opacity"
             >
               {t.header.phone}
             </a>
             <img
-              className="flex-shrink-0"
+              className="hidden md:block flex-shrink-0"
               alt="List margin"
               src="/list-margin.svg"
             />
             <LanguageSwitcher />
             <Button
               onClick={onOpenModal}
-              className="h-10 px-4 bg-[#ae955f] hover:bg-[#9d8454] text-white rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-base leading-4"
+              className="h-8 md:h-10 px-3 md:px-4 bg-[#ae955f] hover:bg-[#9d8454] text-white rounded-xl md:rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm md:text-base leading-4"
             >
               {t.header.bookAppointment}
             </Button>
