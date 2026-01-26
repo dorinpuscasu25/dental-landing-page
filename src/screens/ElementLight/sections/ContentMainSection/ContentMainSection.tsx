@@ -350,53 +350,7 @@ export const ContentMainSection = ({
               ))}
             </div>
 
-            <div className="w-full overflow-hidden">
-              <ScrollArea className="w-full">
-                <div className="flex gap-4 pb-10 pl-14 pr-4">
-                  {teamMembers.map((member, index) => (
-                    <Card
-                      key={index}
-                      className="min-w-[530px] rounded-[32px] overflow-hidden border-0"
-                    >
-                      <CardContent className="p-0 relative">
-                        <div
-                          className="h-[382px] bg-cover bg-center"
-                          style={{ backgroundImage: `url(${member.image})` }}
-                        />
-                        <div className="absolute bottom-2 left-2 right-2 bg-[#ffffff33] backdrop-blur-[22.5px] rounded-[32px] p-5">
-                          <div className="flex flex-wrap gap-1 mb-4">
-                            <Badge className="h-8 px-2.5 bg-white text-[#ae955f] hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm">
-                              {member.experience}
-                            </Badge>
-                            {member.degree && (
-                              <Badge className="h-8 px-2.5 bg-white text-[#ae955f] hover:bg-white/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-sm">
-                                {member.degree}
-                              </Badge>
-                            )}
-                          </div>
-                          <h3 className="[font-family:'Inter',Helvetica] font-normal text-white text-lg mb-2">
-                            {member.name}
-                          </h3>
-                          <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#ffffffcc] text-base mb-4">
-                            {member.role}
-                          </p>
-                          <Button
-                            onClick={onOpenModal}
-                            className="w-full h-12 px-4 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl"
-                          >
-                            <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base">
-                              Записаться
-                            </span>
-                          </Button>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-                <ScrollBar orientation="horizontal" />
-              </ScrollArea>
-              <img className="w-full" alt="Container" src="/container-2.svg" />
-            </div>
+            
           </div>
         </CardContent>
       </Card>
