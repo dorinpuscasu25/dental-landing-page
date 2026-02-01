@@ -172,7 +172,7 @@ export const ContentMainSection = ({
     <div className="flex flex-col w-full items-start gap-5 px-4 md:px-8 lg:px-[170px] py-0 relative">
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] overflow-hidden border-0">
         <CardContent className="flex items-start justify-center pl-4 pr-4 md:pr-[200px] lg:pr-[800px] pt-[250px] md:pt-[350px] lg:pt-[402.75px] pb-4 relative p-0">
-          <div className="absolute w-full h-full top-0 left-0 bg-[url('/bloc1_copy.jpg')] bg-cover bg-center" />
+          <div className="absolute w-full h-full top-0 left-0 bg-cover bg-center" style={{ backgroundImage: "url('/bloc1_copy.jpg')" }}/>
           <div className="gap-4 md:gap-6 p-6 md:p-10 flex-1 backdrop-blur-[10px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(10px)_brightness(100%)] flex flex-col items-start relative bg-[#ffffffcc] rounded-2xl md:rounded-[28px]">
             <h1 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-2xl md:text-3xl lg:text-[45.2px] tracking-[-1.2px] md:tracking-[-1.92px] leading-8 md:leading-[48px]">
               {t.hero.title}
