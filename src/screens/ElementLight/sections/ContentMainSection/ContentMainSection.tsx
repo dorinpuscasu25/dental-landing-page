@@ -653,67 +653,13 @@ export const ContentMainSection = ({
           <div className="flex flex-col lg:flex-row gap-4 md:gap-5 w-full">
             <div className="flex-1">
               <div className="relative h-[300px] md:h-[400px] lg:h-[554px] rounded-2xl md:rounded-[28px] overflow-hidden">
-                <div className="w-full h-full relative">
-                  <div className="absolute top-0 left-0 w-px h-px flex bg-white bg-blend-saturation">
-                    <div className="-mt-32 w-[1020px] h-[810px] -ml-32 bg-[url(/image.png)] bg-cover bg-center" />
-                  </div>
-                  <img
-                    className="hidden md:block absolute top-[197px] left-[347px] w-[70px] h-20"
-                    alt="Image"
-                    src="/image-1.svg"
-                  />
-                  <img
-                    className="hidden md:block absolute top-[108px] left-2.5 w-7 h-[206px]"
-                    alt="Container"
-                    src="/container-4.svg"
-                  />
-                  <div className="hidden md:flex absolute bottom-0 left-0 right-0 flex-col items-start pl-[423.55px] pr-[3px]">
-                    <div className="flex items-center gap-2 pb-2 px-2">
-                      <div className="flex items-start h-6 bg-white rounded-[3px] overflow-hidden shadow-[0px_2px_5px_-3px_#00000026,0px_1px_2px_1px_#00000026]">
-                        <img
-                          className="w-[26px] h-6"
-                          alt="Margin"
-                          src="/margin.svg"
-                        />
-                        <span className="[font-family:'Inter',Helvetica] font-normal text-black text-[11.1px] leading-6 px-1.5">
-                          Как добраться
-                        </span>
-                      </div>
-                      <div className="flex items-start h-6 bg-white rounded-[3px] overflow-hidden shadow-[0px_2px_5px_-3px_#00000026,0px_1px_2px_1px_#00000026]">
-                        <img
-                          className="w-[30px] h-6"
-                          alt="Margin"
-                          src="/margin-1.svg"
-                        />
-                        <span className="[font-family:'Inter',Helvetica] font-normal text-black text-[11.1px] leading-6 px-1.5">
-                          Доехать на такси
-                        </span>
-                      </div>
-                      <div className="flex items-start pt-0 pb-px px-1 bg-[#ffffffb2] rounded-[3px]">
-                        <span className="[font-family:'Inter',Helvetica] font-normal text-black text-xs underline">
-                          API Карт
-                        </span>
-                      </div>
-                    </div>
-                    <div className="w-full h-6 overflow-hidden">
-                      <div className="flex items-center justify-center gap-0 relative top-px">
-                        <div className="flex items-start pt-0 pb-px px-1 bg-[#ffffffbf] rounded-[3px]">
-                          <span className="[font-family:'Inter',Helvetica] font-normal text-black text-[11px]">
-                            © Яндекс
-                          </span>
-                          <span className="[font-family:'Inter',Helvetica] font-normal text-black text-[11px] underline">
-                            Условия использования
-                          </span>
-                        </div>
-                        <img
-                          className="w-[134px]"
-                          alt="Container"
-                          src="/container-1.svg"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3510.9431382019707!2d28.889423!3d47.05691709999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97d0020f4b831%3A0x2b265dfa3e639478!2sTopdentica%20Clinic%C4%83%20Stomatologic%C4%83!5e1!3m2!1sen!2s!4v1769987820310!5m2!1sen!2s"
+                  className="w-full h-full border-0"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
 
