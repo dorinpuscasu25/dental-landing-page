@@ -161,7 +161,7 @@ export const AppWrapperSection = ({
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-6 md:pt-8 pb-0 px-0 relative self-stretch w-full flex-[0_0_auto] border-t border-white/20">
+      <div className="flex flex-col md:flex-row items-start md:items-center gap-4 pt-6 md:pt-8 pb-0 px-0 relative self-stretch w-full flex-[0_0_auto] border-t border-white/20">
         <div className="inline-flex flex-col md:flex-row flex-wrap items-start gap-3 md:gap-4 relative flex-[0_0_auto]">
           <p className="inline-flex flex-col items-start relative self-stretch flex-[0_0_auto] opacity-60">
             <span className="text-[#ffffffcc] text-xs md:text-sm lg:text-base leading-4 mt-[-1.00px] [font-family:'Manrope',Helvetica] font-extralight tracking-[0]">
@@ -177,22 +177,6 @@ export const AppWrapperSection = ({
               {t.footer.privacy}
             </span>
           </a>
-        </div>
-
-        <div className="inline-flex flex-col items-start relative flex-[0_0_auto]">
-          <div className="inline-flex items-center pt-0 pb-px px-0 relative">
-            <span className="mt-[-1.50px] opacity-60 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base lg:text-xl tracking-[0] leading-5">
-              {t.footer.madeIn}
-            </span>
-            <a
-              href="#"
-              className="inline-flex items-start px-0 py-[3.5px] relative flex-[0_0_auto] mt-[-4.00px] mb-[-4.00px]"
-            >
-              <span className="mt-[-1.00px] [font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base lg:text-xl tracking-[0] leading-5">
-                everest
-              </span>
-            </a>
-          </div>
         </div>
       </div>
     </footer>
