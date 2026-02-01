@@ -262,7 +262,7 @@ export const ContentMainSection = ({
                   <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bg.png)] bg-cover bg-center min-h-[250px] md:min-h-[336px]" />
                 </div>
               </div>
-              <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bg-1.png)] bg-cover bg-center min-h-[400px] md:min-h-[602px]" />
+              <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/Bloc2.jpg)] bg-cover bg-center min-h-[400px] md:min-h-[602px]" />
             </div>
           </div>
         </CardContent>
