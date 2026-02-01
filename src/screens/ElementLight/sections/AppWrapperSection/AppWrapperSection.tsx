@@ -23,12 +23,15 @@ export const AppWrapperSection = ({
 
   return (
     <footer className="flex flex-col w-full items-start p-6 md:p-10 lg:p-14 relative bg-[#336699] rounded-2xl md:rounded-[32px]">
-      <div className="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-5 pt-0 pb-10 md:pb-[60px] px-0 relative self-stretch w-full flex-[0_0_auto]">
+      <div className="mb-8 lg:mb-12">
         <img
-          className="hidden lg:block relative flex-1 self-stretch grow"
-          alt="Container"
-          src="/container.svg"
+          className="w-32 md:w-40 lg:w-48 h-auto"
+          alt="Topdentica Logo"
+          src="/logo_alb.svg"
         />
+      </div>
+
+      <div className="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-5 pt-0 pb-10 md:pb-[60px] px-0 relative self-stretch w-full flex-[0_0_auto]">
 
         <nav className="flex flex-col items-start gap-6 lg:gap-11 relative flex-1 self-stretch w-full lg:grow">
           <h3 className="self-stretch mt-[-1.00px] [font-family:'Inter',Helvetica] font-normal text-white text-xl md:text-2xl lg:text-[30.4px] tracking-[0] leading-6 md:leading-8">
