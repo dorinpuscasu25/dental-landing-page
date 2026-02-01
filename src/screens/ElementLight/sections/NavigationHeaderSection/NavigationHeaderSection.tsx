@@ -81,7 +81,7 @@ export const NavigationHeaderSection = ({
               )}
             </button>
             <a
-              href="tel:+74950856646"
+              href="tel:+37368303088"
               className="hidden md:block pr-2.5 [font-family:'Manrope',Helvetica] font-extralight text-white text-sm tracking-[0] leading-[14px] whitespace-nowrap hover:opacity-80 transition-opacity"
             >
               {t.header.phone}
@@ -130,7 +130,7 @@ export const NavigationHeaderSection = ({
               </div>
             ))}
             <a
-              href="tel:+74950856646"
+              href="tel:+37368303088"
               className="block py-3 px-4 rounded-lg hover:bg-[#f5f7fa] transition-colors md:hidden"
             >
               <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#336699] text-base">

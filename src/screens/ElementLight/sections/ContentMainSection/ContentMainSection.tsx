@@ -42,56 +42,41 @@ const specialtyFilters = [
 
 const trustReasons = [
   {
-    title: "Современные технологии",
+    title: "Calitate, nu cantitate",
     description:
-      "Клиника и собственная зуботехническая лаборатория оборудованы по мировым стандартам.",
-    badge: "Технологии",
+      "Tratăm fiecare pacient cu timp, atenție și soluții corecte din prima, pentru rezultate sigure și durabile.",
+    badge: "Calitate",
     image: "/----------------------.png",
     bgColor: "bg-[#ae955f1f]",
   },
   {
     title:
-      "Опыт команды + Технологии = Высококачественные стоматологические услуги",
-    badge: "Гарантии качества",
+      "Experiența echipei + Tehnologia = Servicii stomatologice de înaltă calitate.",
+    badge: "Garanția calității",
     bgColor: "bg-[#336699]",
     textColor: "text-white",
   },
   {
-    title: "Индивидуальный подход",
+    title: "Abordare individuală",
     description:
-      "Подберем команду врачей и предоставим персонального куратора именно для быстрого решения всех вопросов",
-    badge: "Сервис",
+      "Selectăm echipa medicală potrivită pentru soluționarea rapidă și eficientă a tuturor solicitărilor tale.",
+    badge: "Abordare individuală",
     image: "/---------------------.png",
     bgColor: "bg-[#ae955f1f]",
   },
   {
-    title: "Более 20 специалистов",
-    description: "по разным направлениям стоматологии и медицины",
-    badge: "Эксперты в своей области",
+    title: "5 specialiști",
+    description: "în diferite ramuri ale stomatologiei și medicinei, dedicați tratamentelor sigure, personalizate și durabile.",
+    badge: "Experți în domeniul lor",
     image: "/------20-------------.png",
     bgColor: "bg-[#ae955f1f]",
     hasOverlay: true,
   },
   {
-    title: "Собственная лаборатория",
+    title: "Tehnologii moderne",
     description:
-      "Полный цикл изготовления протезов под контролем наших специалистов",
-    badge: "Качество",
-    bgColor: "bg-[#ae955f1f]",
-  },
-  {
-    title: "Гарантия на все работы",
-    description:
-      "Предоставляем официальную гарантию на все виды стоматологических услуг",
-    badge: "Надежность",
-    bgColor: "bg-[#336699]",
-    textColor: "text-white",
-  },
-  {
-    title: "Современное оборудование",
-    description:
-      "Используем новейшие технологии для точной диагностики и лечения",
-    badge: "Инновации",
+      "Clinica noastră este echipată conform standardelor internaționale, pentru tratamente precise și sigure.",
+    badge: "Tehnologii moderne",
     bgColor: "bg-[#ae955f1f]",
   },
 ];
@@ -105,38 +90,38 @@ const ratingPlatforms = [
 
 const services = [
   {
-    category: "Cпасение вашей улыбки",
-    title: "Лечение кариеса",
-    description: "Бережное лечение и восстановление зубов",
+    category: "Salvarea zâmbetului tău",
+    title: "Tratamentul cariilor",
+    description: "Tratament atent și restaurarea dinților",
     image: "/---------------.png",
     large: true,
   },
   {
-    category: "Быстрое решение проблемы",
-    title: "Удаление зубов",
+    category: "Soluție rapidă pentru problemă",
+    title: "Extracții dentare",
     description:
-      "Бережное и безболезненное удаление зубов даже в сложных случаях",
+      "Extracții dentare atente și nedureroase chiar și în cazuri complexe",
     image: "/--------------.png",
   },
   {
-    category: "Восстановление вашей улыбки",
-    title: "Имплантация зубов",
+    category: "Refacerea zâmbetului tău",
+    title: "Implanturi dentare",
     description:
-      "Установка аналога корня зуба с последующей установкой коронки на имплантат",
+      "Instalarea unui analog al rădăcinii dintelui cu instalarea ulterioară a coroanei pe implant",
     image: "/-----------------.png",
   },
   {
-    category: "Забота о вашей улыбке",
-    title: "Профессиональная гигиена",
+    category: "Grijă pentru zâmbetul tău",
+    title: "Igienă profesională",
     description:
-      "Эффективное очищение налета, подходит для чувствительных зубов и десен",
+      "Curățare eficientă a plăcii bacteriene, potrivită pentru dinți și gingii sensibile",
     image: "/------------------------.png",
   },
   {
-    category: "Чтобы составить план лечения",
-    title: "Комплексная консультация",
+    category: "Pentru a stabili planul de tratament",
+    title: "Consultație complexă",
     description:
-      "Всесторонняя оценка состояния ваших зубов и всей полости рта и составление вариантов решения проблем",
+      "Evaluare cuprinzătoare a stării dinților și a întregii cavități orale și elaborarea variantelor de rezolvare a problemelor",
     image: "/-------------------------1.png",
   },
 ];
