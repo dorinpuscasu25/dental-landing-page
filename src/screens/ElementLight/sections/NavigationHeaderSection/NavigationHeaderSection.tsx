@@ -35,7 +35,7 @@ export const NavigationHeaderSection = ({
     <header className="flex flex-col w-full items-start px-4 md:px-8 lg:px-40 py-2.5 relative bg-transparent">
       <nav className="flex items-center justify-between px-3 md:px-6 py-4 md:py-5 relative self-stretch w-full bg-[#336699] rounded-2xl md:rounded-3xl shadow-[0px_6px_24px_#0000000d]">
         <Link to="/">
-          <img className="relative flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity w-20 md:w-auto" alt="Link" src="/link.svg" />
+          <img className="relative flex-shrink-0 cursor-pointer hover:opacity-80 transition-opacity w-32 md:w-40 h-auto" alt="Topdentica Logo" src="/logo_alb.svg" />
         </Link>
 
         <div className="flex items-center justify-between relative flex-1 ml-3 md:ml-6">
