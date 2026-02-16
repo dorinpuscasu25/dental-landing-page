@@ -43,20 +43,76 @@ export const translations = {
     },
     trust: {
       title: "Почему пациенты нам доверяют?",
-      technology: "Современные технологии",
-      quality: "Гарантия качества",
-      service: "Индивидуальный подход",
-      experts: "Эксперты в своей области",
+      items: [
+        {
+          title: "Качество, а не количество",
+          description:
+            "Лечим каждого пациента с вниманием и правильными решениями с первого раза, для надёжных и долговечных результатов.",
+        },
+        {
+          title: "Современные технологии",
+          description:
+            "Клиника оснащена по международным стандартам для точного и безопасного лечения.",
+        },
+        {
+          title: "Гарантия качества",
+          description:
+            "Опыт команды + технологии = стоматологические услуги высокого качества.",
+        },
+        {
+          title: "Индивидуальный подход",
+          description:
+            "Подбираем подходящую медицинскую команду для быстрого и эффективного решения ваших запросов.",
+        },
+        {
+          title: "Эксперты в своей области",
+          description:
+            "5 специалистов в разных направлениях стоматологии и медицины, посвятивших себя безопасному, персонализированному и долговечному лечению.",
+        },
+      ],
     },
     ratings: {
       title: "Положительные отзывы Topdentica — прямой показатель качества нашей работы",
       independent: "Независимые рейтинги",
+      googleLabel: "Отзывы Google",
+      googleButton: "Смотреть отзывы Google",
       awards: "Награды и сертификаты",
+      awardsPlaceholder: "Ожидаем фото",
+      certificates: [
+        "Сертификат 1",
+        "Сертификат 2",
+        "Сертификат 3",
+        "Сертификат 4",
+        "Сертификат 5",
+        "Сертификат 6",
+      ],
     },
     services: {
       title: "Всё необходимое для здоровья зубов в одной клинике",
       subtitle: "",
       allServicesButton: "Все услуги",
+      items: [
+        {
+          title: "Лечение кариеса",
+          tag: "Спасение вашей улыбки",
+        },
+        {
+          title: "Удаление зубов",
+          tag: "Быстрое решение проблемы",
+        },
+        {
+          title: "Дентальные импланты",
+          tag: "Восстановление вашей улыбки",
+        },
+        {
+          title: "Профессиональная гигиена",
+          tag: "Забота о вашей улыбке",
+        },
+        {
+          title: "Комплексная консультация",
+          tag: "Для составления плана лечения",
+        },
+      ],
       pricing: "Прозрачные цены",
       pricingDescription:
         "Наш подход к лечению пациентов начинается с создания полного плана уже при первом визите в клинику. Этот план включает все необходимые услуги, этапы лечения и общую стоимость. Мы гарантируем, что установленная цена остается окончательной — без скрытых расходов, только честные и прозрачные цены.",
@@ -146,20 +202,76 @@ export const translations = {
     },
     trust: {
       title: "De ce ne acordă pacienții încredere?",
-      technology: "Tehnologii moderne",
-      quality: "Garanția calității",
-      service: "Abordare individuală",
-      experts: "Experți în domeniul lor",
+      items: [
+        {
+          title: "Calitate, nu cantitate",
+          description:
+            "Tratăm fiecare pacient cu timp, atenție și soluții corecte din prima, pentru rezultate sigure și durabile.",
+        },
+        {
+          title: "Tehnologii moderne",
+          description:
+            "Clinica noastră este echipată conform standardelor internaționale, pentru tratamente precise și sigure.",
+        },
+        {
+          title: "Garanția calității",
+          description:
+            "Experiența echipei + Tehnologia = Servicii stomatologice de înaltă calitate.",
+        },
+        {
+          title: "Abordare individuală",
+          description:
+            "Selectăm echipa medicală potrivită pentru soluționarea rapidă și eficientă a tuturor solicitărilor tale.",
+        },
+        {
+          title: "Experți în domeniul lor",
+          description:
+            "5 specialiști în diferite ramuri ale stomatologiei și medicinei, dedicați tratamentelor sigure, personalizate și durabile.",
+        },
+      ],
     },
     ratings: {
       title: "Recenziile pozitive Topdentica — un indicator direct al calității muncii noastre",
       independent: "Ratinguri independente",
+      googleLabel: "Recenzii Google",
+      googleButton: "Vezi recenziile Google",
       awards: "Premii și certificate",
+      awardsPlaceholder: "În așteptarea pozelor",
+      certificates: [
+        "Certificat 1",
+        "Certificat 2",
+        "Certificat 3",
+        "Certificat 4",
+        "Certificat 5",
+        "Certificat 6",
+      ],
     },
     services: {
       title: "Tot ce ai nevoie pentru sănătatea dinților, într-o singură clinică",
       subtitle: "",
       allServicesButton: "Toate serviciile",
+      items: [
+        {
+          title: "Tratamentul cariilor",
+          tag: "Salvarea zâmbetului tău",
+        },
+        {
+          title: "Extracții dentare",
+          tag: "Soluție rapidă pentru problemă",
+        },
+        {
+          title: "Implanturi dentare",
+          tag: "Refacerea zâmbetului tău",
+        },
+        {
+          title: "Igienă profesională",
+          tag: "Grijă pentru zâmbetul tău",
+        },
+        {
+          title: "Consultație complexă",
+          tag: "Pentru a stabili planul de tratament",
+        },
+      ],
       pricing: "Prețuri transparente",
       pricingDescription:
         "Abordarea noastră în tratamentul pacienților pornește de la crearea unui plan complet încă de la prima vizită în clinică. Acest plan include toate serviciile necesare, etapele tratamentului și costul total. Garantăm că prețul stabilit rămâne final - fără costuri ascunse, doar prețuri corecte și transparente.",
@@ -249,20 +361,76 @@ export const translations = {
     },
     trust: {
       title: "Why do patients trust us?",
-      technology: "Modern Technologies",
-      quality: "Quality Guarantee",
-      service: "Individual Approach",
-      experts: "Experts in their field",
+      items: [
+        {
+          title: "Quality, not quantity",
+          description:
+            "We treat every patient with time, care, and the right solutions from the first visit for safe, lasting results.",
+        },
+        {
+          title: "Modern technologies",
+          description:
+            "Our clinic is equipped to international standards for precise and safe treatments.",
+        },
+        {
+          title: "Quality guarantee",
+          description:
+            "Team experience + technology = high‑quality dental services.",
+        },
+        {
+          title: "Individual approach",
+          description:
+            "We select the right medical team to solve your requests quickly and effectively.",
+        },
+        {
+          title: "Experts in their field",
+          description:
+            "5 specialists across different areas of dentistry and medicine, dedicated to safe, personalized, long‑lasting care.",
+        },
+      ],
     },
     ratings: {
       title: "Positive Topdentica reviews — a direct indicator of the quality of our work",
       independent: "Independent ratings",
+      googleLabel: "Google Reviews",
+      googleButton: "View Google reviews",
       awards: "Awards and certificates",
+      awardsPlaceholder: "Images coming soon",
+      certificates: [
+        "Certificate 1",
+        "Certificate 2",
+        "Certificate 3",
+        "Certificate 4",
+        "Certificate 5",
+        "Certificate 6",
+      ],
     },
     services: {
       title: "Everything you need for dental health in one clinic",
       subtitle: "",
       allServicesButton: "All Services",
+      items: [
+        {
+          title: "Caries treatment",
+          tag: "Saving your smile",
+        },
+        {
+          title: "Tooth extractions",
+          tag: "Quick solution to the problem",
+        },
+        {
+          title: "Dental implants",
+          tag: "Restoring your smile",
+        },
+        {
+          title: "Professional hygiene",
+          tag: "Care for your smile",
+        },
+        {
+          title: "Comprehensive consultation",
+          tag: "To define the treatment plan",
+        },
+      ],
       pricing: "Transparent Pricing",
       pricingDescription:
         "Our approach to patient treatment begins with creating a complete plan at the first visit to the clinic. This plan includes all necessary services, treatment stages, and total cost. We guarantee that the established price remains final — no hidden costs, only fair and transparent pricing.",

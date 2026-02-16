@@ -11,8 +11,6 @@ import {
 } from "../../components/ui/accordion";
 import { NavigationHeaderSection } from "../ElementLight/sections/NavigationHeaderSection";
 import { AppointmentModal } from "../../components/AppointmentModal";
-import { useLanguage } from "../../contexts/LanguageContext";
-import { useTranslations } from "../../translations";
 
 interface ServiceItem {
   name: string;
@@ -128,13 +126,7 @@ const therapeuticServicesData: ServiceCategory[] = [
   },
 ];
 
-interface PricesPageProps {
-  onOpenModal: () => void;
-}
-
-export const PricesPage = ({ onOpenModal }: PricesPageProps): JSX.Element => {
-  const { language } = useLanguage();
-  const t = useTranslations(language);
+export const PricesPage = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState("consultation");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -150,10 +142,7 @@ export const PricesPage = ({ onOpenModal }: PricesPageProps): JSX.Element => {
   return (
     <>
       <NavigationHeaderSection onOpenModal={() => setIsModalOpen(true)} />
-      <AppointmentModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <AppointmentModal open={isModalOpen} onOpenChange={setIsModalOpen} />
       <div className="flex flex-col w-full min-h-screen bg-[#f5f7fa]">
         <div className="flex flex-col w-full items-start gap-5 px-4 md:px-8 lg:px-[170px] py-6 md:py-10 relative">
         <div className="flex items-center gap-2 text-xs md:text-sm">

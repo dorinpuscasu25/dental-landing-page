@@ -11,7 +11,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<ElementLight />} />
-          <Route path="/prices" element={<PricesPage onOpenModal={() => {}} />} />
+          <Route path="/prices" element={<PricesPage />} />
         </Routes>
       </BrowserRouter>
     </LanguageProvider>

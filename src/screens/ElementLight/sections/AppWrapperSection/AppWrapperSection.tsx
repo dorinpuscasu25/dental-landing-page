@@ -1,5 +1,4 @@
 import { Button } from "../../../../components/ui/button";
-import { Separator } from "../../../../components/ui/separator";
 import { useLanguage } from "../../../../contexts/LanguageContext";
 import { useTranslations } from "../../../../translations";
 
@@ -44,14 +43,11 @@ export const AppWrapperSection = ({
                 key={index}
                 className="flex relative self-stretch w-full flex-[0_0_auto]"
               >
-                <a
-                  href="#"
-                  className="flex items-start px-0 py-[3.5px] relative self-stretch w-full flex-[0_0_auto]"
-                >
+                <span className="flex items-start px-0 py-[3.5px] relative self-stretch w-full flex-[0_0_auto] cursor-default">
                   <span className="flex-1 mt-[-1.00px] [font-family:'Manrope',Helvetica] font-extralight text-white text-base md:text-lg lg:text-xl tracking-[0] leading-5">
                     {link}
                   </span>
-                </a>
+                </span>
               </li>
             ))}
           </ul>
@@ -68,14 +64,11 @@ export const AppWrapperSection = ({
                 key={index}
                 className="flex relative self-stretch w-full flex-[0_0_auto]"
               >
-                <a
-                  href="#"
-                  className="flex items-start px-0 py-[3.5px] relative self-stretch w-full flex-[0_0_auto]"
-                >
+                <span className="flex items-start px-0 py-[3.5px] relative self-stretch w-full flex-[0_0_auto] cursor-default">
                   <span className="flex-1 mt-[-1.00px] [font-family:'Manrope',Helvetica] font-extralight text-white text-base md:text-lg lg:text-xl tracking-[0] leading-5">
                     {link}
                   </span>
-                </a>
+                </span>
               </li>
             ))}
           </ul>
@@ -93,7 +86,7 @@ export const AppWrapperSection = ({
               </span>
 
               <p className="self-stretch mt-[-1.00px] [font-family:'Manrope',Helvetica] font-extralight text-white text-base md:text-lg lg:text-xl tracking-[0] leading-5">
-                {t.footer.contacts !== "Contacte" ? t.header.address : "Chișinău, sec. Ciocana, Bd. Mircea cel Bătrân 41b"}
+                {t.header.address}
               </p>
             </address>
 
