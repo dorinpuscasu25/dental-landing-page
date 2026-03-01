@@ -13,6 +13,10 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Topdentica",
   description: "Topdentica Clinică Stomatologică",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

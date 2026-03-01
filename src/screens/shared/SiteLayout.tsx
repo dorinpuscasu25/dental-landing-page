@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { AppointmentModal } from "../../components/AppointmentModal";
 import { AppWrapperSection } from "../ElementLight/sections/AppWrapperSection/AppWrapperSection";
 import { NavigationHeaderSection } from "../ElementLight/sections/NavigationHeaderSection";
@@ -26,10 +26,17 @@ export const SiteLayout = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+
+  const getCurrentSearchParams = () => {
+    if (typeof window === "undefined") {
+      return new URLSearchParams();
+    }
+
+    return new URLSearchParams(window.location.search);
+  };
 
   const syncModalQuery = (open: boolean, source?: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = getCurrentSearchParams();
 
     if (open) {
       params.set(POPUP_QUERY_KEY, POPUP_QUERY_VALUE);
@@ -40,7 +47,12 @@ export const SiteLayout = ({
     }
 
     const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    const safePathname = pathname || "/";
+    const hash = typeof window !== "undefined" ? window.location.hash : "";
+    router.replace(
+      query ? `${safePathname}?${query}${hash}` : `${safePathname}${hash}`,
+      { scroll: false },
+    );
   };
 
   const openModal = (source?: string) => {
@@ -56,10 +68,18 @@ export const SiteLayout = ({
   };
 
   useEffect(() => {
-    if (searchParams.get(POPUP_QUERY_KEY) === POPUP_QUERY_VALUE) {
-      setIsModalOpen(true);
-    }
-  }, [searchParams]);
+    const syncModalStateFromUrl = () => {
+      const params = getCurrentSearchParams();
+      setIsModalOpen(params.get(POPUP_QUERY_KEY) === POPUP_QUERY_VALUE);
+    };
+
+    syncModalStateFromUrl();
+    window.addEventListener("popstate", syncModalStateFromUrl);
+
+    return () => {
+      window.removeEventListener("popstate", syncModalStateFromUrl);
+    };
+  }, []);
 
   return (
     <div className="bg-[linear-gradient(0deg,rgba(236,242,249,1)_0%,rgba(236,242,249,1)_100%),linear-gradient(0deg,rgba(255,255,255,1)_0%,rgba(255,255,255,1)_100%)] w-full min-h-screen flex flex-col relative overflow-x-hidden">
