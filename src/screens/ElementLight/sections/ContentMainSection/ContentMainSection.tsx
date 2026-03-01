@@ -43,6 +43,7 @@ export const ContentMainSection = ({
     image: serviceImages[index],
     description: "description" in service ? service.description : "",
   }));
+  const serviceDetailHref = "/services/reabilitare";
   const certificates = t.ratings.certificates ?? [];
 
   const canSlide = heroSlides.length > 1;
@@ -499,41 +500,44 @@ export const ContentMainSection = ({
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {services.map((service, index) => (
-                <Card
-                  key={index}
-                  className="group bg-[#0035690a] hover:bg-[#133f78] rounded-2xl md:rounded-[28px] border-0 transition-colors duration-300"
+                <Link
+                  key={`${service.title}-${index}`}
+                  href={serviceDetailHref}
+                  className="block"
                 >
-                  <CardContent className="p-6 md:p-8 flex flex-col h-full min-h-[172px] md:min-h-[198px]">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="min-w-0">
-                        <p className=" font-normal text-[#1d252d99] text-base md:text-lg transition-colors duration-300 group-hover:text-[#ffffffcc]">
-                          {service.tag}
-                        </p>
-                        <h4 className=" font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7 transition-colors duration-300 group-hover:text-white">
-                          {service.title}
-                        </h4>
-                        {service.description && (
-                          <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-28 group-hover:opacity-100">
-                            <p className="mt-3 font-extralight text-white text-sm md:text-[17px] leading-6">
-                              {service.description}
-                            </p>
+                  <Card className="group bg-[#0035690a] hover:bg-[#133f78] rounded-2xl md:rounded-[28px] border-0 transition-colors duration-300 cursor-pointer">
+                    <CardContent className="p-6 md:p-8 flex flex-col h-full min-h-[172px] md:min-h-[198px]">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <p className=" font-normal text-[#1d252d99] text-base md:text-lg transition-colors duration-300 group-hover:text-[#ffffffcc]">
+                            {service.tag}
+                          </p>
+                          <h4 className=" font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7 transition-colors duration-300 group-hover:text-white">
+                            {service.title}
+                          </h4>
+                          {service.description && (
+                            <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-28 group-hover:opacity-100">
+                              <p className="mt-3 font-extralight text-white text-sm md:text-[17px] leading-6">
+                                {service.description}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        <div className="relative flex-shrink-0">
+                          <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl overflow-hidden transition-opacity duration-300 group-hover:opacity-0">
+                            <div
+                              className="w-full h-full bg-cover bg-center"
+                              style={{ backgroundImage: `url(${service.image})` }}
+                            />
                           </div>
-                        )}
-                      </div>
-                      <div className="relative flex-shrink-0">
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl overflow-hidden transition-opacity duration-300 group-hover:opacity-0">
-                          <div
-                            className="w-full h-full bg-cover bg-center"
-                            style={{ backgroundImage: `url(${service.image})` }}
-                          />
-                        </div>
-                        <div className="absolute top-0 right-0 w-10 h-10 rounded-xl bg-white text-[#133f78] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                          <ArrowRight className="w-5 h-5" />
+                          <div className="absolute top-0 right-0 w-10 h-10 rounded-xl bg-white text-[#133f78] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <ArrowRight className="w-5 h-5" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
 
