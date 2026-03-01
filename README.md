@@ -21,11 +21,17 @@ npm run dev
 ```
 
 After a few seconds, your project should be accessible at the address
-[http://localhost:5173/](http://localhost:5173/)
+[http://localhost:3000/](http://localhost:3000/)
 
 
 If you are satisfied with the result, you can finally build the project for release with:
 
 ```
 npm run build
+```
+
+To run the production build locally:
+
+```
+npm run start
 ```

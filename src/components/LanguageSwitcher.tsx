@@ -23,7 +23,7 @@ export const LanguageSwitcher = () => {
         <Button
           variant="ghost"
           size="sm"
-          className="h-10 px-3 text-white hover:bg-white/10 [font-family:'Manrope',Helvetica] font-extralight"
+          className="h-10 px-3 text-white hover:bg-white/10 font-extralight"
         >
           <Globe className="h-4 w-4 mr-2" />
           {languages[language]}

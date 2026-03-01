@@ -88,29 +88,39 @@ export const translations = {
       ],
     },
     services: {
-      title: "Всё необходимое для здоровья зубов в одной клинике",
-      subtitle: "",
+      title: "Какое лечение проводим?",
+      subtitle: "Все необходимое для здоровья зубов в одной клинике",
       allServicesButton: "Все услуги",
       items: [
         {
           title: "Лечение кариеса",
           tag: "Спасение вашей улыбки",
+          description:
+            "Удаление пораженных тканей и восстановление формы зуба эстетичной пломбой.",
         },
         {
           title: "Удаление зубов",
           tag: "Быстрое решение проблемы",
+          description:
+            "Безболезненное удаление зуба с аккуратным восстановлением тканей.",
         },
         {
           title: "Дентальные импланты",
           tag: "Восстановление вашей улыбки",
+          description:
+            "Установка аналога корня зуба с последующей установкой коронки на имплантат.",
         },
         {
           title: "Профессиональная гигиена",
           tag: "Забота о вашей улыбке",
+          description:
+            "Профессиональная чистка от налета и камня для здоровья зубов и десен.",
         },
         {
           title: "Комплексная консультация",
           tag: "Для составления плана лечения",
+          description:
+            "Диагностика, снимки и персональный план лечения в один визит.",
         },
       ],
       pricing: "Прозрачные цены",
@@ -247,8 +257,8 @@ export const translations = {
       ],
     },
     services: {
-      title: "Tot ce ai nevoie pentru sănătatea dinților, într-o singură clinică",
-      subtitle: "",
+      title: "Ce tratamente efectuăm?",
+      subtitle: "Tot ce ai nevoie pentru sănătatea dinților, într-o singură clinică",
       allServicesButton: "Toate serviciile",
       items: [
         {

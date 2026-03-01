@@ -27,10 +27,10 @@ export const AppointmentModal = ({
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[800px] bg-white rounded-[32px] p-12">
         <DialogHeader className="space-y-6">
-          <DialogTitle className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-[40px] tracking-[-1.92px] leading-[48px] text-left">
+          <DialogTitle className=" font-normal text-[#336699] text-[40px] tracking-[-1.92px] leading-[48px] text-left">
             {t.modal.title}
           </DialogTitle>
-          <DialogDescription className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-base leading-6 text-left whitespace-pre-line">
+          <DialogDescription className=" font-extralight text-[#1d252d99] text-base leading-6 text-left whitespace-pre-line">
             {t.modal.description}
           </DialogDescription>
         </DialogHeader>
@@ -39,16 +39,16 @@ export const AppointmentModal = ({
           <div className="grid grid-cols-2 gap-4">
             <Input
               placeholder={t.modal.namePlaceholder}
-              className="h-14 rounded-2xl border border-[#1d252d1f] bg-white px-6 [font-family:'Manrope',Helvetica] font-extralight text-base placeholder:text-[#1d252d99]"
+              className="h-14 rounded-2xl border border-[#1d252d1f] bg-white px-6 font-extralight text-base placeholder:text-[#1d252d99]"
             />
             <Input
               placeholder={t.modal.phonePlaceholder}
               type="tel"
-              className="h-14 rounded-2xl border border-[#1d252d1f] bg-white px-6 [font-family:'Manrope',Helvetica] font-extralight text-base placeholder:text-[#1d252d99]"
+              className="h-14 rounded-2xl border border-[#1d252d1f] bg-white px-6 font-extralight text-base placeholder:text-[#1d252d99]"
             />
           </div>
 
-          <Button className="w-full h-14 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-white text-lg">
+          <Button className="w-full h-14 bg-[#56B3EE] hover:bg-[#56B3EE]/90 rounded-2xl font-extralight text-white text-lg">
             {t.modal.submitButton}
           </Button>
 
@@ -56,7 +56,7 @@ export const AppointmentModal = ({
             <Checkbox id="consent" className="mt-1" />
             <label
               htmlFor="consent"
-              className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-sm leading-5 cursor-pointer"
+              className=" font-extralight text-[#1d252d99] text-sm leading-5 cursor-pointer"
             >
               {t.modal.consent.split('Politica de prelucrare și protecție a datelor cu caracter personal').join('')}
               {t.modal.consent.includes('Politica de prelucrare și protecție a datelor cu caracter personal') && (
@@ -85,13 +85,13 @@ export const AppointmentModal = ({
           </div>
 
           <div className="flex flex-col gap-3 pt-4">
-            <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d] text-base">
+            <p className=" font-extralight text-[#1d252d] text-base">
               {t.modal.orWriteUs}
             </p>
             <div className="flex gap-3">
               <Button
                 variant="outline"
-                className="h-12 px-6 bg-white border border-[#1d252d1f] hover:bg-[#f5f5f5] rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-base"
+                className="h-12 px-6 bg-white border border-[#1d252d1f] hover:bg-[#f5f5f5] rounded-2xl font-extralight text-[#ae955f] text-base"
                 asChild
               >
                 <a href="https://www.instagram.com/topdenticamd/" target="_blank" rel="noopener noreferrer">
@@ -100,7 +100,7 @@ export const AppointmentModal = ({
               </Button>
               <Button
                 variant="outline"
-                className="h-12 px-6 bg-white border border-[#1d252d1f] hover:bg-[#f5f5f5] rounded-2xl [font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-base"
+                className="h-12 px-6 bg-white border border-[#1d252d1f] hover:bg-[#f5f5f5] rounded-2xl font-extralight text-[#ae955f] text-base"
                 asChild
               >
                 <a href="https://wa.me/37368303088" target="_blank" rel="noopener noreferrer">

@@ -1,5 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Check } from "lucide-react";
 import { Card, CardContent } from "../../components/ui/card";
 import { Badge } from "../../components/ui/badge";
@@ -9,8 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../../components/ui/accordion";
-import { NavigationHeaderSection } from "../ElementLight/sections/NavigationHeaderSection";
-import { AppointmentModal } from "../../components/AppointmentModal";
+import { SiteLayout } from "../shared/SiteLayout";
 
 interface ServiceItem {
   name: string;
@@ -126,9 +127,8 @@ const therapeuticServicesData: ServiceCategory[] = [
   },
 ];
 
-export const PricesPage = (): JSX.Element => {
+export const PricesPage = () => {
   const [activeTab, setActiveTab] = useState("consultation");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const tabs = [
     { id: "consultation", label: "Консультация и диагностика" },
@@ -140,29 +140,27 @@ export const PricesPage = (): JSX.Element => {
   ];
 
   return (
-    <>
-      <NavigationHeaderSection onOpenModal={() => setIsModalOpen(true)} />
-      <AppointmentModal open={isModalOpen} onOpenChange={setIsModalOpen} />
-      <div className="flex flex-col w-full min-h-screen bg-[#f5f7fa]">
+    <SiteLayout headerSource="prices_header" footerSource="prices_footer">
+      {() => (
         <div className="flex flex-col w-full items-start gap-5 px-4 md:px-8 lg:px-[170px] py-6 md:py-10 relative">
         <div className="flex items-center gap-2 text-xs md:text-sm">
-          <Link to="/" className="text-[#1d252d99] [font-family:'Manrope',Helvetica] font-extralight hover:text-[#336699] transition-colors">
+          <Link href="/" className="text-[#1d252d99] font-extralight hover:text-[#336699] transition-colors">
             Главная
           </Link>
           <span className="text-[#1d252d99]">|</span>
-          <span className="text-[#336699] [font-family:'Manrope',Helvetica] font-normal">
+          <span className="text-[#336699] font-normal">
             Цены
           </span>
         </div>
 
         <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
           <div>
-            <h1 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-5xl md:text-7xl lg:text-[120px] tracking-[-3px] md:tracking-[-5px] leading-tight md:leading-[100px] mb-4 md:mb-6">
+            <h1 className=" font-normal text-[#336699] text-5xl md:text-7xl lg:text-[120px] tracking-[-3px] md:tracking-[-5px] leading-tight md:leading-[100px] mb-4 md:mb-6">
               Цены
             </h1>
           </div>
           <div className="flex items-start lg:items-end">
-            <p className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-lg md:text-2xl lg:text-[32px] tracking-[-0.5px] md:tracking-[-1px] leading-6 md:leading-[38px]">
+            <p className=" font-normal text-[#336699] text-lg md:text-2xl lg:text-[32px] tracking-[-0.5px] md:tracking-[-1px] leading-6 md:leading-[38px]">
               Ниже указаны цены по основным направлениям, после консультации
               составим индивидуальный план и смету
             </p>
@@ -171,7 +169,7 @@ export const PricesPage = (): JSX.Element => {
 
         <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0 mt-6 md:mt-10">
           <CardContent className="p-5 md:p-10">
-            <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-6 md:mb-10">
+            <h2 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-6 md:mb-10">
               Наша ценовая политика
               <br />
               отличается от большинства клиник
@@ -184,13 +182,13 @@ export const PricesPage = (): JSX.Element => {
                   className={`${item.bgColor} rounded-2xl md:rounded-[24px] border-0`}
                 >
                   <CardContent className="p-5 md:p-6 flex flex-col min-h-[240px] md:min-h-[280px]">
-                    <Badge className="h-6 md:h-7 px-2.5 md:px-3 bg-white hover:bg-white/90 rounded-lg md:rounded-xl [font-family:'Manrope',Helvetica] font-extralight text-[10px] md:text-xs text-[#ae955f] mb-3 md:mb-4 w-fit">
+                    <Badge className="h-6 md:h-7 px-2.5 md:px-3 bg-white hover:bg-white/90 rounded-lg md:rounded-xl font-extralight text-[10px] md:text-xs text-[#ae955f] mb-3 md:mb-4 w-fit">
                       {item.badge}
                     </Badge>
-                    <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-lg md:text-xl tracking-[-0.5px] leading-6 md:leading-7 mb-2 md:mb-3">
+                    <h3 className=" font-normal text-[#ae955f] text-lg md:text-xl tracking-[-0.5px] leading-6 md:leading-7 mb-2 md:mb-3">
                       {item.title}
                     </h3>
-                    <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d] text-xs md:text-sm leading-5">
+                    <p className=" font-extralight text-[#1d252d] text-xs md:text-sm leading-5">
                       {item.description}
                     </p>
                   </CardContent>
@@ -208,7 +206,7 @@ export const PricesPage = (): JSX.Element => {
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`px-3 md:px-4 py-2 rounded-lg [font-family:'Manrope',Helvetica] text-xs md:text-sm transition-all whitespace-nowrap ${
+                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm transition-all whitespace-nowrap ${
                       activeTab === tab.id
                         ? "bg-[#336699] text-white font-normal"
                         : "text-[#1d252d99] font-extralight hover:bg-[#1d252d0d]"
@@ -223,10 +221,10 @@ export const PricesPage = (): JSX.Element => {
             <div className="px-5 md:px-10 py-5 md:py-6">
               {activeTab === "consultation" && (
                 <div className="space-y-4">
-                  <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-4 md:mb-6">
+                  <h2 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-4 md:mb-6">
                     Консультация и диагностика
                   </h2>
-                  <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 mb-6 md:mb-8">
+                  <p className=" font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 mb-6 md:mb-8">
                     Комплексная консультация стоматолога по всем имеющимся
                     проблемам в полости рта
                   </p>
@@ -243,10 +241,10 @@ export const PricesPage = (): JSX.Element => {
 
               {activeTab === "therapeutic" && (
                 <div className="space-y-4">
-                  <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-4 md:mb-6">
+                  <h2 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-4 md:mb-6">
                     Терапевтическое лечение
                   </h2>
-                  <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 mb-6 md:mb-8">
+                  <p className=" font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 mb-6 md:mb-8">
                     Восстановление и реставрация зубов при незначительных
                     повреждениях зубов.
                   </p>
@@ -264,8 +262,8 @@ export const PricesPage = (): JSX.Element => {
           </CardContent>
         </Card>
         </div>
-      </div>
-    </>
+      )}
+    </SiteLayout>
   );
 };
 
@@ -284,11 +282,11 @@ const ServiceAccordion = ({
       >
         <AccordionTrigger className="px-4 md:px-6 py-4 md:py-5 hover:no-underline [&[data-state=open]]:text-white [&[data-state=closed]]:text-[#336699]">
           <div className="flex items-center justify-between w-full pr-2 md:pr-4">
-            <span className="[font-family:'Inter',Helvetica] font-normal text-base md:text-xl lg:text-2xl tracking-[-0.5px] leading-6 md:leading-7 text-left">
+            <span className=" font-normal text-base md:text-xl lg:text-2xl tracking-[-0.5px] leading-6 md:leading-7 text-left">
               {category.title}
             </span>
             <div className="flex items-center gap-2 md:gap-4">
-              <span className="[font-family:'Manrope',Helvetica] font-light text-sm md:text-lg whitespace-nowrap">
+              <span className=" font-light text-sm md:text-lg whitespace-nowrap">
                 {category.items.length === 1
                   ? category.items[0].price
                   : `от ${category.items[0].price}`}
@@ -304,10 +302,10 @@ const ServiceAccordion = ({
                   key={itemIdx}
                   className="flex items-start justify-between gap-3 md:gap-4 py-2 md:py-3"
                 >
-                  <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-xs md:text-sm leading-5 flex-1">
+                  <span className=" font-extralight text-white text-xs md:text-sm leading-5 flex-1">
                     {item.name}
                   </span>
-                  <span className="[font-family:'Manrope',Helvetica] font-normal text-white text-sm md:text-base whitespace-nowrap">
+                  <span className=" font-normal text-white text-sm md:text-base whitespace-nowrap">
                     {item.price}
                   </span>
                 </div>
@@ -316,7 +314,7 @@ const ServiceAccordion = ({
 
             {category.includes && (
               <div className="bg-[#ae955f1f] rounded-2xl md:rounded-[20px] p-4 md:p-6">
-                <h4 className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-base md:text-lg tracking-[-0.5px] leading-6 mb-3 md:mb-4">
+                <h4 className=" font-normal text-[#ae955f] text-base md:text-lg tracking-[-0.5px] leading-6 mb-3 md:mb-4">
                   Что входит в цену услуги?
                 </h4>
                 <div className="space-y-2.5 md:space-y-3">
@@ -325,7 +323,7 @@ const ServiceAccordion = ({
                       <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#ae955f] flex items-center justify-center flex-shrink-0 mt-0.5">
                         <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
                       </div>
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d] text-xs md:text-sm leading-5">
+                      <span className=" font-extralight text-[#1d252d] text-xs md:text-sm leading-5">
                         {item}
                       </span>
                     </div>

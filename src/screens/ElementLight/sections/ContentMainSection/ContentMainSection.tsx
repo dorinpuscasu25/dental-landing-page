@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import type { RefObject } from "react";
+import Link from "next/link";
 import { Avatar, AvatarImage } from "../../../../components/ui/avatar";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useLanguage } from "../../../../contexts/LanguageContext";
 import { useTranslations } from "../../../../translations";
 
@@ -22,7 +23,7 @@ interface ContentMainSectionProps {
 
 export const ContentMainSection = ({
   onOpenModal,
-}: ContentMainSectionProps): JSX.Element => {
+}: ContentMainSectionProps) => {
   const { language } = useLanguage();
   const t = useTranslations(language);
   const [heroIndex, setHeroIndex] = useState(0);
@@ -40,6 +41,7 @@ export const ContentMainSection = ({
   const services = (t.services.items ?? []).map((service, index) => ({
     ...service,
     image: serviceImages[index],
+    description: "description" in service ? service.description : "",
   }));
   const certificates = t.ratings.certificates ?? [];
 
@@ -53,9 +55,9 @@ export const ContentMainSection = ({
   const [certCanScrollRight, setCertCanScrollRight] = useState(false);
 
   const updateScrollState = (
-    ref: RefObject<HTMLDivElement>,
+    ref: RefObject<HTMLDivElement | null>,
     setLeft: (value: boolean) => void,
-    setRight: (value: boolean) => void
+    setRight: (value: boolean) => void,
   ) => {
     if (!ref.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = ref.current;
@@ -64,14 +66,45 @@ export const ContentMainSection = ({
   };
 
   useEffect(() => {
-    updateScrollState(trustScrollRef, setTrustCanScrollLeft, setTrustCanScrollRight);
+    updateScrollState(
+      trustScrollRef,
+      setTrustCanScrollLeft,
+      setTrustCanScrollRight,
+    );
   }, [trustReasons.length]);
 
   useEffect(() => {
-    updateScrollState(certificatesScrollRef, setCertCanScrollLeft, setCertCanScrollRight);
+    updateScrollState(
+      certificatesScrollRef,
+      setCertCanScrollLeft,
+      setCertCanScrollRight,
+    );
   }, [certificates.length]);
 
-  const scrollByAmount = (ref: RefObject<HTMLDivElement>, direction: "left" | "right") => {
+  useEffect(() => {
+    const scrollToHashSection = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+      const target = document.getElementById(hash);
+      if (!target) return;
+
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
+    // Ensure sections exist in DOM before initial hash scroll
+    const timeoutId = window.setTimeout(scrollToHashSection, 80);
+    window.addEventListener("hashchange", scrollToHashSection);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      window.removeEventListener("hashchange", scrollToHashSection);
+    };
+  }, []);
+
+  const scrollByAmount = (
+    ref: RefObject<HTMLDivElement | null>,
+    direction: "left" | "right",
+  ) => {
     if (!ref.current) return;
     const amount = 360;
     ref.current.scrollTo({
@@ -114,17 +147,17 @@ export const ContentMainSection = ({
                   <div className="relative min-h-[420px] md:min-h-[520px] lg:min-h-[600px] flex items-end">
                     <div className="w-full px-4 md:px-8 lg:px-12 pb-6 md:pb-10 lg:pb-12">
                       <div className="max-w-[680px] gap-4 md:gap-6 p-6 md:p-10 flex flex-col items-start bg-[#ffffffcc] rounded-2xl md:rounded-[28px] backdrop-blur-[10px]">
-                        <h1 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-1.2px] md:tracking-[-1.8px] leading-8 md:leading-[44px]">
+                        <h1 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-1.2px] md:tracking-[-1.8px] leading-8 md:leading-[44px]">
                           {slide.title}
                         </h1>
-                        <p className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-base md:text-xl lg:text-2xl tracking-[-0.30px] md:tracking-[-0.50px] leading-6 md:leading-8 whitespace-pre-line">
+                        <p className=" font-normal text-[#336699] text-base md:text-xl lg:text-2xl tracking-[-0.30px] md:tracking-[-0.50px] leading-6 md:leading-8 whitespace-pre-line">
                           {slide.subtitle}
                         </p>
                         <Button
                           onClick={onOpenModal}
-                          className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ae955f] hover:bg-[#ae955f]/90 rounded-xl md:rounded-2xl"
+                          className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#56B3EE] hover:bg-[#56B3EE]/90 rounded-xl md:rounded-2xl"
                         >
-                          <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
+                          <span className=" font-extralight text-white text-sm md:text-base">
                             {slide.button}
                           </span>
                         </Button>
@@ -135,13 +168,13 @@ export const ContentMainSection = ({
               ))}
             </div>
 
-            <div className="absolute inset-y-0 w-full flex items-center justify-between px-4 md:px-8">
+            <div className="absolute inset-y-0 w-full flex items-center justify-between px-4 md:px-8 pointer-events-none">
               <Button
                 variant="secondary"
                 size="icon"
                 onClick={prevSlide}
                 disabled={!canSlide}
-                className="w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white rounded-xl md:rounded-2xl disabled:opacity-40"
+                className="w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white rounded-xl md:rounded-2xl disabled:opacity-40 pointer-events-auto"
               >
                 <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
               </Button>
@@ -149,7 +182,7 @@ export const ContentMainSection = ({
                 size="icon"
                 onClick={nextSlide}
                 disabled={!canSlide}
-                className="w-10 h-10 md:w-12 md:h-12 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl disabled:opacity-40"
+                className="w-10 h-10 md:w-12 md:h-12 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl disabled:opacity-40 pointer-events-auto"
               >
                 <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
               </Button>
@@ -175,28 +208,28 @@ export const ContentMainSection = ({
         <CardContent className="p-3 md:p-4">
           <div className="flex flex-col gap-4 md:gap-5">
             <div className="flex flex-col lg:flex-row min-h-32 md:min-h-52 gap-4 md:gap-5">
-              <div className="flex-1 flex items-center pt-6 md:pt-10 px-5 md:px-10">
-                <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.8px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+              <div className="flex-1 flex items-start pt-2 md:pt-4 px-5 md:px-10">
+                <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.8px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
                   {t.about.title}
                 </h2>
               </div>
               <div className="flex-1 flex gap-3 md:gap-5">
                 <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
                   <CardContent className="flex flex-col gap-6 md:gap-12 p-5 md:p-10">
-                    <div className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
                       {t.about.years}
                     </div>
-                    <div className="[font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-sm md:text-base">
+                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base">
                       {t.about.yearsText}
                     </div>
                   </CardContent>
                 </Card>
                 <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
                   <CardContent className="flex flex-col gap-6 md:gap-12 p-5 md:p-10">
-                    <div className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
                       {t.about.patients}
                     </div>
-                    <div className="[font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-sm md:text-base">
+                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base">
                       {t.about.patientsText}
                     </div>
                   </CardContent>
@@ -205,16 +238,16 @@ export const ContentMainSection = ({
             </div>
 
             <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
-              <div className="flex-1 flex flex-col gap-6 md:gap-8">
-                <div className="flex flex-col gap-3 md:gap-4">
-                  <blockquote className="pl-5 md:pl-10 pr-2.5 [font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-base md:text-xl lg:text-2xl tracking-[-0.6px] md:tracking-[-1px] leading-6 md:leading-8">
-                    {t.about.quote}
+              <div className="flex-1 flex flex-col gap-3 md:gap-4 pt-1 md:pt-2 lg:-mt-16">
+                <div className="flex flex-col gap-2 md:gap-3">
+                  <blockquote className="pl-5 md:pl-10 pr-2.5 font-normal text-[#1d252d] text-base md:text-xl lg:text-2xl tracking-[-0.6px] md:tracking-[-1px] leading-6 md:leading-8">
+                    {`„${t.about.quote}”`}
                   </blockquote>
-                  <div className="flex flex-col gap-1.5 md:gap-2 pl-5 md:pl-10">
-                    <div className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d] text-base md:text-lg">
+                  <div className="flex flex-col gap-1 md:gap-1.5 pl-5 md:pl-10">
+                    <div className=" font-normal text-[#1d252d] text-base md:text-lg">
                       {t.about.founderName}
                     </div>
-                    <div className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d] text-xs md:text-sm opacity-40">
+                    <div className=" font-extralight text-[#1d252d] text-xs md:text-sm opacity-40">
                       {t.about.founderTitle}
                     </div>
                   </div>
@@ -229,8 +262,8 @@ export const ContentMainSection = ({
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="flex flex-col gap-12 md:gap-24 p-3 md:p-4">
           <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
-            <div className="flex-1 flex items-center pt-6 md:pt-10 px-5 md:px-10">
-              <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-3xl md:text-5xl lg:text-[76.1px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+            <div className="flex-1 flex items-start pt-2 md:pt-4 px-5 md:px-10">
+              <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[76.1px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
                 {t.team.title}
               </h2>
             </div>
@@ -238,7 +271,7 @@ export const ContentMainSection = ({
               <CardContent className="p-6 md:p-10">
                 <div className="flex flex-col md:flex-row gap-4 md:gap-5">
                   <div className="flex-1">
-                    <p className="[font-family:'Manrope',Helvetica] font-normal text-white text-lg md:text-2xl tracking-[-0.30px] md:tracking-[-0.50px] leading-6 md:leading-7 mb-8 md:mb-12 whitespace-pre-line">
+                    <p className=" font-normal text-white text-lg md:text-2xl tracking-[-0.30px] md:tracking-[-0.50px] leading-6 md:leading-7 mb-8 md:mb-12 whitespace-pre-line">
                       {t.team.specialists}
                     </p>
                     <div className="flex items-center">
@@ -253,13 +286,18 @@ export const ContentMainSection = ({
                     </div>
                   </div>
                   <div className="flex-1">
-                    <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#ffffffcc] text-xs md:text-sm leading-4 md:leading-5 mb-6 md:mb-8">
+                    <p className=" font-extralight text-[#ffffffcc] text-xs md:text-sm leading-4 md:leading-5 mb-6 md:mb-8">
                       {t.team.description}
                     </p>
-                    <Button className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl">
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
+                    <Button
+                      asChild
+                      className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl"
+                    >
+                      <Link href="/team">
+                      <span className=" font-extralight text-white text-sm md:text-base">
                         {t.team.allTeamButton}
                       </span>
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -272,7 +310,7 @@ export const ContentMainSection = ({
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="p-3 md:p-4">
           <div className="pt-6 md:pt-10 pb-4 md:pb-6 px-5 md:px-10 flex items-center justify-between gap-4">
-            <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-2xl md:text-4xl lg:text-[74.7px] tracking-[-1.5px] md:tracking-[-3.20px] leading-8 md:leading-[64px]">
+            <h2 className=" font-normal text-[#336699] text-2xl md:text-4xl lg:text-[74.7px] tracking-[-1.5px] md:tracking-[-3.20px] leading-8 md:leading-[64px]">
               {t.trust.title}
             </h2>
             <div className="flex items-center gap-3">
@@ -298,7 +336,11 @@ export const ContentMainSection = ({
           <div
             ref={trustScrollRef}
             onScroll={() =>
-              updateScrollState(trustScrollRef, setTrustCanScrollLeft, setTrustCanScrollRight)
+              updateScrollState(
+                trustScrollRef,
+                setTrustCanScrollLeft,
+                setTrustCanScrollRight,
+              )
             }
             className="flex gap-4 md:gap-5 px-4 md:px-10 pb-8 md:pb-10 overflow-x-auto scrollbar-hide scroll-smooth"
           >
@@ -308,10 +350,10 @@ export const ContentMainSection = ({
                 className="min-w-[260px] md:min-w-[320px] bg-[#0035690a] rounded-2xl md:rounded-[24px] border-0"
               >
                 <CardContent className="p-5 md:p-6 flex flex-col gap-3 min-h-[180px]">
-                  <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-lg md:text-xl leading-6 md:leading-7">
+                  <h3 className=" font-normal text-[#ae955f] text-lg md:text-xl leading-6 md:leading-7">
                     {reason.title}
                   </h3>
-                  <p className="[font-family:'Manrope',Helvetica] font-extralight text-[#1d252d99] text-xs md:text-sm leading-4 md:leading-5">
+                  <p className=" font-extralight text-[#1d252d99] text-xs md:text-sm leading-4 md:leading-5">
                     {reason.description}
                   </p>
                 </CardContent>
@@ -324,56 +366,66 @@ export const ContentMainSection = ({
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="flex flex-col gap-4 p-3 md:p-4">
           <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
-            <div className="flex-1 flex items-center pt-6 md:pt-10 px-5 md:px-10">
-              <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.2px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 whitespace-pre-line">
+            <div className="flex-1 min-w-0 flex items-start pt-2 md:pt-4 px-5 md:px-10">
+              <h2 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.2px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 whitespace-pre-line break-words">
                 {t.ratings.title}
               </h2>
             </div>
-            <Card className="flex-1 bg-[#336699] rounded-2xl md:rounded-[28px] border-0">
+            <Card className="flex-1 w-full bg-[#336699] rounded-2xl md:rounded-[28px] border-0">
               <CardContent className="p-6 md:p-10 flex flex-col gap-6 md:gap-8">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-3">
-                    <img className="h-8 md:h-10" alt="Google" src="/google.png" />
-                    <span className="[font-family:'Inter',Helvetica] font-normal text-white text-lg md:text-xl">
+                <div className="flex flex-row items-start justify-between gap-6">
+                  {/* Stânga: Logo Google + Buton */}
+                  <div className="flex flex-col gap-4">
+                    <img
+                      className="h-8 lg:h-10 w-auto"
+                      alt="Google"
+                      src="/google.png"
+                    />
+                    <Button
+                      asChild
+                      className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl w-fit"
+                    >
+                      <a
+                        href="https://www.google.com/maps/place/Topdentica+Clinic%C4%83+Stomatologic%C4%83/@47.0569171,28.889423,977m/data=!3m1!1e3!4m8!3m7!1s0x40c97d0020f4b831:0x2b265dfa3e639478!8m2!3d47.0569171!4d28.889423!9m1!1b1!16s%2Fg%2F11wj3lqwqz?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className="font-extralight text-white text-sm md:text-base">
+                          {t.ratings.googleButton}
+                        </span>
+                      </a>
+                    </Button>
+                  </div>
+
+                  <div className="flex flex-col items-end gap-3">
+                    <span className="font-normal text-white text-base sm:text-lg lg:text-xl leading-tight text-right">
                       {t.ratings.googleLabel}
                     </span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2">
-                    <Star className="w-4 h-4 text-white" />
-                    <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-base md:text-lg">
-                      5.0
-                    </span>
+                    <div className="inline-flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2 w-fit">
+                      <Star className="w-4 h-4 text-white" />
+                      <span className="font-extralight text-white text-base md:text-lg">
+                        5.0
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <Button
-                  asChild
-                  className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl w-fit"
-                >
-                  <a
-                    href="https://www.google.com/maps/place/Topdentica+Clinic%C4%83+Stomatologic%C4%83/@47.0569171,28.889423,977m/data=!3m1!1e3!4m8!3m7!1s0x40c97d0020f4b831:0x2b265dfa3e639478!8m2!3d47.0569171!4d28.889423!9m1!1b1!16s%2Fg%2F11wj3lqwqz?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
-                      {t.ratings.googleButton}
-                    </span>
-                  </a>
-                </Button>
               </CardContent>
             </Card>
           </div>
 
           <Card className="bg-[#0035690a] rounded-2xl md:rounded-[28px] border-0">
             <CardContent className="flex flex-col gap-6 md:gap-8 p-6 md:p-10">
-              <div className="flex items-center justify-between gap-4">
-                <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[30.4px] leading-7 md:leading-8">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <h3 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[30.4px] leading-7 md:leading-8">
                   {t.ratings.awards}
                 </h3>
                 <div className="flex items-center gap-3">
                   <Button
                     variant="secondary"
                     size="icon"
-                    onClick={() => scrollByAmount(certificatesScrollRef, "left")}
+                    onClick={() =>
+                      scrollByAmount(certificatesScrollRef, "left")
+                    }
                     disabled={!certCanScrollLeft}
                     className="w-10 h-10 md:w-12 md:h-12 bg-[#1d252d1f] hover:bg-[#1d252d1f]/80 rounded-xl md:rounded-2xl disabled:opacity-30"
                   >
@@ -381,7 +433,9 @@ export const ContentMainSection = ({
                   </Button>
                   <Button
                     size="icon"
-                    onClick={() => scrollByAmount(certificatesScrollRef, "right")}
+                    onClick={() =>
+                      scrollByAmount(certificatesScrollRef, "right")
+                    }
                     disabled={!certCanScrollRight}
                     className="w-10 h-10 md:w-12 md:h-12 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl disabled:opacity-30"
                   >
@@ -395,17 +449,17 @@ export const ContentMainSection = ({
                   updateScrollState(
                     certificatesScrollRef,
                     setCertCanScrollLeft,
-                    setCertCanScrollRight
+                    setCertCanScrollRight,
                   )
                 }
-                className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide scroll-smooth"
+                className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-1"
               >
                 {certificates.map((label, index) => (
                   <div
                     key={`${label}-${index}`}
-                    className="min-w-[200px] md:min-w-[240px] h-24 md:h-28 rounded-2xl border border-dashed border-[#1d252d1f] bg-white/80 flex items-center justify-center"
+                    className="min-w-[160px] sm:min-w-[200px] md:min-w-[240px] h-24 md:h-28 rounded-2xl border border-dashed border-[#1d252d1f] bg-white/80 flex items-center justify-center"
                   >
-                    <span className="[font-family:'Manrope',Helvetica] font-extralight text-xs md:text-sm text-[#1d252d66]">
+                    <span className=" font-extralight text-xs md:text-sm text-[#1d252d66]">
                       {label}
                     </span>
                   </div>
@@ -416,52 +470,66 @@ export const ContentMainSection = ({
         </CardContent>
       </Card>
 
+      <section id="services" className="w-full scroll-mt-3 md:scroll-mt-4">
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="flex flex-col items-center gap-8 md:gap-12 pt-8 md:pt-14 pb-4 px-4">
-          <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.7px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px] w-full max-w-[1468px]">
+          <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.7px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px] w-full max-w-[1468px]">
             {t.services.title}
           </h2>
 
           <div className="flex flex-col gap-4 md:gap-5 w-full">
-            <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
-              <div className="flex-1 flex flex-col gap-4 md:gap-6 pl-0 md:pl-10">
-                {t.services.subtitle && (
-                  <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.5px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 max-w-[580px] whitespace-pre-line">
-                    {t.services.subtitle}
-                  </h3>
-                )}
-                <Button
-                  disabled
-                  className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl w-fit disabled:opacity-60"
-                >
-                  <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 pl-0 md:pl-10">
+              {t.services.subtitle && (
+                <h3 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.5px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 max-w-[780px] whitespace-pre-line">
+                  {t.services.subtitle}
+                </h3>
+              )}
+              <Button
+                asChild
+                className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#133f78] hover:bg-[#0f3566] rounded-xl md:rounded-2xl w-fit md:mr-10"
+              >
+                <Link href="/prices">
+                  <span className=" font-extralight text-white text-sm md:text-base">
                     {t.services.allServicesButton}
                   </span>
-                </Button>
-              </div>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </Link>
+              </Button>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {services.map((service, index) => (
                 <Card
                   key={index}
-                  className="bg-[#0035690a] rounded-2xl md:rounded-[28px] border-0"
+                  className="group bg-[#0035690a] hover:bg-[#133f78] rounded-2xl md:rounded-[28px] border-0 transition-colors duration-300"
                 >
-                  <CardContent className="p-6 md:p-8 flex flex-col gap-6 h-full">
+                  <CardContent className="p-6 md:p-8 flex flex-col h-full min-h-[172px] md:min-h-[198px]">
                     <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d99] text-base md:text-lg">
+                      <div className="min-w-0">
+                        <p className=" font-normal text-[#1d252d99] text-base md:text-lg transition-colors duration-300 group-hover:text-[#ffffffcc]">
                           {service.tag}
                         </p>
-                        <h4 className="[font-family:'Inter',Helvetica] font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7">
+                        <h4 className=" font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7 transition-colors duration-300 group-hover:text-white">
                           {service.title}
                         </h4>
+                        {service.description && (
+                          <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-28 group-hover:opacity-100">
+                            <p className="mt-3 font-extralight text-white text-sm md:text-[17px] leading-6">
+                              {service.description}
+                            </p>
+                          </div>
+                        )}
                       </div>
-                      <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl overflow-hidden flex-shrink-0">
-                        <div
-                          className="w-full h-full bg-cover bg-center"
-                          style={{ backgroundImage: `url(${service.image})` }}
-                        />
+                      <div className="relative flex-shrink-0">
+                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl overflow-hidden transition-opacity duration-300 group-hover:opacity-0">
+                          <div
+                            className="w-full h-full bg-cover bg-center"
+                            style={{ backgroundImage: `url(${service.image})` }}
+                          />
+                        </div>
+                        <div className="absolute top-0 right-0 w-10 h-10 rounded-xl bg-white text-[#133f78] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                          <ArrowRight className="w-5 h-5" />
+                        </div>
                       </div>
                     </div>
                   </CardContent>
@@ -469,19 +537,19 @@ export const ContentMainSection = ({
               ))}
             </div>
 
-            <Card className="bg-[#ae955f1f] rounded-2xl md:rounded-[32px] border-0">
+            <Card className="bg-[#336699] rounded-2xl md:rounded-[32px] border-0">
               <CardContent className="p-8 md:p-12 flex flex-col gap-6 min-h-[280px] md:min-h-[340px]">
-                <h3 className="[font-family:'Inter',Helvetica] font-normal text-[#ae955f] text-2xl md:text-3xl lg:text-[38px] leading-8 md:leading-10">
+                <h3 className=" font-normal text-white text-2xl md:text-3xl lg:text-[38px] leading-8 md:leading-10">
                   {t.services.pricing}
                 </h3>
-                <p className="[font-family:'Manrope',Helvetica] font-normal text-[#1d252d99] text-sm md:text-base lg:text-lg leading-5 md:leading-7 max-w-[900px]">
+                <p className=" font-normal text-white text-sm md:text-base lg:text-lg leading-5 md:leading-7 max-w-[900px]">
                   {t.services.pricingDescription}
                 </p>
                 <Button
                   disabled
-                  className="h-11 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ae955f2e] hover:bg-[#ae955f2e]/80 rounded-xl md:rounded-2xl w-fit disabled:opacity-60"
+                  className="h-11 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-white/20 hover:bg-white/30 rounded-xl md:rounded-2xl w-fit disabled:opacity-60"
                 >
-                  <span className="[font-family:'Manrope',Helvetica] font-extralight text-[#ae955f] text-sm md:text-base">
+                  <span className=" font-extralight text-white text-sm md:text-base">
                     {t.services.pricesButton}
                   </span>
                 </Button>
@@ -490,10 +558,12 @@ export const ContentMainSection = ({
           </div>
         </CardContent>
       </Card>
+      </section>
 
+      <section id="contacts" className="w-full scroll-mt-3 md:scroll-mt-4">
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
-        <CardContent className="flex flex-col items-center gap-8 md:gap-12 lg:gap-[77px] pt-8 md:pt-14 pb-4 px-4">
-          <h2 className="[font-family:'Inter',Helvetica] font-normal text-[#336699] text-3xl md:text-5xl lg:text-[75px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px] w-full max-w-[1468px]">
+        <CardContent className="flex flex-col items-center gap-8 md:gap-12 lg:gap-[30px] pt-8 md:pt-14 pb-4 px-4">
+          <h2 className=" font-normal text-[#336699] text-2xl md:text-4xl lg:text-[62px] tracking-[-1px] md:tracking-[-2.4px] leading-8 md:leading-[56px] w-full ">
             {t.location.title}
           </h2>
 
@@ -515,26 +585,24 @@ export const ContentMainSection = ({
                 <CardContent className="flex flex-col gap-6 md:gap-8 p-6 md:p-10">
                   <div className="flex flex-col gap-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-2.5 h-2.5 mt-2 rounded-full bg-white/70" />
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-xs md:text-sm">
+                      <span className=" font-extralight text-white text-xs md:text-sm">
                         {t.location.address}
                       </span>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="w-2.5 h-2.5 mt-2 rounded-full bg-white/70" />
-                      <div className="flex flex-col">
-                        <span className="[font-family:'Manrope',Helvetica] font-extralight text-white/70 text-xs md:text-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-baseline gap-2 md:gap-2.5 flex-wrap">
+                        <span className=" font-extralight text-white/70 text-xs md:text-sm">
                           {t.footer.phoneLabel}
                         </span>
                         <a
                           href="tel:+37368303088"
-                          className="[font-family:'Manrope',Helvetica] font-normal text-white text-sm md:text-base"
+                          className=" font-normal text-white text-sm md:text-base leading-tight"
                         >
                           {t.header.phone}
                         </a>
                       </div>
                     </div>
-                    <p className="[font-family:'Manrope',Helvetica] font-extralight text-white/70 text-xs md:text-sm">
+                    <p className=" font-extralight text-white/70 text-xs md:text-sm">
                       {t.footer.schedule}
                     </p>
                   </div>
@@ -547,7 +615,7 @@ export const ContentMainSection = ({
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      <span className="[font-family:'Manrope',Helvetica] font-extralight text-white text-sm md:text-base">
+                      <span className=" font-extralight text-white text-sm md:text-base">
                         {t.location.contactsButton}
                       </span>
                     </a>
@@ -562,6 +630,7 @@ export const ContentMainSection = ({
           </div>
         </CardContent>
       </Card>
+      </section>
     </div>
   );
 };
