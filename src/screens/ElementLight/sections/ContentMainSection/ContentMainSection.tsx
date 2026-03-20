@@ -30,7 +30,7 @@ export const ContentMainSection = ({
 
   const heroSlides = [
     {
-      image: "/bloc1.jpg",
+      image: "/bloc1-hp.jpg",
       title: t.hero.title,
       subtitle: t.hero.subtitle,
       button: t.hero.bookButton,

@@ -154,6 +154,7 @@ export const translations = {
       bookAppointment: "Записаться на консультацию",
       copyright: "Topdentica © 2025",
       privacy: "Политика конфиденциальности",
+      organigram: "Органиграмма",
       madeIn: "Сделано в",
     },
     modal: {
@@ -313,6 +314,7 @@ export const translations = {
       bookAppointment: "Programează-te la consultație",
       copyright: "Topdentica © 2025",
       privacy: "Politica de confidențialitate",
+      organigram: "Organigramă",
       madeIn: "Realizat în",
     },
     modal: {
@@ -472,6 +474,7 @@ export const translations = {
       bookAppointment: "Book a consultation",
       copyright: "Topdentica © 2025",
       privacy: "Privacy Policy",
+      organigram: "Organigram",
       madeIn: "Made in",
     },
     modal: {

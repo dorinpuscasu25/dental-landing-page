@@ -1,339 +1,608 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Check } from "lucide-react";
-import { Card, CardContent } from "../../components/ui/card";
-import { Badge } from "../../components/ui/badge";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../../components/ui/accordion";
+import { Card, CardContent } from "../../components/ui/card";
+import { Language, useLanguage } from "../../contexts/LanguageContext";
 import { SiteLayout } from "../shared/SiteLayout";
 
-interface ServiceItem {
+interface PriceItem {
+  code: number;
   name: string;
   price: string;
 }
 
-interface ServiceCategory {
+interface PriceCategory {
   title: string;
-  description?: string;
-  items: ServiceItem[];
-  includes?: string[];
+  items: PriceItem[];
 }
 
-const pricingPolicyItems = [
+interface LocalizedPricesCopy {
+  breadcrumbHome: string;
+  breadcrumbCurrent: string;
+  title: string;
+  subtitle: string;
+  updatedFromDoc: string;
+  catalogTitle: string;
+  catalogDescription: string;
+  codeLabel: string;
+  serviceLabel: string;
+  priceLabel: string;
+}
+
+const PRICE_PAGE_COPY: Record<Language, LocalizedPricesCopy> = {
+  ro: {
+    breadcrumbHome: "Acasă",
+    breadcrumbCurrent: "Prețuri",
+    title: "Prețuri",
+    subtitle:
+      "Lista de prețuri a fost actualizată conform documentului clinicii. Planul complet de tratament și costul final se stabilesc după consultație.",
+    updatedFromDoc: "Actualizat din documentul clinicii",
+    catalogTitle: "Lista serviciilor",
+    catalogDescription:
+      "Mai jos găsești serviciile grupate pe categorii, exact cum apar în documentul de prețuri.",
+    codeLabel: "Cod",
+    serviceLabel: "Serviciu",
+    priceLabel: "Preț",
+  },
+  ru: {
+    breadcrumbHome: "Главная",
+    breadcrumbCurrent: "Цены",
+    title: "Цены",
+    subtitle:
+      "Прайс-лист обновлен по документу клиники. Полный план лечения и итоговая стоимость подтверждаются после консультации.",
+    updatedFromDoc: "Обновлено по документу клиники",
+    catalogTitle: "Список услуг",
+    catalogDescription:
+      "Ниже указаны услуги, сгруппированные по категориям, как в документе с ценами.",
+    codeLabel: "Код",
+    serviceLabel: "Услуга",
+    priceLabel: "Цена",
+  },
+  en: {
+    breadcrumbHome: "Home",
+    breadcrumbCurrent: "Prices",
+    title: "Prices",
+    subtitle:
+      "The price list has been updated from the clinic document. The full treatment plan and final cost are confirmed after the consultation.",
+    updatedFromDoc: "Updated from the clinic document",
+    catalogTitle: "Service list",
+    catalogDescription:
+      "Below you can find the services grouped by category, matching the clinic price document.",
+    codeLabel: "Code",
+    serviceLabel: "Service",
+    priceLabel: "Price",
+  },
+};
+
+const PRICE_CATEGORIES: PriceCategory[] = [
   {
-    badge: "Не изменяем цены в процессе",
-    title: "Фиксируем цены",
-    description:
-      "Стоимость услуг после подписания сметы останется неизменной на протяжении всего лечения, даже если оно займет несколько месяцев или даже лет.",
-    bgColor: "bg-[#ae955f1f]",
+    title: "Consultații",
+    items: [
+      {
+        code: 1,
+        name: "Consultanță",
+        price: "0",
+      },
+    ],
   },
   {
-    badge: "Все включено",
-    title: "Нет скрытых платежей",
-    description:
-      "Наши цены сразу включают все необходимые сопутствующие манипуляции, которые не оплачиваются отдельно.",
-    bgColor: "bg-[#ae955f1f]",
+    title: "Radiologie Viziograf",
+    items: [
+      {
+        code: 2,
+        name: "Radiografie -1 imagine",
+        price: "100",
+      },
+      {
+        code: 3,
+        name: "Radiografie cu ac pe canal + rezultatul obținut -1 imagine",
+        price: "100",
+      },
+    ],
   },
   {
-    badge: "Поэтапная оплата",
-    title: "Индивидуальный план оплаты",
-    description:
-      "Оплата происходит по этапам. План оплат составляется индивидуально вместе с планом лечения.",
-    bgColor: "bg-[#ae955f1f]",
+    title: "Profilaxie",
+    items: [
+      {
+        code: 4,
+        name: "Periaj profesional dinți permanenți – toți dinții",
+        price: "600",
+      },
+      {
+        code: 5,
+        name: "Detartraj+Periaj profesional – toți dinții",
+        price: "1000",
+      },
+      {
+        code: 6,
+        name: "Sablare cu sistem Air Flow+Periaj profesional – toți dinții",
+        price: "1000",
+      },
+    ],
   },
   {
-    badge: "Все платежи официально",
-    title: "Налоговый вычет",
-    description:
-      "Подготовим и предоставим все необходимые документы для получения налогового вычета.",
-    bgColor: "bg-[#ae955f1f]",
+    title: "Terapie",
+    items: [
+      {
+        code: 7,
+        name: "Anestezie Infiltrativă",
+        price: "150",
+      },
+      {
+        code: 8,
+        name: "Obturație foto cu Gradia (plomba dentară)",
+        price: "1000",
+      },
+      {
+        code: 9,
+        name: "Obturație Foto cu Estelite Asteria (plomba dentară). Clasa Premium",
+        price: "1200",
+      },
+      {
+        code: 10,
+        name: "Obturație Foto cu Estelite Asteria 2-3 suprafete dentare (plomba dentară). Clasa Premium",
+        price: "1500",
+      },
+      {
+        code: 11,
+        name: "Obturație Foto cu scop de protejare a dintelui (plomba dentară) cu material Estelite Asteria",
+        price: "900",
+      },
+      {
+        code: 12,
+        name: "Obturație dentară Provizorie (plomba temporară)",
+        price: "150",
+      },
+      {
+        code: 13,
+        name: "Obturație Foto (plomba) în axul coroanei (dupa fixarea ei pe implant dentar) cu material Estelite Asteria",
+        price: "600",
+      },
+      {
+        code: 14,
+        name: "Înlăturarea pivotului vechi",
+        price: "350",
+      },
+      {
+        code: 15,
+        name: "Pivot fibră de sticlă+Fixare pe ciment dentar Super Dur",
+        price: "500",
+      },
+      {
+        code: 16,
+        name: "Medicamente endo dinte cu 1 canal radicular",
+        price: "350",
+      },
+      {
+        code: 17,
+        name: "Medicamente endo dinte cu 2 canale radiculare",
+        price: "450",
+      },
+      {
+        code: 18,
+        name: "Medicamente endo dinte cu 3 canale radiculare",
+        price: "550",
+      },
+      {
+        code: 19,
+        name: "Medicamente endo dinte cu 4 canale radiculare",
+        price: "650",
+      },
+      {
+        code: 20,
+        name: "Endo dinte cu 1 canal radicular",
+        price: "800",
+      },
+      {
+        code: 21,
+        name: "Reendo dinte cu 1 canal radicular",
+        price: "1000",
+      },
+      {
+        code: 26,
+        name: "Obturație Foto Zona Frontală cu Estelite Asteria (plomba dentară). Clasa Premium",
+        price: "1400",
+      },
+      {
+        code: 27,
+        name: "Restaurare estetică cu Estelite Asteria. Clasa Premium",
+        price: "1800",
+      },
+    ],
+  },
+  {
+    title: "Estetică dentară",
+    items: [
+      {
+        code: 22,
+        name: "15 min. Albirea dentară în cabinet cu lampa Flash White Smile-Germania. Clasa Premium",
+        price: "2400",
+      },
+      {
+        code: 23,
+        name: "30 min. Albirea dentară în cabinet cu lampa Flash White Smile-Germania. Clasa Premium",
+        price: "4000",
+      },
+      {
+        code: 24,
+        name: "45-60 min. Albirea dentară în cabinet cu lampa Flash White Smile-Germania. Clasa Premium",
+        price: "6000",
+      },
+      {
+        code: 25,
+        name: "Albirea Intracoronară/ dinte devital (per sedință)",
+        price: "800",
+      },
+      {
+        code: 28,
+        name: "Corectarea estetică a dintelui, prin șlefuire selectivă",
+        price: "350",
+      },
+    ],
+  },
+  {
+    title: "Chirurgie",
+    items: [
+      {
+        code: 29,
+        name: "Incizii și drenaj (1 zonă)",
+        price: "400",
+      },
+      {
+        code: 30,
+        name: "Extracție dinte Permanent (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "1000",
+      },
+      {
+        code: 31,
+        name: "Extracție dentară Complicată/cu grad crescut de dificultate (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "1500",
+      },
+      {
+        code: 32,
+        name: "Extracție dinte 8/Dinte de minte Maxila (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "1500",
+      },
+      {
+        code: 33,
+        name: "Extracție dinte 8/Dinte de minte Mandibular (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "1500",
+      },
+      {
+        code: 34,
+        name: "Extracție dinte 8 Semiinclus/Dinte de minte semiinclus (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "2500",
+      },
+      {
+        code: 35,
+        name: "Extracție dinte 8 Inclus/Dinte de minte inclus (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "3500",
+      },
+      {
+        code: 36,
+        name: "Extracție dinte Inclus. Cu cel mai mare grad de dificultate (Include: anestezie+extracție dinte+chiuretaj+burelet hemostatic+sutură+blocadă+gel medicamentos)",
+        price: "7000",
+      },
+      {
+        code: 37,
+        name: "Plastie Gingivală – 1 maxilar",
+        price: "2000",
+      },
+      {
+        code: 38,
+        name: "Gingivectomie si Gingivoplastie (1 zona) cu scop Estetic si Morfologic",
+        price: "700",
+      },
+      {
+        code: 39,
+        name: "Gingivectomie si Gingivoplastie (toata zona frontala) cu scop Estetic si Morfologic (1 maxilar, 6-8 dinți din zona frontală)",
+        price: "2000",
+      },
+      {
+        code: 40,
+        name: "Chiuretaj parodontal",
+        price: "500",
+      },
+      {
+        code: 41,
+        name: "Rețetă Apicală – 1 dinte",
+        price: "2000",
+      },
+      {
+        code: 42,
+        name: "Înlăturarea Suturilor/Firelor",
+        price: "0",
+      },
+      {
+        code: 66,
+        name: "Reabilitare all on 4",
+        price: "44000",
+      },
+      {
+        code: 67,
+        name: "Reabilitare all on 6",
+        price: "58000",
+      },
+      {
+        code: 68,
+        name: "Reabilitare all on 8",
+        price: "68000",
+      },
+    ],
+  },
+  {
+    title: "Implantologie",
+    items: [
+      {
+        code: 43,
+        name: "Implant dentar ,,MegaGen” – Coreea. Clasa Premium",
+        price: "7000",
+      },
+      {
+        code: 44,
+        name: "Fixare Conformator de gingii",
+        price: "800",
+      },
+      {
+        code: 45,
+        name: "Adiție osoasă ( Îngroșare os cu material clasa Premium )",
+        price: "1500",
+      },
+      {
+        code: 46,
+        name: "Sinus Lifting (închis)",
+        price: "8000",
+      },
+      {
+        code: 47,
+        name: "Sinus Lifting (deschis)",
+        price: "12000",
+      },
+    ],
+  },
+  {
+    title: "Protetică",
+    items: [
+      {
+        code: 48,
+        name: "Amprentă dentară",
+        price: "600",
+      },
+      {
+        code: 49,
+        name: "Coroana MC pe Bont Dentar",
+        price: "2500",
+      },
+      {
+        code: 50,
+        name: "Coroana Zirconiu Stratificat pe bont dentar. Clasa Premium",
+        price: "5000",
+      },
+      {
+        code: 51,
+        name: "Coroana Provizorie (temporară)",
+        price: "1000",
+      },
+      {
+        code: 52,
+        name: "Coroana MC pe Implant",
+        price: "5000",
+      },
+      {
+        code: 53,
+        name: "Coroana Zirconiu Stratificat pe Implant. Clasa Premium",
+        price: "6000",
+      },
+      {
+        code: 54,
+        name: "Corp Acrilic Provizoriu (temporar) pe Implant dentar",
+        price: "2000",
+      },
+      {
+        code: 55,
+        name: "Cimentare – 1 coroană dentară",
+        price: "400",
+      },
+      {
+        code: 56,
+        name: "Recimentare – 1 coroană dentară",
+        price: "400",
+      },
+      {
+        code: 57,
+        name: "Secționare și Inlaturarea Coroanei, de pe dinte natural",
+        price: "600",
+      },
+      {
+        code: 58,
+        name: "Secționare și Inlaturarea Coroanei, de pe implant dentar",
+        price: "800",
+      },
+      {
+        code: 59,
+        name: "Proteza acrilică cu Plasa metalică cu coroane individuale (mobilizabilă)",
+        price: "0",
+      },
+      {
+        code: 60,
+        name: "Proteza flexibilă Biodent-Plast (mobilizabilă)",
+        price: "0",
+      },
+      {
+        code: 61,
+        name: "Proteza Scheletată Mobilizabilă",
+        price: "0",
+      },
+      {
+        code: 62,
+        name: "Proteza Scheletată + 2 elemente speciale de ancorare",
+        price: "0",
+      },
+    ],
+  },
+  {
+    title: "Parodontologie",
+    items: [
+      {
+        code: 63,
+        name: "Injectabil Plasmolifting",
+        price: "1250",
+      },
+    ],
+  },
+  {
+    title: "Pedodonție",
+    items: [
+      {
+        code: 64,
+        name: "Sigilarea fisurilor dentare",
+        price: "250",
+      },
+      {
+        code: 65,
+        name: "Gel fluorizat – pentru dinți",
+        price: "150",
+      },
+    ],
   },
 ];
 
-const servicesData: ServiceCategory[] = [
-  {
-    title: "Консультация стоматолога",
-    items: [
-      { name: "Комплексная консультация стоматолога", price: "3 000 ₽" },
-      {
-        name: "Повторная консультация стоматолога (для пациентов, ранее уже проходивших лечение в АГАМИ)",
-        price: "Бесплатно",
-      },
-      {
-        name: "Комплексная консультация главного врача клиники, кандидата медицинских наук Солоп М.В.",
-        price: "5 000 ₽",
-      },
-      { name: "Компьютерная томография (КТ)", price: "5 600 ₽" },
-    ],
-    includes: [
-      "Панорамный и прицельные рентгенологические снимки (при необходимости)",
-      "Комплексная консультация стоматолога с привлечением всех необходимых узких специалистов - терапевта, ортопеда, хирурга, пародонтолога.",
-      "Осмотр полости рта с подробной консультацией и постановкой диагноза",
-      "Фотопротоколирование и 3D-сканирование полости рта (при необходимости)",
-      "Составление подробных вариантов плана и сметы лечения по вашему случаю",
-    ],
-  },
-  {
-    title: "Компьютерная томография зубов",
-    items: [{ name: "Компьютерная томография зубов", price: "5 600 ₽" }],
-  },
-  {
-    title:
-      "Консультация главного врача, кандидата медицинских наук Солоп М.В.",
-    items: [
-      {
-        name: "Консультация главного врача, кандидата медицинских наук Солоп М.В.",
-        price: "5 000 ₽",
-      },
-    ],
-  },
-];
-
-const therapeuticServicesData: ServiceCategory[] = [
-  {
-    title: "Лечение кариеса",
-    items: [
-      { name: "Лечение кариеса (1 поверхность)", price: "от 9 200 ₽" },
-      { name: "Лечение кариеса (2 поверхности)", price: "от 10 800 ₽" },
-      { name: "Лечение кариеса (3 поверхности)", price: "от 12 400 ₽" },
-    ],
-  },
-  {
-    title: "Распломбирование каналов (эндодонтия)",
-    items: [
-      {
-        name: "Распломбирование 1 канала пастой",
-        price: "от 14 400 ₽",
-      },
-      {
-        name: "Распломбирование 1 канала цементом",
-        price: "от 17 200 ₽",
-      },
-    ],
-  },
-  {
-    title: "Пломбирование каналов (эндодонтия)",
-    items: [
-      { name: "Пломбирование 1 канала", price: "от 17 200 ₽" },
-      { name: "Пломбирование 2 каналов", price: "от 23 600 ₽" },
-      { name: "Пломбирование 3 каналов", price: "от 29 200 ₽" },
-    ],
-  },
-];
+const formatPrice = (value: string) =>
+  `${Number(value).toLocaleString("ro-RO")} MDL`;
 
 export const PricesPage = () => {
-  const [activeTab, setActiveTab] = useState("consultation");
-
-  const tabs = [
-    { id: "consultation", label: "Консультация и диагностика" },
-    { id: "therapeutic", label: "Терапевтическое лечение" },
-    { id: "surgery", label: "Хирургическая стоматология" },
-    { id: "implants", label: "Имплантация зубов" },
-    { id: "orthopedics", label: "Остеопластика и синуслифтинг" },
-    { id: "prosthetics", label: "Протезирование зубов" },
-  ];
+  const { language } = useLanguage();
+  const copy = PRICE_PAGE_COPY[language];
 
   return (
     <SiteLayout headerSource="prices_header" footerSource="prices_footer">
       {() => (
         <div className="flex flex-col w-full items-start gap-5 px-4 md:px-8 lg:px-[170px] py-6 md:py-10 relative">
-        <div className="flex items-center gap-2 text-xs md:text-sm">
-          <Link href="/" className="text-[#1d252d99] font-extralight hover:text-[#336699] transition-colors">
-            Главная
-          </Link>
-          <span className="text-[#1d252d99]">|</span>
-          <span className="text-[#336699] font-normal">
-            Цены
-          </span>
-        </div>
-
-        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
-          <div>
-            <h1 className=" font-normal text-[#336699] text-5xl md:text-7xl lg:text-[120px] tracking-[-3px] md:tracking-[-5px] leading-tight md:leading-[100px] mb-4 md:mb-6">
-              Цены
-            </h1>
+          <div className="flex items-center gap-2 text-xs md:text-sm">
+            <Link
+              href="/"
+              className="text-[#1d252d99] font-extralight hover:text-[#336699] transition-colors"
+            >
+              {copy.breadcrumbHome}
+            </Link>
+            <span className="text-[#1d252d99]">|</span>
+            <span className="text-[#336699] font-normal">
+              {copy.breadcrumbCurrent}
+            </span>
           </div>
-          <div className="flex items-start lg:items-end">
-            <p className=" font-normal text-[#336699] text-lg md:text-2xl lg:text-[32px] tracking-[-0.5px] md:tracking-[-1px] leading-6 md:leading-[38px]">
-              Ниже указаны цены по основным направлениям, после консультации
-              составим индивидуальный план и смету
-            </p>
-          </div>
-        </div>
 
-        <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0 mt-6 md:mt-10">
-          <CardContent className="p-5 md:p-10">
-            <h2 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-6 md:mb-10">
-              Наша ценовая политика
-              <br />
-              отличается от большинства клиник
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-              {pricingPolicyItems.map((item, index) => (
-                <Card
-                  key={index}
-                  className={`${item.bgColor} rounded-2xl md:rounded-[24px] border-0`}
-                >
-                  <CardContent className="p-5 md:p-6 flex flex-col min-h-[240px] md:min-h-[280px]">
-                    <Badge className="h-6 md:h-7 px-2.5 md:px-3 bg-white hover:bg-white/90 rounded-lg md:rounded-xl font-extralight text-[10px] md:text-xs text-[#ae955f] mb-3 md:mb-4 w-fit">
-                      {item.badge}
-                    </Badge>
-                    <h3 className=" font-normal text-[#ae955f] text-lg md:text-xl tracking-[-0.5px] leading-6 md:leading-7 mb-2 md:mb-3">
-                      {item.title}
-                    </h3>
-                    <p className=" font-extralight text-[#1d252d] text-xs md:text-sm leading-5">
-                      {item.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
+          <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
+            <div>
+              <h1 className="font-normal text-[#336699] text-5xl md:text-7xl lg:text-[120px] tracking-[-3px] md:tracking-[-5px] leading-tight md:leading-[100px] mb-4 md:mb-6">
+                {copy.title}
+              </h1>
             </div>
-          </CardContent>
-        </Card>
+            <div className="flex items-start lg:items-end">
+              <p className="font-normal text-[#336699] text-lg md:text-2xl lg:text-[32px] tracking-[-0.5px] md:tracking-[-1px] leading-6 md:leading-[38px]">
+                {copy.subtitle}
+              </p>
+            </div>
+          </div>
 
-        <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0 mt-4 md:mt-5">
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <div className="flex gap-3 md:gap-4 px-5 md:px-10 pt-6 md:pt-10 pb-4 md:pb-6 border-b border-[#1d252d1f] min-w-max">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm transition-all whitespace-nowrap ${
-                      activeTab === tab.id
-                        ? "bg-[#336699] text-white font-normal"
-                        : "text-[#1d252d99] font-extralight hover:bg-[#1d252d0d]"
-                    }`}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
+          <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0 mt-6 md:mt-10">
+            <CardContent className="p-5 md:p-8 lg:p-10">
+              <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                <div>
+                  <span className="inline-flex w-fit px-3 py-1.5 rounded-full bg-[#33669912] text-[#336699] text-xs md:text-sm font-medium mb-4">
+                    {copy.updatedFromDoc}
+                  </span>
+                  <h2 className="font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px]">
+                    {copy.catalogTitle}
+                  </h2>
+                </div>
+                <p className="font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 max-w-[520px]">
+                  {copy.catalogDescription}
+                </p>
               </div>
-            </div>
+            </CardContent>
+          </Card>
 
-            <div className="px-5 md:px-10 py-5 md:py-6">
-              {activeTab === "consultation" && (
-                <div className="space-y-4">
-                  <h2 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-4 md:mb-6">
-                    Консультация и диагностика
-                  </h2>
-                  <p className=" font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 mb-6 md:mb-8">
-                    Комплексная консультация стоматолога по всем имеющимся
-                    проблемам в полости рта
-                  </p>
+          <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
+            <CardContent className="p-5 md:p-8 lg:p-10">
+              <Accordion type="multiple" className="w-full space-y-4">
+                {PRICE_CATEGORIES.map((category) => (
+                  <AccordionItem
+                    key={category.title}
+                    value={category.title}
+                    className="border-0 bg-[#f5f7fa] rounded-2xl md:rounded-[24px] overflow-hidden data-[state=open]:bg-[#336699]"
+                  >
+                    <AccordionTrigger className="px-4 md:px-6 py-4 md:py-5 hover:no-underline [&[data-state=open]]:text-white [&[data-state=closed]]:text-[#336699]">
+                      <div className="flex items-center justify-between gap-4 w-full pr-2 md:pr-4 text-left">
+                        <span className="font-normal text-base md:text-xl lg:text-2xl tracking-[-0.5px] leading-6 md:leading-7">
+                          {category.title}
+                        </span>
+                        <span className="font-light text-sm md:text-base whitespace-nowrap">
+                          {category.items.length}
+                        </span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="px-4 md:px-6 pb-5 md:pb-6">
+                      <div className="hidden md:grid md:grid-cols-[80px,1fr,140px] gap-4 pb-3 border-b border-white/20">
+                        <span className="text-white/80 text-sm font-light">
+                          {copy.codeLabel}
+                        </span>
+                        <span className="text-white/80 text-sm font-light">
+                          {copy.serviceLabel}
+                        </span>
+                        <span className="text-white/80 text-sm font-light text-right">
+                          {copy.priceLabel}
+                        </span>
+                      </div>
 
-                  {servicesData.map((category, idx) => (
-                    <ServiceAccordion
-                      key={idx}
-                      category={category}
-                      index={idx}
-                    />
-                  ))}
-                </div>
-              )}
+                      <div className="space-y-3 md:space-y-0">
+                        {category.items.map((item) => (
+                          <div
+                            key={item.code}
+                            className="grid grid-cols-1 md:grid-cols-[80px,1fr,140px] gap-2 md:gap-4 py-3 md:py-4 border-b border-white/15 last:border-b-0"
+                          >
+                            <div className="flex items-center gap-2 md:block">
+                              <span className="md:hidden text-white/70 text-xs">
+                                {copy.codeLabel}:
+                              </span>
+                              <span className="text-white text-sm md:text-base font-light">
+                                {item.code}
+                              </span>
+                            </div>
 
-              {activeTab === "therapeutic" && (
-                <div className="space-y-4">
-                  <h2 className=" font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-0.5px] md:tracking-[-1px] leading-8 md:leading-[48px] mb-4 md:mb-6">
-                    Терапевтическое лечение
-                  </h2>
-                  <p className=" font-extralight text-[#1d252d99] text-sm md:text-base leading-5 md:leading-6 mb-6 md:mb-8">
-                    Восстановление и реставрация зубов при незначительных
-                    повреждениях зубов.
-                  </p>
+                            <div className="flex items-start gap-2 md:block">
+                              <span className="md:hidden text-white/70 text-xs">
+                                {copy.serviceLabel}:
+                              </span>
+                              <span className="text-white text-sm md:text-base font-light leading-5 md:leading-6">
+                                {item.name}
+                              </span>
+                            </div>
 
-                  {therapeuticServicesData.map((category, idx) => (
-                    <ServiceAccordion
-                      key={idx}
-                      category={category}
-                      index={idx}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+                            <div className="flex items-center gap-2 md:justify-end">
+                              <span className="md:hidden text-white/70 text-xs">
+                                {copy.priceLabel}:
+                              </span>
+                              <span className="text-white text-sm md:text-base font-normal whitespace-nowrap">
+                                {formatPrice(item.price)}
+                              </span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </CardContent>
+          </Card>
         </div>
       )}
     </SiteLayout>
-  );
-};
-
-const ServiceAccordion = ({
-  category,
-  index,
-}: {
-  category: ServiceCategory;
-  index: number;
-}) => {
-  return (
-    <Accordion type="single" collapsible className="w-full">
-      <AccordionItem
-        value={`item-${index}`}
-        className="border-0 bg-[#f5f7fa] rounded-2xl md:rounded-[20px] mb-3 md:mb-4 overflow-hidden data-[state=open]:bg-[#336699]"
-      >
-        <AccordionTrigger className="px-4 md:px-6 py-4 md:py-5 hover:no-underline [&[data-state=open]]:text-white [&[data-state=closed]]:text-[#336699]">
-          <div className="flex items-center justify-between w-full pr-2 md:pr-4">
-            <span className=" font-normal text-base md:text-xl lg:text-2xl tracking-[-0.5px] leading-6 md:leading-7 text-left">
-              {category.title}
-            </span>
-            <div className="flex items-center gap-2 md:gap-4">
-              <span className=" font-light text-sm md:text-lg whitespace-nowrap">
-                {category.items.length === 1
-                  ? category.items[0].price
-                  : `от ${category.items[0].price}`}
-              </span>
-            </div>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent className="px-4 md:px-6 pb-5 md:pb-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
-            <div className="space-y-3 md:space-y-4">
-              {category.items.map((item, itemIdx) => (
-                <div
-                  key={itemIdx}
-                  className="flex items-start justify-between gap-3 md:gap-4 py-2 md:py-3"
-                >
-                  <span className=" font-extralight text-white text-xs md:text-sm leading-5 flex-1">
-                    {item.name}
-                  </span>
-                  <span className=" font-normal text-white text-sm md:text-base whitespace-nowrap">
-                    {item.price}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {category.includes && (
-              <div className="bg-[#ae955f1f] rounded-2xl md:rounded-[20px] p-4 md:p-6">
-                <h4 className=" font-normal text-[#ae955f] text-base md:text-lg tracking-[-0.5px] leading-6 mb-3 md:mb-4">
-                  Что входит в цену услуги?
-                </h4>
-                <div className="space-y-2.5 md:space-y-3">
-                  {category.includes.map((item, includeIdx) => (
-                    <div key={includeIdx} className="flex items-start gap-2.5 md:gap-3">
-                      <div className="w-4 h-4 md:w-5 md:h-5 rounded-full bg-[#ae955f] flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-white" />
-                      </div>
-                      <span className=" font-extralight text-[#1d252d] text-xs md:text-sm leading-5">
-                        {item}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
   );
 };

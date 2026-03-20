@@ -172,6 +172,17 @@ export const AppWrapperSection = ({
               {t.footer.privacy}
             </span>
           </a>
+
+          <a
+            href="/organigrama-web.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex flex-col items-start relative self-stretch flex-[0_0_auto] opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <span className="mt-[-1.00px] font-extralight text-[#ffffffcc] text-xs md:text-sm lg:text-base tracking-[0] leading-4">
+              {t.footer.organigram}
+            </span>
+          </a>
         </div>
       </div>
     </footer>
