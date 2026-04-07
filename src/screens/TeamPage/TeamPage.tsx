@@ -15,6 +15,10 @@ interface LocalizedTeamContent {
   quoteRole: string;
   teamLabel: string;
   teamDescription: string;
+  doctorSectionTitle: string;
+  doctorName: string;
+  doctorRole: string;
+  doctorDescription: string;
 }
 
 const TEAM_PAGE_COPY: Record<Language, LocalizedTeamContent> = {
@@ -31,6 +35,11 @@ const TEAM_PAGE_COPY: Record<Language, LocalizedTeamContent> = {
     teamLabel: "Topdentica Team",
     teamDescription:
       "Specialiști cu experiență care lucrează coordonat, după protocoale moderne.",
+    doctorSectionTitle: "Primul specialist din echipă",
+    doctorName: "Sergiu Tabac",
+    doctorRole: "Medic stomatolog",
+    doctorDescription:
+      "Parte din echipa Topdentica, implicat în tratamente stomatologice moderne și îngrijire atentă pentru fiecare pacient.",
   },
   ru: {
     breadcrumbHome: "Главная",
@@ -45,6 +54,11 @@ const TEAM_PAGE_COPY: Record<Language, LocalizedTeamContent> = {
     teamLabel: "Topdentica Team",
     teamDescription:
       "Опытные специалисты, которые работают слаженно по современным протоколам.",
+    doctorSectionTitle: "Первый специалист команды",
+    doctorName: "Серджиу Табак",
+    doctorRole: "Стоматолог",
+    doctorDescription:
+      "Часть команды Topdentica, специалист по современному стоматологическому лечению и внимательному сопровождению каждого пациента.",
   },
   en: {
     breadcrumbHome: "Home",
@@ -59,6 +73,11 @@ const TEAM_PAGE_COPY: Record<Language, LocalizedTeamContent> = {
     teamLabel: "Topdentica Team",
     teamDescription:
       "Experienced specialists working in sync with modern treatment protocols.",
+    doctorSectionTitle: "Featured team specialist",
+    doctorName: "Sergiu Tabac",
+    doctorRole: "Dentist",
+    doctorDescription:
+      "Part of the Topdentica team, focused on modern dental care and attentive treatment for every patient.",
   },
 };
 
@@ -124,6 +143,40 @@ export const TeamPage = () => {
                     </span>
                     <p className="font-normal text-white text-lg md:text-2xl leading-7 md:leading-8 max-w-[420px]">
                       {copy.teamDescription}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
+            <CardContent className="p-4 md:p-6 lg:p-8">
+              <div className="flex flex-col gap-5">
+                <h2 className="font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-1px] leading-8 md:leading-[48px]">
+                  {copy.doctorSectionTitle}
+                </h2>
+
+                <div className="grid grid-cols-1 lg:grid-cols-[360px,1fr] gap-5">
+                  <div className="overflow-hidden rounded-2xl md:rounded-[28px] bg-[#f5f7fa]">
+                    <img
+                      src="/sergiu-tabac.jpg"
+                      alt={copy.doctorName}
+                      className="w-full h-full object-cover object-top min-h-[340px] md:min-h-[460px]"
+                    />
+                  </div>
+
+                  <div className="rounded-2xl md:rounded-[28px] bg-[#33669912] p-6 md:p-8 flex flex-col justify-end gap-4 min-h-[260px] md:min-h-[460px]">
+                    <div>
+                      <p className="font-normal text-[#1d252d] text-2xl md:text-3xl leading-8 md:leading-10">
+                        {copy.doctorName}
+                      </p>
+                      <p className="font-extralight text-[#336699] text-base md:text-lg leading-6">
+                        {copy.doctorRole}
+                      </p>
+                    </div>
+                    <p className="font-extralight text-[#1d252d99] text-sm md:text-base leading-6 max-w-[640px]">
+                      {copy.doctorDescription}
                     </p>
                   </div>
                 </div>

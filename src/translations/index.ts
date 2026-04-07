@@ -38,6 +38,8 @@ export const translations = {
       specialists: "5 квалифицированных специалистов",
       description:
         "Команда врачей-профессионалов с опытом для предоставления комплексного стоматологического лечения высокого качества.",
+      featuredDoctorName: "Серджиу Табак",
+      featuredDoctorRole: "Стоматолог",
       allTeamButton: "Узнать команду",
       bookButton: "Записаться",
     },
@@ -208,6 +210,8 @@ export const translations = {
       specialists: "5 specialiști calificați",
       description:
         "O echipă de medici de profesioniști, cu experiență pentru a oferi tratamente dentare complexe și de înaltă calitate.",
+      featuredDoctorName: "Sergiu Tabac",
+      featuredDoctorRole: "Medic stomatolog",
       allTeamButton: "Descoperă echipa",
       bookButton: "Programează-te",
     },
@@ -287,9 +291,9 @@ export const translations = {
       pricingDescription:
         "Abordarea noastră în tratamentul pacienților pornește de la crearea unui plan complet încă de la prima vizită în clinică. Acest plan include toate serviciile necesare, etapele tratamentului și costul total. Garantăm că prețul stabilit rămâne final - fără costuri ascunse, doar prețuri corecte și transparente.",
       pricesButton: "Prețuri",
-      sleepTitle: "Lечим зубы\nво сне под седацией",
+      sleepTitle: "Tratăm dinții\nîn somn, sub sedare",
       sleepDescription:
-        "Комфортное лечение зубов без страха, стресса и неприятных воспоминаний под полным контролем врача-анестезиолога",
+        "Tratament dentar confortabil, fără frică, stres sau amintiri neplăcute, sub controlul deplin al medicului anesteziolog.",
       moreButton: "Mai multe",
     },
     location: {
@@ -368,6 +372,8 @@ export const translations = {
       specialists: "5 qualified specialists",
       description:
         "A team of professional doctors with experience to provide comprehensive and high-quality dental treatment.",
+      featuredDoctorName: "Sergiu Tabac",
+      featuredDoctorRole: "Dentist",
       allTeamButton: "Meet the Team",
       bookButton: "Book Appointment",
     },

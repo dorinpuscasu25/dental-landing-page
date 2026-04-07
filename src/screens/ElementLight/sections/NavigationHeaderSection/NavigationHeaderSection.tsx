@@ -23,9 +23,15 @@ export const NavigationHeaderSection = ({
     { label: t.header.services, href: "/#services" },
     { label: t.header.team, href: "/team" },
     { label: t.header.prices, href: "/prices" },
-    { label: t.header.aboutClinic },
+    { label: t.header.aboutClinic, href: "/#about" },
     { label: t.header.contacts, href: "/#contacts" },
   ];
+
+  const isActiveLink = (href?: string) => {
+    if (!href) return false;
+    return !href.includes("#") && href === pathname;
+  };
+
   return (
     <header className="flex flex-col w-full items-start px-4 md:px-8 lg:px-40 py-2.5 relative bg-transparent">
       <nav className="flex items-center justify-between px-3 md:px-6 py-4 md:py-5 relative self-stretch w-full bg-[#336699] rounded-2xl md:rounded-3xl shadow-[0px_6px_24px_#0000000d]">
@@ -44,7 +50,7 @@ export const NavigationHeaderSection = ({
                   <Link
                     href={item.href}
                     className={`font-extralight text-sm tracking-[0] leading-[14px] whitespace-nowrap transition-opacity hover:opacity-80 ${
-                      pathname === item.href ? "text-white" : "text-white/80"
+                      isActiveLink(item.href) ? "text-white" : "text-white/80"
                     }`}
                   >
                     {item.label}
@@ -58,17 +64,7 @@ export const NavigationHeaderSection = ({
             ))}
           </div>
 
-          <div className="flex items-center gap-1 md:gap-2">
-            <button
-              className="lg:hidden text-white p-2 hover:opacity-80 transition-opacity"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+          <div className="hidden lg:flex items-center gap-1 md:gap-2">
             <LanguageSwitcher />
             <a
               href="tel:+37368303088"
@@ -82,6 +78,27 @@ export const NavigationHeaderSection = ({
             >
               {t.header.bookAppointment}
             </Button>
+          </div>
+
+          <div className="flex items-center gap-2 lg:hidden">
+            <LanguageSwitcher />
+            <Button
+              onClick={onOpenModal}
+              className="h-10 px-4 bg-[#56B3EE] hover:bg-[#56B3EE]/90 text-white rounded-2xl font-extralight text-base leading-4"
+            >
+              {t.header.bookAppointment}
+            </Button>
+            <button
+              className="text-white p-2 hover:opacity-80 transition-opacity"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
           </div>
         </div>
       </nav>

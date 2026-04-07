@@ -8,7 +8,13 @@ import { ArrowRight, ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useLanguage } from "../../../../contexts/LanguageContext";
 import { useTranslations } from "../../../../translations";
 
-const avatarImages = ["/i.png", "/i-1.png", "/i-2.png", "/i-3.png", "/i-4.png"];
+const avatarImages = [
+  "/sergiu-tabac.jpg",
+  "/i-1.png",
+  "/i-2.png",
+  "/i-3.png",
+  "/i-4.png",
+];
 const serviceImages = [
   "/---------------.png",
   "/--------------.png",
@@ -30,7 +36,7 @@ export const ContentMainSection = ({
 
   const heroSlides = [
     {
-      image: "/bloc1-hp.jpg",
+      image: "/bloc1-1.jpg",
       title: t.hero.title,
       subtitle: t.hero.subtitle,
       button: t.hero.bookButton,
@@ -44,16 +50,12 @@ export const ContentMainSection = ({
     description: "description" in service ? service.description : "",
   }));
   const serviceDetailHref = "/services/reabilitare";
-  const certificates = t.ratings.certificates ?? [];
 
   const canSlide = heroSlides.length > 1;
 
   const trustScrollRef = useRef<HTMLDivElement>(null);
-  const certificatesScrollRef = useRef<HTMLDivElement>(null);
   const [trustCanScrollLeft, setTrustCanScrollLeft] = useState(false);
   const [trustCanScrollRight, setTrustCanScrollRight] = useState(false);
-  const [certCanScrollLeft, setCertCanScrollLeft] = useState(false);
-  const [certCanScrollRight, setCertCanScrollRight] = useState(false);
 
   const updateScrollState = (
     ref: RefObject<HTMLDivElement | null>,
@@ -73,14 +75,6 @@ export const ContentMainSection = ({
       setTrustCanScrollRight,
     );
   }, [trustReasons.length]);
-
-  useEffect(() => {
-    updateScrollState(
-      certificatesScrollRef,
-      setCertCanScrollLeft,
-      setCertCanScrollRight,
-    );
-  }, [certificates.length]);
 
   useEffect(() => {
     const scrollToHashSection = () => {
@@ -205,6 +199,7 @@ export const ContentMainSection = ({
         </CardContent>
       </Card>
 
+      <section id="about" className="w-full scroll-mt-3 md:scroll-mt-4">
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="p-3 md:p-4">
           <div className="flex flex-col gap-4 md:gap-5">
@@ -216,21 +211,21 @@ export const ContentMainSection = ({
               </div>
               <div className="flex-1 flex gap-3 md:gap-5">
                 <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
-                  <CardContent className="flex flex-col gap-6 md:gap-12 p-5 md:p-10">
-                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+                  <CardContent className="flex flex-col gap-1 md:gap-2 p-5 md:p-8 lg:p-9">
+                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
                       {t.about.years}
                     </div>
-                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base">
+                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base leading-5">
                       {t.about.yearsText}
                     </div>
                   </CardContent>
                 </Card>
                 <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
-                  <CardContent className="flex flex-col gap-6 md:gap-12 p-5 md:p-10">
-                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+                  <CardContent className="flex flex-col gap-1 md:gap-2 p-5 md:p-8 lg:p-9">
+                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
                       {t.about.patients}
                     </div>
-                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base">
+                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base leading-5">
                       {t.about.patientsText}
                     </div>
                   </CardContent>
@@ -254,11 +249,12 @@ export const ContentMainSection = ({
                   </div>
                 </div>
               </div>
-              <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bloc2.jpg)] bg-cover bg-center min-h-[260px] md:min-h-[360px] lg:min-h-[460px]" />
+              <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bloc1.jpg)] bg-cover bg-center min-h-[260px] md:min-h-[360px] lg:min-h-[460px]" />
             </div>
           </div>
         </CardContent>
       </Card>
+      </section>
 
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="flex flex-col gap-12 md:gap-24 p-3 md:p-4">
@@ -284,6 +280,19 @@ export const ContentMainSection = ({
                           <AvatarImage src={img} className="object-cover" />
                         </Avatar>
                       ))}
+                    </div>
+                    <div className="mt-5 inline-flex max-w-full items-center gap-3 rounded-2xl bg-white/10 px-3 py-3 md:px-4">
+                      <Avatar className="w-14 h-14 border border-white/20">
+                        <AvatarImage src="/sergiu-tabac.jpg" className="object-cover object-top" />
+                      </Avatar>
+                      <div className="min-w-0">
+                        <p className="font-normal text-white text-sm md:text-base leading-5">
+                          {t.team.featuredDoctorName}
+                        </p>
+                        <p className="font-extralight text-white/70 text-xs md:text-sm leading-4">
+                          {t.team.featuredDoctorRole}
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className="flex-1">
@@ -375,10 +384,9 @@ export const ContentMainSection = ({
             <Card className="flex-1 w-full bg-[#336699] rounded-2xl md:rounded-[28px] border-0">
               <CardContent className="p-6 md:p-10 flex flex-col gap-6 md:gap-8">
                 <div className="flex flex-row items-start justify-between gap-6">
-                  {/* Stânga: Logo Google + Buton */}
                   <div className="flex flex-col gap-4">
                     <img
-                      className="h-8 lg:h-10 w-auto"
+                      className="h-7 sm:h-8 md:h-9 w-auto object-contain"
                       alt="Google"
                       src="/google.png"
                     />
@@ -399,7 +407,7 @@ export const ContentMainSection = ({
                   </div>
 
                   <div className="flex flex-col items-end gap-3">
-                    <span className="font-normal text-white text-base sm:text-lg lg:text-xl leading-tight text-right">
+                    <span className="font-normal text-white text-base sm:text-lg lg:text-xl leading-tight text-right whitespace-nowrap">
                       {t.ratings.googleLabel}
                     </span>
                     <div className="inline-flex items-center gap-2 bg-white/10 rounded-xl px-3 py-2 w-fit">
@@ -413,73 +421,18 @@ export const ContentMainSection = ({
               </CardContent>
             </Card>
           </div>
-
-          <Card className="bg-[#0035690a] rounded-2xl md:rounded-[28px] border-0">
-            <CardContent className="flex flex-col gap-6 md:gap-8 p-6 md:p-10">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <h3 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[30.4px] leading-7 md:leading-8">
-                  {t.ratings.awards}
-                </h3>
-                <div className="flex items-center gap-3">
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    onClick={() =>
-                      scrollByAmount(certificatesScrollRef, "left")
-                    }
-                    disabled={!certCanScrollLeft}
-                    className="w-10 h-10 md:w-12 md:h-12 bg-[#1d252d1f] hover:bg-[#1d252d1f]/80 rounded-xl md:rounded-2xl disabled:opacity-30"
-                  >
-                    <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-                  </Button>
-                  <Button
-                    size="icon"
-                    onClick={() =>
-                      scrollByAmount(certificatesScrollRef, "right")
-                    }
-                    disabled={!certCanScrollRight}
-                    className="w-10 h-10 md:w-12 md:h-12 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl disabled:opacity-30"
-                  >
-                    <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
-                  </Button>
-                </div>
-              </div>
-              <div
-                ref={certificatesScrollRef}
-                onScroll={() =>
-                  updateScrollState(
-                    certificatesScrollRef,
-                    setCertCanScrollLeft,
-                    setCertCanScrollRight,
-                  )
-                }
-                className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide scroll-smooth pb-1"
-              >
-                {certificates.map((label, index) => (
-                  <div
-                    key={`${label}-${index}`}
-                    className="min-w-[160px] sm:min-w-[200px] md:min-w-[240px] h-24 md:h-28 rounded-2xl border border-dashed border-[#1d252d1f] bg-white/80 flex items-center justify-center"
-                  >
-                    <span className=" font-extralight text-xs md:text-sm text-[#1d252d66]">
-                      {label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
         </CardContent>
       </Card>
 
       <section id="services" className="w-full scroll-mt-3 md:scroll-mt-4">
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
         <CardContent className="flex flex-col items-center gap-8 md:gap-12 pt-8 md:pt-14 pb-4 px-4">
-          <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.7px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px] w-full max-w-[1468px]">
-            {t.services.title}
-          </h2>
+          <div className="w-full max-w-[1468px] flex flex-col gap-4 md:gap-6">
+            <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.7px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+              {t.services.title}
+            </h2>
 
-          <div className="flex flex-col gap-4 md:gap-5 w-full">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 pl-0 md:pl-10">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
               {t.services.subtitle && (
                 <h3 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.5px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 max-w-[780px] whitespace-pre-line">
                   {t.services.subtitle}
@@ -497,7 +450,9 @@ export const ContentMainSection = ({
                 </Link>
               </Button>
             </div>
+          </div>
 
+          <div className="flex flex-col gap-4 md:gap-5 w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
               {services.map((service, index) => (
                 <Link
@@ -506,7 +461,7 @@ export const ContentMainSection = ({
                   className="block"
                 >
                   <Card className="group bg-[#0035690a] hover:bg-[#133f78] rounded-2xl md:rounded-[28px] border-0 transition-colors duration-300 cursor-pointer">
-                    <CardContent className="p-6 md:p-8 flex flex-col h-full min-h-[172px] md:min-h-[198px]">
+                    <CardContent className="p-5 md:p-6 flex flex-col h-full min-h-[148px] md:min-h-[168px]">
                       <div className="flex items-start justify-between gap-4">
                         <div className="min-w-0">
                           <p className=" font-normal text-[#1d252d99] text-base md:text-lg transition-colors duration-300 group-hover:text-[#ffffffcc]">
@@ -516,8 +471,8 @@ export const ContentMainSection = ({
                             {service.title}
                           </h4>
                           {service.description && (
-                            <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-28 group-hover:opacity-100">
-                              <p className="mt-3 font-extralight text-white text-sm md:text-[17px] leading-6">
+                            <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
+                              <p className="mt-2 font-extralight text-white text-sm md:text-base leading-5">
                                 {service.description}
                               </p>
                             </div>
@@ -550,12 +505,14 @@ export const ContentMainSection = ({
                   {t.services.pricingDescription}
                 </p>
                 <Button
-                  disabled
-                  className="h-11 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-white/20 hover:bg-white/30 rounded-xl md:rounded-2xl w-fit disabled:opacity-60"
+                  asChild
+                  className="h-11 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-white/20 hover:bg-white/30 rounded-xl md:rounded-2xl w-fit"
                 >
-                  <span className=" font-extralight text-white text-sm md:text-base">
-                    {t.services.pricesButton}
-                  </span>
+                  <Link href="/prices">
+                    <span className=" font-extralight text-white text-sm md:text-base">
+                      {t.services.pricesButton}
+                    </span>
+                  </Link>
                 </Button>
               </CardContent>
             </Card>
@@ -596,7 +553,7 @@ export const ContentMainSection = ({
                     <div className="flex items-center gap-3">
                       <div className="flex items-baseline gap-2 md:gap-2.5 flex-wrap">
                         <span className=" font-extralight text-white/70 text-xs md:text-sm">
-                          {t.footer.phoneLabel}
+                          {`${t.footer.phoneLabel}:`}
                         </span>
                         <a
                           href="tel:+37368303088"
@@ -628,7 +585,7 @@ export const ContentMainSection = ({
               </Card>
               <div
                 className="flex-1 rounded-2xl md:rounded-3xl bg-cover bg-center min-h-[220px] md:min-h-[260px]"
-                style={{ backgroundImage: "url(/bloc1.jpg)" }}
+                style={{ backgroundImage: "url(/foto-map.jpg)" }}
               />
             </div>
           </div>
