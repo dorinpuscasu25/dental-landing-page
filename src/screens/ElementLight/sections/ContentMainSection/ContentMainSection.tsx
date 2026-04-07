@@ -200,60 +200,60 @@ export const ContentMainSection = ({
       </Card>
 
       <section id="about" className="w-full scroll-mt-3 md:scroll-mt-4">
-      <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
-        <CardContent className="p-3 md:p-4">
-          <div className="flex flex-col gap-4 md:gap-5">
-            <div className="flex flex-col lg:flex-row min-h-32 md:min-h-52 gap-4 md:gap-5">
-              <div className="flex-1 flex items-start pt-2 md:pt-4 px-5 md:px-10">
-                <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.8px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
-                  {t.about.title}
-                </h2>
+        <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
+          <CardContent className="p-3 md:p-4">
+            <div className="flex flex-col gap-4 md:gap-5">
+              <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
+                <div className="flex-1 flex items-start pt-2 md:pt-4 px-5 md:px-10">
+                  <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.8px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+                    {t.about.title}
+                  </h2>
+                </div>
+                <div className="flex-1 flex gap-3 md:gap-5">
+                  <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
+                    <CardContent className="flex flex-col justify-center gap-1 p-4 md:p-6 lg:p-7">
+                      <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
+                        {t.about.years}
+                      </div>
+                      <div className=" font-extralight text-[#ae955f] text-sm md:text-base leading-5">
+                        {t.about.yearsText}
+                      </div>
+                    </CardContent>
+                  </Card>
+                  <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
+                    <CardContent className="flex flex-col justify-center gap-1 p-4 md:p-6 lg:p-7">
+                      <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
+                        {t.about.patients}
+                      </div>
+                      <div className=" font-extralight text-[#ae955f] text-sm md:text-base leading-5">
+                        {t.about.patientsText}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
-              <div className="flex-1 flex gap-3 md:gap-5">
-                <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
-                  <CardContent className="flex min-h-[130px] md:min-h-[150px] flex-col justify-center gap-1 p-4 md:p-6 lg:p-7">
-                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
-                      {t.about.years}
-                    </div>
-                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base leading-5">
-                      {t.about.yearsText}
-                    </div>
-                  </CardContent>
-                </Card>
-                <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
-                  <CardContent className="flex min-h-[130px] md:min-h-[150px] flex-col justify-center gap-1 p-4 md:p-6 lg:p-7">
-                    <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
-                      {t.about.patients}
-                    </div>
-                    <div className=" font-extralight text-[#ae955f] text-sm md:text-base leading-5">
-                      {t.about.patientsText}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
 
-            <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
-              <div className="flex-1 flex flex-col gap-3 md:gap-4 pt-1 md:pt-2 lg:-mt-16">
-                <div className="flex flex-col gap-2 md:gap-3">
-                  <blockquote className="pl-5 md:pl-10 pr-2.5 font-normal text-[#1d252d] text-base md:text-xl lg:text-2xl tracking-[-0.6px] md:tracking-[-1px] leading-6 md:leading-8">
-                    {`„${t.about.quote}”`}
-                  </blockquote>
-                  <div className="flex flex-col gap-1 md:gap-1.5 pl-5 md:pl-10">
-                    <div className=" font-normal text-[#1d252d] text-base md:text-lg">
-                      {t.about.founderName}
-                    </div>
-                    <div className=" font-extralight text-[#1d252d] text-xs md:text-sm opacity-40">
-                      {t.about.founderTitle}
+              <div className="flex flex-col lg:flex-row gap-4 md:gap-5">
+                <div className="flex-1 flex flex-col gap-3 md:gap-4 pt-1 md:pt-2 lg:-mt-16">
+                  <div className="flex flex-col gap-2 md:gap-3">
+                    <blockquote className="pl-5 md:pl-10 pr-2.5 font-normal text-[#1d252d] text-base md:text-xl lg:text-2xl tracking-[-0.6px] md:tracking-[-1px] leading-6 md:leading-8">
+                      {`„${t.about.quote}”`}
+                    </blockquote>
+                    <div className="flex flex-col gap-1 md:gap-1.5 pl-5 md:pl-10">
+                      <div className=" font-normal text-[#1d252d] text-base md:text-lg">
+                        {t.about.founderName}
+                      </div>
+                      <div className=" font-extralight text-[#1d252d] text-xs md:text-sm opacity-40">
+                        {t.about.founderTitle}
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bloc1.jpg)] bg-cover bg-center min-h-[260px] md:min-h-[360px] lg:min-h-[460px]" />
               </div>
-              <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bloc1.jpg)] bg-cover bg-center min-h-[260px] md:min-h-[360px] lg:min-h-[460px]" />
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
       </section>
 
       <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
@@ -291,9 +291,9 @@ export const ContentMainSection = ({
                       className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl"
                     >
                       <Link href="/team">
-                      <span className=" font-extralight text-white text-sm md:text-base">
-                        {t.team.allTeamButton}
-                      </span>
+                        <span className=" font-extralight text-white text-sm md:text-base">
+                          {t.team.allTeamButton}
+                        </span>
                       </Link>
                     </Button>
                   </div>
@@ -412,172 +412,174 @@ export const ContentMainSection = ({
       </Card>
 
       <section id="services" className="w-full scroll-mt-3 md:scroll-mt-4">
-      <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
-        <CardContent className="flex flex-col items-center gap-8 md:gap-12 pt-8 md:pt-14 pb-4 px-4">
-          <div className="w-full max-w-[1468px] flex flex-col gap-4 md:gap-6">
-            <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.7px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
-              {t.services.title}
-            </h2>
+        <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
+          <CardContent className="flex flex-col items-center gap-8 md:gap-12 pt-8 md:pt-14 pb-4 px-4">
+            <div className="w-full max-w-[1468px] flex flex-col gap-4 md:gap-6">
+              <h2 className=" font-normal text-[#336699] text-3xl md:text-5xl lg:text-[74.7px] tracking-[-2px] md:tracking-[-3.20px] leading-10 md:leading-[64px]">
+                {t.services.title}
+              </h2>
 
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
-              {t.services.subtitle && (
-                <h3 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.5px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 max-w-[780px] whitespace-pre-line">
-                  {t.services.subtitle}
-                </h3>
-              )}
-              <Button
-                asChild
-                className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#133f78] hover:bg-[#0f3566] rounded-xl md:rounded-2xl w-fit md:mr-10"
-              >
-                <Link href="/prices">
-                  <span className=" font-extralight text-white text-sm md:text-base">
-                    {t.services.allServicesButton}
-                  </span>
-                  <ArrowRight className="w-4 h-4 text-white" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-4 md:gap-5 w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-              {services.map((service, index) => (
-                <Link
-                  key={`${service.title}-${index}`}
-                  href={serviceDetailHref}
-                  className="block"
-                >
-                  <Card className="group bg-[#0035690a] hover:bg-[#133f78] rounded-2xl md:rounded-[28px] border-0 transition-colors duration-300 cursor-pointer">
-                    <CardContent className="p-5 md:p-6 flex flex-col h-full min-h-[148px] md:min-h-[168px]">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <p className=" font-normal text-[#1d252d99] text-base md:text-lg transition-colors duration-300 group-hover:text-[#ffffffcc]">
-                            {service.tag}
-                          </p>
-                          <h4 className=" font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7 transition-colors duration-300 group-hover:text-white">
-                            {service.title}
-                          </h4>
-                          {service.description && (
-                            <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
-                              <p className="mt-2 font-extralight text-white text-sm md:text-base leading-5">
-                                {service.description}
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                        <div className="relative flex-shrink-0">
-                          <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl overflow-hidden transition-opacity duration-300 group-hover:opacity-0">
-                            <div
-                              className="w-full h-full bg-cover bg-center"
-                              style={{ backgroundImage: `url(${service.image})` }}
-                            />
-                          </div>
-                          <div className="absolute top-0 right-0 w-10 h-10 rounded-xl bg-white text-[#133f78] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                            <ArrowRight className="w-5 h-5" />
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-
-            <Card className="bg-[#336699] rounded-2xl md:rounded-[32px] border-0">
-              <CardContent className="p-8 md:p-12 flex flex-col gap-6 min-h-[280px] md:min-h-[340px]">
-                <h3 className=" font-normal text-white text-2xl md:text-3xl lg:text-[38px] leading-8 md:leading-10">
-                  {t.services.pricing}
-                </h3>
-                <p className=" font-normal text-white text-sm md:text-base lg:text-lg leading-5 md:leading-7 max-w-[900px]">
-                  {t.services.pricingDescription}
-                </p>
+              <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6">
+                {t.services.subtitle && (
+                  <h3 className=" font-normal text-[#1d252d] text-xl md:text-2xl lg:text-[37.5px] tracking-[-1px] md:tracking-[-1.60px] leading-7 md:leading-10 max-w-[780px] whitespace-pre-line">
+                    {t.services.subtitle}
+                  </h3>
+                )}
                 <Button
                   asChild
-                  className="h-11 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-white/20 hover:bg-white/30 rounded-xl md:rounded-2xl w-fit"
+                  className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#133f78] hover:bg-[#0f3566] rounded-xl md:rounded-2xl w-fit md:mr-10"
                 >
                   <Link href="/prices">
                     <span className=" font-extralight text-white text-sm md:text-base">
-                      {t.services.pricesButton}
+                      {t.services.allServicesButton}
                     </span>
+                    <ArrowRight className="w-4 h-4 text-white" />
                   </Link>
                 </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </CardContent>
-      </Card>
-      </section>
-
-      <section id="contacts" className="w-full scroll-mt-3 md:scroll-mt-4">
-      <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
-        <CardContent className="flex flex-col items-center gap-8 md:gap-12 lg:gap-[30px] pt-8 md:pt-14 pb-4 px-4">
-          <h2 className=" font-normal text-[#336699] text-2xl md:text-4xl lg:text-[62px] tracking-[-1px] md:tracking-[-2.4px] leading-8 md:leading-[56px] w-full ">
-            {t.location.title}
-          </h2>
-
-          <div className="flex flex-col lg:flex-row gap-4 md:gap-5 w-full">
-            <div className="flex-1">
-              <div className="relative h-[300px] md:h-[400px] lg:h-[554px] rounded-2xl md:rounded-[28px] overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3510.9431382019707!2d28.889423!3d47.05691709999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97d0020f4b831%3A0x2b265dfa3e639478!2sTopdentica%20Clinic%C4%83%20Stomatologic%C4%83!5e1!3m2!1sen!2s!4v1769987820310!5m2!1sen!2s"
-                  className="w-full h-full border-0"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
               </div>
             </div>
 
-            <div className="flex-1 flex flex-col gap-4 md:gap-5">
-              <Card className="bg-[#336699] rounded-2xl md:rounded-3xl border-0">
-                <CardContent className="flex flex-col gap-6 md:gap-8 p-6 md:p-10">
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-start gap-3">
-                      <span className=" font-extralight text-white text-xs md:text-sm">
-                        {t.location.address}
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-baseline gap-2 md:gap-2.5 flex-wrap">
-                        <span className=" font-extralight text-white/70 text-xs md:text-sm">
-                          {`${t.footer.phoneLabel}:`}
-                        </span>
-                        <a
-                          href="tel:+37368303088"
-                          className=" font-normal text-white text-sm md:text-base leading-tight"
-                        >
-                          {t.header.phone}
-                        </a>
-                      </div>
-                    </div>
-                    <p className=" font-extralight text-white/70 text-xs md:text-sm">
-                      {t.footer.schedule}
-                    </p>
-                  </div>
+            <div className="flex flex-col gap-4 md:gap-5 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+                {services.map((service, index) => (
+                  <Link
+                    key={`${service.title}-${index}`}
+                    href={serviceDetailHref}
+                    className="block"
+                  >
+                    <Card className="group bg-[#0035690a] hover:bg-[#133f78] rounded-2xl md:rounded-[28px] border-0 transition-colors duration-300 cursor-pointer">
+                      <CardContent className="p-5 md:p-6 flex flex-col h-full min-h-[148px] md:min-h-[168px]">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="min-w-0">
+                            <p className=" font-normal text-[#1d252d99] text-base md:text-lg transition-colors duration-300 group-hover:text-[#ffffffcc]">
+                              {service.tag}
+                            </p>
+                            <h4 className=" font-normal text-[#1d252d] text-lg md:text-xl lg:text-[22.3px] leading-6 md:leading-7 transition-colors duration-300 group-hover:text-white">
+                              {service.title}
+                            </h4>
+                            {service.description && (
+                              <div className="overflow-hidden max-h-0 opacity-0 transition-all duration-300 group-hover:max-h-24 group-hover:opacity-100">
+                                <p className="mt-2 font-extralight text-white text-sm md:text-base leading-5">
+                                  {service.description}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                          <div className="relative flex-shrink-0">
+                            <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl overflow-hidden transition-opacity duration-300 group-hover:opacity-0">
+                              <div
+                                className="w-full h-full bg-cover bg-center"
+                                style={{
+                                  backgroundImage: `url(${service.image})`,
+                                }}
+                              />
+                            </div>
+                            <div className="absolute top-0 right-0 w-10 h-10 rounded-xl bg-white text-[#133f78] flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                              <ArrowRight className="w-5 h-5" />
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+
+              <Card className="bg-[#336699] rounded-2xl md:rounded-[32px] border-0">
+                <CardContent className="p-8 md:p-12 flex flex-col gap-6 min-h-[280px] md:min-h-[340px]">
+                  <h3 className=" font-normal text-white text-2xl md:text-3xl lg:text-[38px] leading-8 md:leading-10">
+                    {t.services.pricing}
+                  </h3>
+                  <p className=" font-normal text-white text-sm md:text-base lg:text-lg leading-5 md:leading-7 max-w-[900px]">
+                    {t.services.pricingDescription}
+                  </p>
                   <Button
                     asChild
-                    className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl w-fit"
+                    className="h-11 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-white/20 hover:bg-white/30 rounded-xl md:rounded-2xl w-fit"
                   >
-                    <a
-                      href="https://share.google/8IkzDmYShpjgye9u8"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                    <Link href="/prices">
                       <span className=" font-extralight text-white text-sm md:text-base">
-                        {t.location.contactsButton}
+                        {t.services.pricesButton}
                       </span>
-                    </a>
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>
-              <div
-                className="flex-1 rounded-2xl md:rounded-3xl bg-cover bg-center min-h-[220px] md:min-h-[260px]"
-                style={{ backgroundImage: "url(/foto-map.jpg)" }}
-              />
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </section>
+
+      <section id="contacts" className="w-full scroll-mt-3 md:scroll-mt-4">
+        <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
+          <CardContent className="flex flex-col items-center gap-8 md:gap-12 lg:gap-[30px] pt-8 md:pt-14 pb-4 px-4">
+            <h2 className=" font-normal text-[#336699] text-2xl md:text-4xl lg:text-[62px] tracking-[-1px] md:tracking-[-2.4px] leading-8 md:leading-[56px] w-full ">
+              {t.location.title}
+            </h2>
+
+            <div className="flex flex-col lg:flex-row gap-4 md:gap-5 w-full">
+              <div className="flex-1">
+                <div className="relative h-[300px] md:h-[400px] lg:h-[554px] rounded-2xl md:rounded-[28px] overflow-hidden">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3510.9431382019707!2d28.889423!3d47.05691709999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c97d0020f4b831%3A0x2b265dfa3e639478!2sTopdentica%20Clinic%C4%83%20Stomatologic%C4%83!5e1!3m2!1sen!2s!4v1769987820310!5m2!1sen!2s"
+                    className="w-full h-full border-0"
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+              </div>
+
+              <div className="flex-1 flex flex-col gap-4 md:gap-5">
+                <Card className="bg-[#336699] rounded-2xl md:rounded-3xl border-0">
+                  <CardContent className="flex flex-col gap-6 md:gap-8 p-6 md:p-10">
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-start gap-3">
+                        <span className=" font-extralight text-white text-xs md:text-sm">
+                          {t.location.address}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="flex items-baseline gap-2 md:gap-2.5 flex-wrap">
+                          <span className=" font-extralight text-white/70 text-xs md:text-sm">
+                            {`${t.footer.phoneLabel}:`}
+                          </span>
+                          <a
+                            href="tel:+37368303088"
+                            className=" font-normal text-white text-sm md:text-base leading-tight"
+                          >
+                            {t.header.phone}
+                          </a>
+                        </div>
+                      </div>
+                      <p className=" font-extralight text-white/70 text-xs md:text-sm">
+                        {t.footer.schedule}
+                      </p>
+                    </div>
+                    <Button
+                      asChild
+                      className="h-10 md:h-12 gap-2 md:gap-3 px-4 md:px-5 bg-[#ffffff29] hover:bg-[#ffffff29]/80 rounded-xl md:rounded-2xl w-fit"
+                    >
+                      <a
+                        href="https://share.google/8IkzDmYShpjgye9u8"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span className=" font-extralight text-white text-sm md:text-base">
+                          {t.location.contactsButton}
+                        </span>
+                      </a>
+                    </Button>
+                  </CardContent>
+                </Card>
+                <div
+                  className="flex-1 rounded-2xl md:rounded-3xl bg-cover bg-center min-h-[220px] md:min-h-[260px]"
+                  style={{ backgroundImage: "url(/foto-map.jpg)" }}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </section>
     </div>
   );
