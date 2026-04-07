@@ -152,12 +152,7 @@ export const TeamPage = () => {
 
           <Card className="w-full bg-white rounded-2xl md:rounded-[32px] border-0">
             <CardContent className="p-4 md:p-6 lg:p-8">
-              <div className="flex flex-col gap-5">
-                <h2 className="font-normal text-[#336699] text-2xl md:text-3xl lg:text-[42px] tracking-[-1px] leading-8 md:leading-[48px]">
-                  {copy.doctorSectionTitle}
-                </h2>
-
-                <div className="grid grid-cols-1 lg:grid-cols-[360px,1fr] gap-5">
+              <div className="grid grid-cols-1 lg:grid-cols-[360px,1fr] gap-5">
                   <div className="overflow-hidden rounded-2xl md:rounded-[28px] bg-[#f5f7fa]">
                     <img
                       src="/sergiu-tabac.jpg"
@@ -180,7 +175,6 @@ export const TeamPage = () => {
                     </p>
                   </div>
                 </div>
-              </div>
             </CardContent>
           </Card>
         </div>

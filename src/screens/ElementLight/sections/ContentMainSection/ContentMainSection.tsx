@@ -211,7 +211,7 @@ export const ContentMainSection = ({
               </div>
               <div className="flex-1 flex gap-3 md:gap-5">
                 <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
-                  <CardContent className="flex flex-col gap-1 md:gap-2 p-5 md:p-8 lg:p-9">
+                  <CardContent className="flex min-h-[130px] md:min-h-[150px] flex-col justify-center gap-1 p-4 md:p-6 lg:p-7">
                     <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[73.1px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
                       {t.about.years}
                     </div>
@@ -221,7 +221,7 @@ export const ContentMainSection = ({
                   </CardContent>
                 </Card>
                 <Card className="flex-1 bg-[#ae955f1f] rounded-2xl md:rounded-[28px] border-0">
-                  <CardContent className="flex flex-col gap-1 md:gap-2 p-5 md:p-8 lg:p-9">
+                  <CardContent className="flex min-h-[130px] md:min-h-[150px] flex-col justify-center gap-1 p-4 md:p-6 lg:p-7">
                     <div className=" font-normal text-[#ae955f] text-3xl md:text-5xl lg:text-[70.9px] tracking-[-2px] md:tracking-[-3.20px] leading-none">
                       {t.about.patients}
                     </div>
@@ -280,19 +280,6 @@ export const ContentMainSection = ({
                           <AvatarImage src={img} className="object-cover" />
                         </Avatar>
                       ))}
-                    </div>
-                    <div className="mt-5 inline-flex max-w-full items-center gap-3 rounded-2xl bg-white/10 px-3 py-3 md:px-4">
-                      <Avatar className="w-14 h-14 border border-white/20">
-                        <AvatarImage src="/sergiu-tabac.jpg" className="object-cover object-top" />
-                      </Avatar>
-                      <div className="min-w-0">
-                        <p className="font-normal text-white text-sm md:text-base leading-5">
-                          {t.team.featuredDoctorName}
-                        </p>
-                        <p className="font-extralight text-white/70 text-xs md:text-sm leading-4">
-                          {t.team.featuredDoctorRole}
-                        </p>
-                      </div>
                     </div>
                   </div>
                   <div className="flex-1">
