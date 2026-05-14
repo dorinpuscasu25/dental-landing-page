@@ -230,6 +230,17 @@ export const AppWrapperSection = ({
               {t.footer.organigram}
             </span>
           </a>
+
+          <a
+            href="/raport-de-activitate.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex flex-col items-start relative self-stretch flex-[0_0_auto] opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <span className="font-extralight text-[#ffffffcc] text-xs md:text-sm leading-4">
+              {t.footer.activityReport}
+            </span>
+          </a>
         </div>
       </div>
     </footer>

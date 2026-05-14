@@ -157,6 +157,7 @@ export const translations = {
       copyright: "Topdentica © 2025",
       privacy: "Политика конфиденциальности",
       organigram: "Органиграмма",
+      activityReport: "Отчет о деятельности",
       madeIn: "Сделано в",
     },
     modal: {
@@ -319,6 +320,7 @@ export const translations = {
       copyright: "Topdentica © 2025",
       privacy: "Politica de confidențialitate",
       organigram: "Organigramă",
+      activityReport: "Raport de activitate",
       madeIn: "Realizat în",
     },
     modal: {
@@ -481,6 +483,7 @@ export const translations = {
       copyright: "Topdentica © 2025",
       privacy: "Privacy Policy",
       organigram: "Organigram",
+      activityReport: "Activity report",
       madeIn: "Made in",
     },
     modal: {
