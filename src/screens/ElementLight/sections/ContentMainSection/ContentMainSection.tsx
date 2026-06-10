@@ -22,6 +22,7 @@ const serviceImages = [
   "/------------------------.png",
   "/-------------------------1.png",
 ];
+const heroImages = ["/bloc1-1.jpg", "/bloc1-hp.jpg", "/bloc1.jpg"];
 
 interface ContentMainSectionProps {
   onOpenModal: () => void;
@@ -34,14 +35,12 @@ export const ContentMainSection = ({
   const t = useTranslations(language);
   const [heroIndex, setHeroIndex] = useState(0);
 
-  const heroSlides = [
-    {
-      image: "/bloc1-1.jpg",
-      title: t.hero.title,
-      subtitle: t.hero.subtitle,
-      button: t.hero.bookButton,
-    },
-  ];
+  const heroSlides = heroImages.map((image) => ({
+    image,
+    title: t.hero.title,
+    subtitle: t.hero.subtitle,
+    button: t.hero.bookButton,
+  }));
 
   const trustReasons = t.trust.items ?? [];
   const services = (t.services.items ?? []).map((service, index) => ({
@@ -77,6 +76,20 @@ export const ContentMainSection = ({
   }, [trustReasons.length]);
 
   useEffect(() => {
+    const updateTrustButtons = () =>
+      updateScrollState(
+        trustScrollRef,
+        setTrustCanScrollLeft,
+        setTrustCanScrollRight,
+      );
+
+    updateTrustButtons();
+    window.addEventListener("resize", updateTrustButtons);
+
+    return () => window.removeEventListener("resize", updateTrustButtons);
+  }, []);
+
+  useEffect(() => {
     const scrollToHashSection = () => {
       const hash = window.location.hash.replace("#", "");
       if (!hash) return;
@@ -106,6 +119,13 @@ export const ContentMainSection = ({
       left: ref.current.scrollLeft + (direction === "right" ? amount : -amount),
       behavior: "smooth",
     });
+    window.setTimeout(() => {
+      updateScrollState(
+        trustScrollRef,
+        setTrustCanScrollLeft,
+        setTrustCanScrollRight,
+      );
+    }, 350);
   };
 
   const goToSlide = (index: number) => {
@@ -169,6 +189,7 @@ export const ContentMainSection = ({
                 size="icon"
                 onClick={prevSlide}
                 disabled={!canSlide}
+                aria-label="Previous slide"
                 className="w-10 h-10 md:w-12 md:h-12 bg-white/80 hover:bg-white rounded-xl md:rounded-2xl disabled:opacity-40 pointer-events-auto"
               >
                 <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -177,6 +198,7 @@ export const ContentMainSection = ({
                 size="icon"
                 onClick={nextSlide}
                 disabled={!canSlide}
+                aria-label="Next slide"
                 className="w-10 h-10 md:w-12 md:h-12 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl disabled:opacity-40 pointer-events-auto"
               >
                 <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
@@ -249,7 +271,7 @@ export const ContentMainSection = ({
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bloc1.jpg)] bg-cover bg-center min-h-[260px] md:min-h-[360px] lg:min-h-[460px]" />
+                <div className="flex-1 rounded-2xl md:rounded-[28px] bg-[url(/bloc2.jpg)] bg-cover bg-center min-h-[260px] md:min-h-[360px] lg:min-h-[460px]" />
               </div>
             </div>
           </CardContent>
@@ -316,6 +338,7 @@ export const ContentMainSection = ({
                 size="icon"
                 onClick={() => scrollByAmount(trustScrollRef, "left")}
                 disabled={!trustCanScrollLeft}
+                aria-label="Scroll left"
                 className="w-10 h-10 md:w-12 md:h-12 bg-[#1d252d1f] hover:bg-[#1d252d1f]/80 rounded-xl md:rounded-2xl disabled:opacity-30"
               >
                 <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -324,6 +347,7 @@ export const ContentMainSection = ({
                 size="icon"
                 onClick={() => scrollByAmount(trustScrollRef, "right")}
                 disabled={!trustCanScrollRight}
+                aria-label="Scroll right"
                 className="w-10 h-10 md:w-12 md:h-12 bg-[#336699] hover:bg-[#336699]/90 rounded-xl md:rounded-2xl disabled:opacity-30"
               >
                 <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-white" />

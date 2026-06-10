@@ -1,3 +1,6 @@
+"use client";
+
+import { FormEvent, useState } from "react";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import {
@@ -22,6 +25,70 @@ export const AppointmentModal = ({
 }: AppointmentModalProps) => {
   const { language } = useLanguage();
   const t = useTranslations(language);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [consent, setConsent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const successMessages = {
+    ro: "Mulțumim! Cererea a fost trimisă.",
+    ru: "Спасибо! Заявка отправлена.",
+    en: "Thank you! Your request has been sent.",
+  };
+
+  const errorMessages = {
+    ro: "Nu am putut trimite cererea. Încercați din nou.",
+    ru: "Не удалось отправить заявку. Попробуйте еще раз.",
+    en: "We could not send your request. Please try again.",
+  };
+
+  const consentMessages = {
+    ro: "Vă rugăm să acceptați prelucrarea datelor personale.",
+    ru: "Пожалуйста, подтвердите согласие на обработку персональных данных.",
+    en: "Please accept the personal data processing consent.",
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!consent) {
+      setStatus("error");
+      setErrorMessage(consentMessages[language]);
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/telegram", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          language,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Telegram request failed");
+      }
+
+      setStatus("success");
+      setName("");
+      setPhone("");
+      setConsent(false);
+    } catch {
+      setStatus("error");
+      setErrorMessage(errorMessages[language]);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -35,25 +102,54 @@ export const AppointmentModal = ({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col gap-5 md:gap-6 mt-6 md:mt-8">
+        <form
+          className="flex flex-col gap-5 md:gap-6 mt-6 md:mt-8"
+          onSubmit={handleSubmit}
+        >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
             <Input
               placeholder={t.modal.namePlaceholder}
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              required
               className="h-12 md:h-14 rounded-2xl border border-[#1d252d1f] bg-white px-4 md:px-6 font-extralight text-sm md:text-base placeholder:text-[#1d252d99]"
             />
             <Input
               placeholder={t.modal.phonePlaceholder}
               type="tel"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
+              required
               className="h-12 md:h-14 rounded-2xl border border-[#1d252d1f] bg-white px-4 md:px-6 font-extralight text-sm md:text-base placeholder:text-[#1d252d99]"
             />
           </div>
 
-          <Button className="w-full h-12 md:h-14 bg-[#56B3EE] hover:bg-[#56B3EE]/90 rounded-2xl font-extralight text-white text-base md:text-lg">
-            {t.modal.submitButton}
+          <Button
+            className="w-full h-12 md:h-14 bg-[#56B3EE] hover:bg-[#56B3EE]/90 rounded-2xl font-extralight text-white text-base md:text-lg"
+            disabled={status === "loading"}
+          >
+            {status === "loading" ? "..." : t.modal.submitButton}
           </Button>
 
+          {status === "success" && (
+            <p className="font-extralight text-[#336699] text-sm md:text-base">
+              {successMessages[language]}
+            </p>
+          )}
+
+          {status === "error" && (
+            <p className="font-extralight text-red-600 text-sm md:text-base">
+              {errorMessage || errorMessages[language]}
+            </p>
+          )}
+
           <div className="flex items-start gap-3">
-            <Checkbox id="consent" className="mt-1" />
+            <Checkbox
+              id="consent"
+              className="mt-1"
+              checked={consent}
+              onCheckedChange={(checked) => setConsent(checked === true)}
+            />
             <label
               htmlFor="consent"
               className=" font-extralight text-[#1d252d99] text-xs md:text-sm leading-5 cursor-pointer"
@@ -109,7 +205,7 @@ export const AppointmentModal = ({
               </Button>
             </div>
           </div>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
