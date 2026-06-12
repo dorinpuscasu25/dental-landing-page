@@ -56,8 +56,23 @@ export async function POST(request: NextRequest) {
   );
 
   if (!telegramResponse.ok) {
+    const telegramError = await telegramResponse.json().catch(() => null);
+    console.error("Telegram message could not be sent", {
+      status: telegramResponse.status,
+      description:
+        typeof telegramError?.description === "string"
+          ? telegramError.description
+          : "Unknown Telegram error",
+    });
+
     return NextResponse.json(
-      { error: "Telegram message could not be sent." },
+      {
+        error: "Telegram message could not be sent.",
+        details:
+          process.env.NODE_ENV === "development"
+            ? telegramError?.description
+            : undefined,
+      },
       { status: 502 }
     );
   }

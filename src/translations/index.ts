@@ -172,6 +172,10 @@ export const translations = {
       orWriteUs: "Или напишите нам напрямую",
       telegram: "В Instagram",
       whatsapp: "В WhatsApp",
+      successTitle: "Заявка успешно отправлена",
+      successDescription:
+        "Спасибо! Мы получили ваши данные и свяжемся с вами в ближайшее время.",
+      successButton: "Хорошо",
     },
   },
   ro: {
@@ -335,6 +339,10 @@ export const translations = {
       orWriteUs: "Sau scrie-ne direct",
       telegram: "În Instagram",
       whatsapp: "În WhatsApp",
+      successTitle: "Cererea a fost trimisă cu succes",
+      successDescription:
+        "Mulțumim! Am primit datele tale și te vom contacta în cel mai scurt timp.",
+      successButton: "Închide",
     },
   },
   en: {
@@ -498,6 +506,10 @@ export const translations = {
       orWriteUs: "Or write to us directly",
       telegram: "On Instagram",
       whatsapp: "On WhatsApp",
+      successTitle: "Request sent successfully",
+      successDescription:
+        "Thank you! We received your details and will contact you shortly.",
+      successButton: "Close",
     },
   },
 };

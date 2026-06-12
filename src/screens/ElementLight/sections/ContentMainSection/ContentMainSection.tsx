@@ -22,7 +22,11 @@ const serviceImages = [
   "/------------------------.png",
   "/-------------------------1.png",
 ];
-const heroImages = ["/bloc1-1.jpg", "/bloc1-hp.jpg", "/bloc1.jpg"];
+const heroImages = [
+  "/bloc1-1.jpg",
+  "/bloc1-hp.jpg",
+  "/topdentica-receptie-slider.png",
+];
 
 interface ContentMainSectionProps {
   onOpenModal: () => void;
